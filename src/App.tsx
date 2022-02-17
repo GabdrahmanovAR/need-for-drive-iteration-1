@@ -1,11 +1,16 @@
 import React from 'react';
 import './App.scss';
+import Sidebar from './components/sidebar/Sidebar';
+import MainPage from './pages/main-page/MainPage';
 
 const App = () => (
-  <div className="App">
-    <header className="App-header">
-      <h1>Hello</h1>
-    </header>
+  <div className="main">
+    <aside className="main__sidebar">
+      <Sidebar />
+    </aside>
+    <main className="main__container">
+      <MainPage />
+    </main>
   </div>
 );
 

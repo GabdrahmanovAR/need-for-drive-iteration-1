@@ -1,0 +1,13 @@
+.main-page {
+  display: flex;
+  max-width: 1440px;
+  margin: 0 auto;
+  height: 100%;
+
+  &__content {
+    flex-grow: 1;
+  }
+  &__slider {
+    width: 688px;
+  }
+}

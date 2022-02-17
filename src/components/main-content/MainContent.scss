@@ -1,0 +1,68 @@
+@import "src/constants/styles/common";
+
+.content {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  box-sizing: border-box;
+  padding: 2rem 4rem;
+
+  &__header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    h1 {
+      color: $main-green-color;
+      font-size: 1.875rem;
+      margin: 0;
+      line-height: 1;
+    }
+  }
+  &__location {
+    display: flex;
+    align-items: center;
+
+    img {
+      width: .9375rem;
+      height: 1.125rem;
+      padding-right: .375rem;
+    }
+    span {
+      color: $main-grey-color;
+      font-size: .875rem;
+    }
+  }
+  &__info {
+    padding-top: 8rem;
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+
+    h1 {
+      margin: 0;
+      font-size: 4.375rem;
+      line-height: 1;
+    }
+    p {
+      font-size: 1.625rem;
+      color: $main-grey-color;
+      margin: 2rem 0 4rem 0;
+    }
+    :nth-child(2) {
+      color: $main-green-color;
+    }
+    &__button {
+      width: 40%;
+    }
+  }
+  &__footer {
+    display: flex;
+    justify-content: space-between;
+    font-size: .8125rem;
+
+    :first-child {
+      color: $main-grey-color;
+    }
+  }
+}
