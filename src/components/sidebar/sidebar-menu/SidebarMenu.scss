@@ -1,0 +1,73 @@
+@import "src/constants/styles/common";
+
+.sidebar-menu {
+  display: flex;
+  align-items: center;
+  position: absolute;
+  z-index: 1;
+  left: -100%;
+  top: 0;
+  width: calc(100% - 4rem);
+  height: 100%;
+  animation-duration: 200ms;
+  animation-name: closing-menu;
+
+  &__navigation {
+    display: flex;
+    height: 100%;
+    align-items: center;
+    flex-grow: 1;
+    background-color: #151B1F;
+    font-size: 2rem;
+    color: $main-white-color;
+    padding-left: 4rem;
+
+    &__list {
+      list-style-type: none;
+      margin: 0;
+      padding: 0;
+    }
+    &__list li:hover {
+      cursor: pointer;
+      color: $main-green-color;
+    }
+  }
+  &__social-network img {
+    margin-top: 1rem;
+    margin-right: 1.5rem;
+    width: 2rem;
+    background-color: $main-white-color;
+    border-radius: 100%;
+  }
+  &__social-network img:hover {
+    cursor: pointer;
+    background-color: $main-green-color;
+  }
+  &__empty {
+    width: 688px;
+    height: 100%;
+    background-color: rgba(21,27,31, .8);
+  }
+  &_open {
+    animation-duration: 200ms;
+    animation-name: sliding-menu;
+    left: 4rem;
+  }
+}
+
+@keyframes sliding-menu {
+  from {
+    left: -100%;
+  }
+  to {
+    left: 4rem;
+  }
+}
+@keyframes closing-menu {
+  from {
+    left: 4rem;
+  }
+  to {
+    left: -100%;
+  }
+}
