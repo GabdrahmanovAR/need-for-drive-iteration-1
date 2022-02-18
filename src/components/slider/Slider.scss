@@ -19,6 +19,10 @@
       img {
         width: .5rem;
       }
+
+      @media screen and (min-width: 1024px) and (max-width: 1439px){
+        min-width: 2rem;
+      }
     }
     &__left-arrow:hover, &__right-arrow:hover {
       cursor: pointer;
@@ -43,8 +47,10 @@
         line-height: 1;
       }
       &__button {
-        background: linear-gradient(to right, #13493F, #0C7B1B);
         width: 164px;
+      }
+      &__button:before {
+        background: linear-gradient(to right, #13493F, #0C7B1B);
       }
     }
     &__dots {

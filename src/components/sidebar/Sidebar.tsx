@@ -1,44 +1,38 @@
 import React, { useState } from 'react';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
 import menuButton from '../../assets/icons/menu_btn.svg';
-import menuCloseButton from '../../assets/icons/menu_close_btn.svg';
 import './Sidebar.scss';
 import { ENG_LANG, RU_LANG } from '../../constants/common';
-import SidebarMenu from './sidebar-menu/SidebarMenu';
+import { IState } from '../../types/state';
+import { sidebarMenuAction } from '../../actions/SidebarMenuAction';
 
-const Sidebar = () => {
+interface IProps {
+  isOpen: boolean;
+  sidebarMenu: (isOpen: boolean) => void,
+}
+
+const Sidebar = ({ isOpen, sidebarMenu }: IProps) => {
   const [langActive, setLangActive] = useState(ENG_LANG);
-  const [menuOpen, setMenuOpen] = useState(false);
 
   const handleLangChange = () => {
     setLangActive(langActive === ENG_LANG ? RU_LANG : ENG_LANG);
   };
 
-  const handleMenuClick = () => {
-    setMenuOpen(!menuOpen);
+  const handleSidebarBtnClick = () => {
+    sidebarMenu(!isOpen);
   };
 
   return (
     <div className="sidebar">
       <header>
-        {menuOpen
-          ? (
-            <button
-              className="sidebar__button"
-              type="button"
-              onClick={handleMenuClick}
-            >
-              <img className="sidebar__button" src={menuCloseButton} alt="Close Icon" />
-            </button>
-          )
-          : (
-            <button
-              className="sidebar__button"
-              type="button"
-              onClick={handleMenuClick}
-            >
-              <img className="sidebar__button" src={menuButton} alt="Open Icon" />
-            </button>
-          )}
+        <button
+          className="sidebar__button"
+          type="button"
+          onClick={handleSidebarBtnClick}
+        >
+          <img src={menuButton} alt="Close Icon" />
+        </button>
       </header>
       <footer className="sidebar__lang">
         <button
@@ -56,8 +50,14 @@ const Sidebar = () => {
           Рус
         </button>
       </footer>
-      <SidebarMenu isOpen={menuOpen} />
     </div>
   );
 };
-export default Sidebar;
+export default connect(
+  (state: IState) => ({
+    isOpen: state.sidebarMenu.isOpen,
+  }),
+  (dispatch) => ({
+    sidebarMenu: bindActionCreators(sidebarMenuAction, dispatch),
+  }),
+)(Sidebar);

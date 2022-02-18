@@ -5,10 +5,17 @@
   font-size: 1.125rem;
   border-radius: .375rem;
   border: none;
-  background: linear-gradient(to right, #0EC261, #039F67);
   color: $main-white-color;
   transition: hover 500ms linear;
+  position: relative;
 
+  &__text {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    cursor: pointer;
+  }
   div {
     color: $main-white-color;
   }
@@ -17,15 +24,24 @@
   }
 }
 
-.button:hover {
-  cursor: pointer;
-  filter: brightness(.8);
-  span {
-    filter: brightness(1);
-  }
+.button:before {
+  display: block;
+  position: absolute;
+  border-radius: .375rem;
+  content: '';
+  top:0;
+  left:0;
+  right:0;
+  bottom:0;
+  background: linear-gradient(to right, #0EC261, #039F67);
 }
 
-.button:active {
+.button:hover:before {
+  cursor: pointer;
+  filter: brightness(.8);
+}
+
+.button:active:before {
   filter: brightness(.6);
 }
 

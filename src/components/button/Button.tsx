@@ -23,7 +23,7 @@ const Button = ({
   >
     {isLoading
       ? <Spin indicator={<LoadingOutlined spin />} />
-      : <span>{text}</span>}
+      : <span className="button__text">{text}</span>}
   </button>
 );
 

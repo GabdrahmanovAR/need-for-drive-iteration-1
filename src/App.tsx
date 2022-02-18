@@ -2,15 +2,13 @@ import React from 'react';
 import './App.scss';
 import Sidebar from './components/sidebar/Sidebar';
 import MainPage from './pages/main-page/MainPage';
+import SidebarMenu from './components/sidebar/sidebar-menu/SidebarMenu';
 
 const App = () => (
   <div className="main">
-    <aside className="main__sidebar">
-      <Sidebar />
-    </aside>
-    <main className="main__container">
-      <MainPage />
-    </main>
+    <Sidebar />
+    <SidebarMenu />
+    <MainPage />
   </div>
 );
 

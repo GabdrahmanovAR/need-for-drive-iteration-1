@@ -1,6 +1,6 @@
 .main-page {
   display: flex;
-  max-width: 1440px;
+  width: 100%;
   margin: 0 auto;
   height: 100%;
 
@@ -8,6 +8,13 @@
     flex-grow: 1;
   }
   &__slider {
-    width: 688px;
+    max-width: 688px;
+
+    @media screen and (min-width: 1024px) and (max-width: 1439px){
+      max-width: 614px;
+    }
+    @media screen and (max-width: 1023px){
+      display: none;
+    }
   }
 }
