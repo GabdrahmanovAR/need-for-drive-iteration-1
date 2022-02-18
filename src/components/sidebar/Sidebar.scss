@@ -29,27 +29,11 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    color: $main-green-color;
 
     &__btn {
       display: none;
       background-color: transparent;
       border: none;
-    }
-    &_active {
-      display: flex !important;
-    }
-    &_active:hover {
-      cursor: default;
-      justify-content: center;
-      align-items: center;
-      border-radius: 100%;
-      width: 3rem;
-      height: 3rem;
-      border: 1px solid $main-white-color;
-    }
-    &_active:active {
-      color: $main-white-color;
     }
   }
 

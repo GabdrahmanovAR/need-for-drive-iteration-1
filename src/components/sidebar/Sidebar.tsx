@@ -1,11 +1,11 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import menuButton from '../../assets/icons/menu_btn.svg';
 import './Sidebar.scss';
-import { ENG_LANG, RU_LANG } from '../../constants/common';
 import { IState } from '../../types/state';
 import { sidebarMenuAction } from '../../actions/SidebarMenuAction';
+import LangButton from '../lang-button/LangButton';
 
 interface IProps {
   isOpen: boolean;
@@ -13,12 +13,6 @@ interface IProps {
 }
 
 const Sidebar = ({ isOpen, sidebarMenu }: IProps) => {
-  const [langActive, setLangActive] = useState(ENG_LANG);
-
-  const handleLangChange = () => {
-    setLangActive(langActive === ENG_LANG ? RU_LANG : ENG_LANG);
-  };
-
   const handleSidebarBtnClick = () => {
     sidebarMenu(!isOpen);
   };
@@ -34,21 +28,8 @@ const Sidebar = ({ isOpen, sidebarMenu }: IProps) => {
           <img src={menuButton} alt="Close Icon" />
         </button>
       </header>
-      <footer className="sidebar__lang">
-        <button
-          type="button"
-          onClick={handleLangChange}
-          className={`sidebar__lang__btn ${langActive === ENG_LANG && 'sidebar__lang_active'}`}
-        >
-          Eng
-        </button>
-        <button
-          type="button"
-          onClick={handleLangChange}
-          className={`sidebar__lang__btn ${langActive === RU_LANG && 'sidebar__lang_active'}`}
-        >
-          Рус
-        </button>
+      <footer>
+        <LangButton />
       </footer>
     </div>
   );

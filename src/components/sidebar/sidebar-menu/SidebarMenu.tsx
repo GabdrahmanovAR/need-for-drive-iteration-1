@@ -8,6 +8,7 @@ import './SidebarMenu.scss';
 import { IState } from '../../../types/state';
 import { sidebarMenuAction } from '../../../actions/SidebarMenuAction';
 import menuCloseButton from '../../../assets/icons/menu_close_btn.svg';
+import LangButton from '../../lang-button/LangButton';
 
 interface IProps {
   isOpen: boolean;
@@ -45,6 +46,9 @@ const SidebarMenu = ({ isOpen, sidebarMenu }: IProps) => {
           </div>
         </nav>
       </section>
+      <footer className="sidebar-menu__lang-btn">
+        <LangButton />
+      </footer>
       <section className="sidebar-menu__empty" />
     </div>
   );
