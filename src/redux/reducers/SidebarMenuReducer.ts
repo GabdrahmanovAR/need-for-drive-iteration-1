@@ -1,7 +1,7 @@
 import produce from 'immer';
-import { ISidebarMenuState } from '../types/state';
-import { ISidebarMenuActionType } from '../types/actions';
-import { SIDEBAR_MENU_STATE_CHANGE } from '../constants/actions/sidebarMenu';
+import { ISidebarMenuState } from '../../types/state';
+import { ISidebarMenuActionType } from '../../types/actions';
+import { SIDEBAR_MENU_STATE_CHANGE } from '../../constants/actions/sidebarMenu';
 
 const initialState: ISidebarMenuState = {
   isOpen: false,

@@ -3,6 +3,7 @@
   width: 100%;
   margin: 0 auto;
   height: 100%;
+  overflow: auto;
 
   &__content {
     flex-grow: 1;
@@ -10,11 +11,16 @@
   &__slider {
     max-width: 688px;
 
-    @media screen and (min-width: 1024px) and (max-width: 1439px){
-      max-width: 614px;
-    }
-    @media screen and (max-width: 1023px){
-      display: none;
-    }
+  }
+}
+
+@media screen and (min-width: 1024px) and (max-width: 1439px){
+  .main-page__slider {
+    max-width: 614px;
+  }
+}
+@media screen and (max-width: 1023px){
+  .main-page__slider {
+    display: none;
   }
 }

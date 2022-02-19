@@ -1,6 +1,6 @@
 import { Dispatch } from 'redux';
-import { ISidebarMenuActionType } from '../types/actions';
-import { SIDEBAR_MENU_STATE_CHANGE } from '../constants/actions/sidebarMenu';
+import { ISidebarMenuActionType } from '../../types/actions';
+import { SIDEBAR_MENU_STATE_CHANGE } from '../../constants/actions/sidebarMenu';
 
 const sidebarMenuStateChange = (isOpen: boolean): ISidebarMenuActionType => ({
   type: SIDEBAR_MENU_STATE_CHANGE,

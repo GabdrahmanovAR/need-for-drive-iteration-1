@@ -34,7 +34,7 @@
     height: 100%;
     align-items: center;
     flex-grow: 1;
-    background-color: #151B1F;
+    background-color: $main-black-color;
     font-size: 2rem;
     color: $main-white-color;
     padding-left: 4rem;
@@ -117,6 +117,14 @@
       background-color: $main-black-color;
       padding-left: 1rem;
       color: $main-white-color
+    }
+  }
+}
+
+@media screen and (min-height: 811px) {
+  .sidebar-menu {
+    &__empty {
+      max-width: calc(100vh * 0.8484);
     }
   }
 }

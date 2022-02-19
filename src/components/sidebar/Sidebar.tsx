@@ -4,7 +4,7 @@ import { bindActionCreators } from 'redux';
 import menuButton from '../../assets/icons/menu_btn.svg';
 import './Sidebar.scss';
 import { IState } from '../../types/state';
-import { sidebarMenuAction } from '../../actions/SidebarMenuAction';
+import { sidebarMenuAction } from '../../redux/actions/SidebarMenuAction';
 import LangButton from '../lang-button/LangButton';
 
 interface IProps {

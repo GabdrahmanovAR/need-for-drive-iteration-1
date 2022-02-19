@@ -6,7 +6,7 @@ import locationIcon from '../../assets/icons/location-icon.svg';
 import Button from '../button/Button';
 import menuButton from '../../assets/icons/menu_btn_black.svg';
 import { IState } from '../../types/state';
-import { sidebarMenuAction } from '../../actions/SidebarMenuAction';
+import { sidebarMenuAction } from '../../redux/actions/SidebarMenuAction';
 
 interface IProps {
   isOpen: boolean;

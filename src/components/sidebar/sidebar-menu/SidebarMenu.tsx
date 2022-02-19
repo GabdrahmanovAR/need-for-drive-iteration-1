@@ -6,7 +6,7 @@ import telegramIcon from '../../../assets/icons/telegram.svg';
 import instagramIcon from '../../../assets/icons/instagram.svg';
 import './SidebarMenu.scss';
 import { IState } from '../../../types/state';
-import { sidebarMenuAction } from '../../../actions/SidebarMenuAction';
+import { sidebarMenuAction } from '../../../redux/actions/SidebarMenuAction';
 import menuCloseButton from '../../../assets/icons/menu_close_btn.svg';
 import LangButton from '../../lang-button/LangButton';
 
