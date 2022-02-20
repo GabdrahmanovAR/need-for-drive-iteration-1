@@ -1,0 +1,29 @@
+@import "src/constants/styles/common";
+
+.order-step {
+  padding: .5rem 0;
+  border-top: 1px solid $main-lightgrey-color;
+  border-bottom: 1px solid $main-lightgrey-color;
+
+  &__nav {
+    max-width: 1440px;
+    width: 100%;
+    margin: 0 auto;
+
+    &__list {
+      display: flex;
+      list-style-type: none;
+      margin: 0;
+      padding: 0;
+      color: $main-grey-color;
+      font-weight: bold;
+
+      img {
+        margin: 0 1rem;
+      }
+      &_active {
+        color: $main-green-color;
+      }
+    }
+  }
+}
