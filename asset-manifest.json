@@ -1,11 +1,11 @@
 {
   "files": {
-    "main.css": "/need-for-drive-iteration-1/static/css/main.e012a213.css",
+    "main.css": "/need-for-drive-iteration-1/static/css/main.daa5b1fd.css",
     "main.js": "/need-for-drive-iteration-1/static/js/main.29952ca2.js",
-    "static/media/4-slide.png": "/need-for-drive-iteration-1/static/media/4-slide.55a575ee260980489cf8.png",
-    "static/media/3-slide.png": "/need-for-drive-iteration-1/static/media/3-slide.4f3163f1a9e8bf3da244.png",
-    "static/media/1-slide.png": "/need-for-drive-iteration-1/static/media/1-slide.27a4ad69af4af07c6e94.png",
-    "static/media/2-slide.png": "/need-for-drive-iteration-1/static/media/2-slide.d5a7af93bb269670f8d5.png",
+    "static/media/4-slide.jpg": "/need-for-drive-iteration-1/static/media/4-slide.d53618c6b186bbeab088.jpg",
+    "static/media/3-slide.jpg": "/need-for-drive-iteration-1/static/media/3-slide.950c0c32ce3ab9999851.jpg",
+    "static/media/2-slide.jpg": "/need-for-drive-iteration-1/static/media/2-slide.0db3e7e6509dbdbde206.jpg",
+    "static/media/1-slide.jpg": "/need-for-drive-iteration-1/static/media/1-slide.b010c9b467c5286670a5.jpg",
     "static/media/instagram.svg": "/need-for-drive-iteration-1/static/media/instagram.34ef303e3d23873b913b8e00fbeaf8b5.svg",
     "static/media/telegram.svg": "/need-for-drive-iteration-1/static/media/telegram.f14f13bbac423c20f45cd9e437ff087d.svg",
     "static/media/facebook.svg": "/need-for-drive-iteration-1/static/media/facebook.54faedbe3dd449b58c819858e044fd1e.svg",
@@ -16,11 +16,11 @@
     "static/media/menu_close_btn.svg": "/need-for-drive-iteration-1/static/media/menu_close_btn.1d4598cc9458aab267f86f7a6fc8b3fa.svg",
     "static/media/left-arrow.svg": "/need-for-drive-iteration-1/static/media/left-arrow.1752ae9160db5265a941d6120fcaeadb.svg",
     "static/media/right-arrow.svg": "/need-for-drive-iteration-1/static/media/right-arrow.7591c327fb5160f95b31d713c84e5cc5.svg",
-    "main.e012a213.css.map": "/need-for-drive-iteration-1/static/css/main.e012a213.css.map",
+    "main.daa5b1fd.css.map": "/need-for-drive-iteration-1/static/css/main.daa5b1fd.css.map",
     "main.29952ca2.js.map": "/need-for-drive-iteration-1/static/js/main.29952ca2.js.map"
   },
   "entrypoints": [
-    "static/css/main.e012a213.css",
+    "static/css/main.daa5b1fd.css",
     "static/js/main.29952ca2.js"
   ]
 }
