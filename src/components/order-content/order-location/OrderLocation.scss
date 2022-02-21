@@ -14,12 +14,14 @@
       padding-right: .5rem;
       width: 7.125rem;
       text-align: end;
+      font-size: .875rem;
     }
     &__input {
       width: 12.75rem;
       border: none;
       border-bottom: .09375rem solid $main-grey-color;
       padding-left: .5rem;
+      font-size: .875rem
     }
     &__input:focus {
       outline: none;
@@ -58,7 +60,7 @@
       position: absolute;
       z-index: 1;
       background-color: $main-white-color;
-      left: 3.2rem;
+      left: 4.2rem;
     }
   }
   .list-item {

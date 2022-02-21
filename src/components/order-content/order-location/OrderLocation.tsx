@@ -2,6 +2,7 @@ import React, { BaseSyntheticEvent, useState } from 'react';
 import { listOfCities, EMPTY_STRING } from '../../../constants/common';
 import deleteIcon from '../../../assets/icons/delete-city.svg';
 import './OrderLocation.scss';
+import YandexMaps from '../../yandex-maps/YandexMaps';
 
 const OrderLocation = () => {
   const [city, setCity] = useState(EMPTY_STRING);
@@ -88,6 +89,7 @@ const OrderLocation = () => {
             />
           </button>
         </div>
+        <YandexMaps />
       </div>
     </div>
   );
