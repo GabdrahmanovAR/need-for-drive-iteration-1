@@ -2,18 +2,28 @@
 
 .order-location {
   padding: 2rem;
+  width: 70%;
+  border-right: 1px solid $main-lightgrey-color;
 
-  &__input-title {
-    padding-right: .5rem;
-  }
-  &__input {
-    width: 12.75rem;
-    border: none;
-    border-bottom: .09375rem solid $main-grey-color;
-    padding-left: .5rem;
-  }
-  &__input:focus {
-    outline: none;
+  &__input-block {
+    position: relative;
+    padding: .375rem 0;
+
+    &__title {
+      display: inline-block;
+      padding-right: .5rem;
+      width: 7.125rem;
+      text-align: end;
+    }
+    &__input {
+      width: 12.75rem;
+      border: none;
+      border-bottom: .09375rem solid $main-grey-color;
+      padding-left: .5rem;
+    }
+    &__input:focus {
+      outline: none;
+    }
   }
   .city-button {
     border: none;
@@ -45,6 +55,10 @@
     }
     &_active {
       display: block;
+      position: absolute;
+      z-index: 1;
+      background-color: $main-white-color;
+      left: 3.2rem;
     }
   }
   .list-item {

@@ -25,15 +25,14 @@ const Button = ({
   return (
     <button
       type="button"
-      className={`button 
-      ${(customClass !== EMPTY_STRING && !isDisabled) && customClass} 
-      ${isDisabled && 'button_disabled'}`}
+      className={`${!isDisabled ? 'button' : 'button_disabled'} 
+      ${(customClass !== EMPTY_STRING && !isDisabled) && customClass}`}
       disabled={isDisabled}
       onClick={handleRouteChange}
     >
       {isLoading
         ? <Spin indicator={<LoadingOutlined spin />} />
-        : <span className="button__text">{text}</span>}
+        : <span className={`${!isDisabled ? 'button__text' : 'button__text_disabled'}`}>{text}</span>}
     </button>
   );
 };

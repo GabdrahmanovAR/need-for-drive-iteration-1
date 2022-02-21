@@ -5,14 +5,20 @@
   justify-content: space-between;
   align-items: center;
 
-  &__title__link {
-    color: $main-green-color;
-    font-size: 1.875rem;
-    margin: 0;
-    line-height: 1;
-  }
-  &__title__link:hover {
-    color: $main-green-color;
+  &__title {
+    h1 {
+      margin: 0;
+    }
+    &__link {
+      color: $main-green-color;
+      font-size: 1.875rem;
+      margin: 0;
+      line-height: 1;
+      text-decoration: none;
+    }
+    &__link:hover {
+      color: $main-green-color;
+    }
   }
   &__menu-btn {
     display: none;
