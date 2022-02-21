@@ -1,0 +1,57 @@
+@import "src/constants/styles/common";
+
+.order-location {
+  padding: 2rem;
+
+  &__input-title {
+    padding-right: .5rem;
+  }
+  &__input {
+    width: 12.75rem;
+    border: none;
+    border-bottom: .09375rem solid $main-grey-color;
+    padding-left: .5rem;
+  }
+  &__input:focus {
+    outline: none;
+  }
+  .city-button {
+    border: none;
+    background-color: transparent;
+    border-bottom: 1.5px solid gray;
+
+    &__icon {
+      cursor: pointer;
+      visibility: hidden;
+
+      &_active {
+        visibility: visible;
+      }
+    }
+  }
+  &__cities-list {
+    display: none;
+    border: 1px solid $main-lightgrey-color;
+    max-height: 6.625rem;
+    width: 14rem;
+    overflow: auto;
+    padding: .5rem;
+    margin-left: 2.9375rem;
+
+    ul {
+      list-style-type: none;
+      margin: 0;
+      padding: 0;
+    }
+    &_active {
+      display: block;
+    }
+  }
+  .list-item {
+    color: $main-grey-color;
+  }
+  .list-item:hover {
+    color: $main-green-color;
+    cursor: pointer;
+  }
+}
