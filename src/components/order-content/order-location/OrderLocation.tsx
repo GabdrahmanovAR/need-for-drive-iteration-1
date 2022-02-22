@@ -98,14 +98,14 @@ const OrderLocation = ({ changeLocationData }: IProps) => {
           </button>
           <nav className={`order-location__cities-list ${navActive && 'order-location__cities-list_active'}`}>
             <ul>
-              {listOfCities.map((someCity: ICity, index:number) => {
+              {listOfCities.map((someCity: ICity, index: number) => {
                 if (someCity.name.slice(0, city.length) === city) {
                   return (
                     <li
                       className="list-item"
                       onClick={handleListItemClick}
                       role="presentation"
-                      key={index}
+                      key={`city-${index}`}
                     >
                       {someCity.name}
                     </li>

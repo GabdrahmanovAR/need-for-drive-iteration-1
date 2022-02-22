@@ -3,6 +3,7 @@ import { Clusterer, Map, Placemark } from 'react-yandex-maps';
 import './YandexMaps.scss';
 import { connect } from 'react-redux';
 import { IState } from '../../types/state';
+import { ICity, ICityMarker, listOfCities } from '../../constants/cities';
 
 interface IProps {
   cityCoords: number[],
@@ -18,11 +19,16 @@ const YandexMaps = ({ cityCoords }: IProps) => (
         width={600}
       >
         <Clusterer>
-          <Placemark
-            geometry={[54.310599, 48.356279]}
-            options={{ preset: 'islands#blueCircleDotIcon' }}
-            onClick={() => console.log('update')}
-          />
+          {listOfCities.map((city: ICity) => (
+            city.markers.map((marker: ICityMarker, index: number) => (
+              <Placemark
+                geometry={marker.coordinates}
+                options={{ preset: 'islands#blueCircleDotIcon' }}
+                onClick={() => console.log('update')}
+                key={`marker-${index}`}
+              />
+            ))
+          ))}
         </Clusterer>
       </Map>
     </main>
