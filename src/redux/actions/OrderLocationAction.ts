@@ -1,6 +1,6 @@
 import { Dispatch } from 'redux';
 import { IOrderLocationActionType } from '../../types/actions';
-import { CHANGE_CITY_DATA } from '../../constants/actions/orderLocation';
+import { CHANGE_CITY_DATA, CHANGE_MARKER_DATA } from '../../constants/actions/orderLocation';
 
 const changeCityData = (cityName: string, cityCoords: number[]): IOrderLocationActionType => ({
   type: CHANGE_CITY_DATA,
@@ -9,7 +9,7 @@ const changeCityData = (cityName: string, cityCoords: number[]): IOrderLocationA
 });
 
 const changeMarkerData = (markerName: string, markerCoords: number[]): IOrderLocationActionType => ({
-  type: CHANGE_CITY_DATA,
+  type: CHANGE_MARKER_DATA,
   markerName,
   markerCoords,
 });

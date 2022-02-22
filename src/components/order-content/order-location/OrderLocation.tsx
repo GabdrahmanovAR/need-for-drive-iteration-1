@@ -10,10 +10,11 @@ import { IState } from '../../../types/state';
 import { changeLocationDataAction } from '../../../redux/actions/OrderLocationAction';
 
 interface IProps {
+  markerName: string,
   changeLocationData: (name: string, coords: number[], key: string) => void,
 }
 
-const OrderLocation = ({ changeLocationData }: IProps) => {
+const OrderLocation = ({ markerName, changeLocationData }: IProps) => {
   const [city, setCity] = useState(EMPTY_STRING);
   const [navActive, setNavActive] = useState(false);
   const cyrillicRegexp = new RegExp(/^[А-я]*$/);
@@ -121,6 +122,7 @@ const OrderLocation = ({ changeLocationData }: IProps) => {
           <input
             className="order-location__input-block__input"
             type="text"
+            value={markerName}
             placeholder="Начните вводить пункт..."
           />
           <button
@@ -141,7 +143,9 @@ const OrderLocation = ({ changeLocationData }: IProps) => {
 };
 
 export default connect(
-  (state: IState) => state,
+  (state: IState) => ({
+    markerName: state.orderLocation.markerName,
+  }),
   (dispatch) => ({
     changeLocationData: bindActionCreators(changeLocationDataAction, dispatch),
   }),

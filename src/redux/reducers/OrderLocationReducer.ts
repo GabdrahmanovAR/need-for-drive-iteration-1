@@ -5,7 +5,7 @@ import { IOrderLocationActionType } from '../../types/actions';
 import { CHANGE_CITY_DATA, CHANGE_MARKER_DATA } from '../../constants/actions/orderLocation';
 
 const initialState: IOrderLocationState = {
-  cityName: EMPTY_STRING,
+  cityName: 'Ульяновск',
   markerName: EMPTY_STRING,
   cityCoords: [54.314192, 48.403132],
   markerCoords: EMPTY_ARRAY,
