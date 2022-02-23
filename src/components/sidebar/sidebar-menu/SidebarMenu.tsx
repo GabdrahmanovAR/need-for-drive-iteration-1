@@ -1,6 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
+import { useLocation } from 'react-router-dom';
 import facebookIcon from '../../../assets/icons/facebook.svg';
 import telegramIcon from '../../../assets/icons/telegram.svg';
 import instagramIcon from '../../../assets/icons/instagram.svg';
@@ -16,6 +17,8 @@ interface IProps {
 }
 
 const SidebarMenu = ({ isOpen, sidebarMenu }: IProps) => {
+  const location = useLocation();
+
   const handleSidebarBtnClick = () => {
     sidebarMenu(!isOpen);
   };
@@ -49,7 +52,7 @@ const SidebarMenu = ({ isOpen, sidebarMenu }: IProps) => {
       <footer className="sidebar-menu__lang-btn">
         <LangButton />
       </footer>
-      <section className="sidebar-menu__empty" />
+      <section className={`${location.pathname !== '/order' && 'sidebar-menu__empty'}`} />
     </div>
   );
 };

@@ -1,5 +1,7 @@
 import React from 'react';
-import { Clusterer, Map, Placemark } from 'react-yandex-maps';
+import {
+  Clusterer, Map, Placemark, YMaps,
+} from 'react-yandex-maps';
 import './YandexMaps.scss';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
@@ -22,24 +24,26 @@ const YandexMaps = ({ cityCoords, changeLocationData }: IProps) => {
     <section className="maps">
       <header className="maps__header">Выбрать на карте:</header>
       <main>
-        <Map
-          state={{ center: cityCoords, zoom: 9 }}
-          height="50vh"
-          width="80%"
-        >
-          <Clusterer>
-            {listOfCities.map((city: ICity) => (
-              city.markers.map((marker: ICityMarker, index: number) => (
-                <Placemark
-                  geometry={marker.coordinates}
-                  options={{ preset: 'islands#blueCircleDotIcon' }}
-                  onClick={() => handleMarkerClick(marker.street, marker.coordinates, city.name, city.coordinates)}
-                  key={`marker-${index}`}
-                />
-              ))
-            ))}
-          </Clusterer>
-        </Map>
+        <YMaps>
+          <Map
+            state={{ center: cityCoords, zoom: 9 }}
+            height="45vh"
+            width="100%"
+          >
+            <Clusterer>
+              {listOfCities.map((city: ICity) => (
+                city.markers.map((marker: ICityMarker, index: number) => (
+                  <Placemark
+                    geometry={marker.coordinates}
+                    options={{ preset: 'islands#blueCircleDotIcon' }}
+                    onClick={() => handleMarkerClick(marker.street, marker.coordinates, city.name, city.coordinates)}
+                    key={`marker-${index}`}
+                  />
+                ))
+              ))}
+            </Clusterer>
+          </Map>
+        </YMaps>
       </main>
     </section>
   );

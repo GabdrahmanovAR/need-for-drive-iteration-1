@@ -23,7 +23,6 @@
       color: gray;
       flex-grow: 1;
       border-bottom: 2px dotted $main-grey-color;
-      max-width: 12rem;
     }
     &__address {
       display: flex;
@@ -39,4 +38,33 @@
   &__price {
     margin-bottom: 1.5rem;
   }
+}
+
+@media screen and (min-width: 1024px) and (max-width: 1439px){
+  .order-info {
+    &__details {
+      display: block;
+      text-align: start;
+
+      &__dots {
+        display: none;
+      }
+      &__address {
+        text-align: start;
+      }
+    }
+    &__title {
+      text-align: start;
+    }
+  }
+}
+@media screen and (max-width: 1023px){
+  .order-info {
+    width: 100%;
+    padding: 0 2rem 2rem 2rem;
+  }
+}
+
+@media screen and (min-width: 320px) and (max-width: 767px) {
+
 }

@@ -115,6 +115,16 @@
         min-width: 2rem;
       }
     }
+    .slider-content {
+      &__info {
+        &__title {
+          font-size: 1.8rem;
+        }
+        &__description {
+          font-size: 1rem;
+        }
+      }
+    }
   }
 }
 

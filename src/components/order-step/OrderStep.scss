@@ -1,7 +1,6 @@
 @import "src/constants/styles/common";
 
 .order-step {
-  padding: .5rem 0;
   border-top: 1px solid $main-lightgrey-color;
   border-bottom: 1px solid $main-lightgrey-color;
 
@@ -15,16 +14,36 @@
       display: flex;
       list-style-type: none;
       margin: 0;
-      padding: 0;
       color: $main-grey-color;
       font-weight: bold;
       font-size: .875rem;
+      padding: .5rem 0;
 
       img {
         margin: 0 1rem;
       }
       &_active {
         color: $main-green-color;
+      }
+    }
+  }
+}
+
+@media screen and (min-width: 1024px) and (max-width: 1439px){
+
+}
+@media screen and (max-width: 1023px){
+
+}
+
+@media screen and (min-width: 320px) and (max-width: 767px) {
+  .order-step {
+    &__nav__list {
+      overflow: auto;
+
+      li {
+        display: flex;
+        align-items: center;
       }
     }
   }

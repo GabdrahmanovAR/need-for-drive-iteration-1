@@ -29,7 +29,7 @@ const Header = ({ isOpen, sidebarMenu, customClass }: IProps) => {
         >
           <img src={menuButton} alt="Close Icon" />
         </button>
-        <h1><a className="header__title__link" href="/">Need for drive</a></h1>
+        <h1><a className="header__title__link" href="/need-for-drive-iteration-1">Need for drive</a></h1>
       </section>
       <div className="header__location">
         <img src={locationIcon} alt="Location icon" />

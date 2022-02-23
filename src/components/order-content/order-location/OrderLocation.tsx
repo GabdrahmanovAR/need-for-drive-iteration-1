@@ -29,10 +29,6 @@ const OrderLocation = ({ cityName, markerName, changeLocationData }: IProps) => 
   }, [cityName, markerName]);
 
   useEffect(() => {
-    if (markerName !== EMPTY_STRING) setMarker(markerName);
-  }, [markerName]);
-
-  useEffect(() => {
     if (city !== EMPTY_STRING) {
       listOfCities.map((someCity: ICity) => {
         if (someCity.name === city) {
@@ -100,25 +96,27 @@ const OrderLocation = ({ cityName, markerName, changeLocationData }: IProps) => 
     <div className="order-location">
       <div className="order-location__input-block">
         <span className="order-location__input-block__title">Город</span>
-        <input
-          className="order-location__input-block__input"
-          type="text"
-          value={city}
-          placeholder="Начните вводить пункт..."
-          onInput={handleCityInput}
-          onFocus={() => setCitiesMenu(true)}
-        />
-        <button
-          type="button"
-          className="order-location__input-block__btn city-button"
-          onClick={handleCityBtnClick}
-        >
-          <img
-            className={`city-button__icon ${city !== EMPTY_STRING && 'city-button__icon_active'}`}
-            src={deleteIcon}
-            alt="Delete"
+        <div>
+          <input
+            className="order-location__input-block__input"
+            type="text"
+            value={city}
+            placeholder="Начните вводить пункт..."
+            onInput={handleCityInput}
+            onFocus={() => setCitiesMenu(true)}
           />
-        </button>
+          <button
+            type="button"
+            className="order-location__input-block__btn city-button"
+            onClick={handleCityBtnClick}
+          >
+            <img
+              className={`city-button__icon ${city !== EMPTY_STRING && 'city-button__icon_active'}`}
+              src={deleteIcon}
+              alt="Delete"
+            />
+          </button>
+        </div>
         <nav className={`order-location__cities-list ${citiesMenu && 'order-location__cities-list_active'}`}>
           <ul>
             {listOfCities.map((someCity: ICity, index: number) => {
@@ -141,23 +139,25 @@ const OrderLocation = ({ cityName, markerName, changeLocationData }: IProps) => 
       </div>
       <div className="order-location__input-block">
         <span className="order-location__input-block__title">Пункт выдачи</span>
-        <input
-          className="order-location__input-block__input"
-          type="text"
-          value={marker}
-          placeholder="Начните вводить пункт..."
-        />
-        <button
-          type="button"
-          className="order-location__input-block__btn city-button"
-          onClick={handleMarkerBtnClick}
-        >
-          <img
-            className={`city-button__icon ${marker !== EMPTY_STRING && 'city-button__icon_active'}`}
-            src={deleteIcon}
-            alt="Delete"
+        <div>
+          <input
+            className="order-location__input-block__input"
+            type="text"
+            value={marker}
+            placeholder="Выберите пункт на карте..."
           />
-        </button>
+          <button
+            type="button"
+            className="order-location__input-block__btn city-button"
+            onClick={handleMarkerBtnClick}
+          >
+            <img
+              className={`city-button__icon ${marker !== EMPTY_STRING && 'city-button__icon_active'}`}
+              src={deleteIcon}
+              alt="Delete"
+            />
+          </button>
+        </div>
       </div>
       <YandexMaps />
     </div>
