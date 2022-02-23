@@ -13,7 +13,8 @@ interface IProps {
 }
 
 const YandexMaps = ({ cityCoords, changeLocationData }: IProps) => {
-  const handleMarkerClick = (markerName: string, markerCoords: number[]) => {
+  const handleMarkerClick = (markerName: string, markerCoords: number[], markerCity: string, markerCityCoords: number[]) => {
+    changeLocationData(markerCity, markerCityCoords, 'city');
     changeLocationData(markerName, markerCoords, 'marker');
   };
 
@@ -32,7 +33,7 @@ const YandexMaps = ({ cityCoords, changeLocationData }: IProps) => {
                 <Placemark
                   geometry={marker.coordinates}
                   options={{ preset: 'islands#blueCircleDotIcon' }}
-                  onClick={() => handleMarkerClick(marker.street, marker.coordinates)}
+                  onClick={() => handleMarkerClick(marker.street, marker.coordinates, city.name, city.coordinates)}
                   key={`marker-${index}`}
                 />
               ))

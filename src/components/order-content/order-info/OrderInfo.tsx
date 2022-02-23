@@ -28,7 +28,7 @@ const OrderInfo = ({ cityName, markerName }: IProps) => (
       <span><strong>Цена:</strong></span>
       <span>{` от ${minPrice} до ${maxPrice} ₽`}</span>
     </section>
-    <Button text="Выбрать модель" isDisabled />
+    <Button text="Выбрать модель" isDisabled={((cityName === EMPTY_STRING || markerName === EMPTY_STRING))} />
   </div>
 );
 

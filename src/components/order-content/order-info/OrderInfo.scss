@@ -23,6 +23,7 @@
       color: gray;
       flex-grow: 1;
       border-bottom: 2px dotted $main-grey-color;
+      max-width: 12rem;
     }
     &__address {
       display: flex;
