@@ -62,7 +62,7 @@
       z-index: 1;
       background-color: $main-white-color;
       left: 7.15rem;
-      top: 1.6rem
+      top: 1.9rem
     }
   }
   .list-item {
@@ -84,11 +84,11 @@
   }
 }
 
-@media screen and (min-width: 420px) and (max-width: 767px){
+@media screen and (min-width: 320px) and (max-width: 767px){
 
 }
 
-@media screen and (max-width: 419px){
+@media screen and (max-width: 420px){
   .order-location {
     padding: 1rem 2rem;
 
@@ -98,6 +98,12 @@
       &__title {
         text-align: start;
         padding-left: .5rem;
+      }
+    }
+    &__cities-list {
+      &_active {
+        top: 3.25rem;
+        left: 0;
       }
     }
   }

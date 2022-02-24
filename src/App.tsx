@@ -15,7 +15,7 @@ const App = () => (
       <SidebarMenu />
       <Routes>
         <Route path="/" element={<MainPage />} />
-        <Route path="/order" element={<OrderPage />} />
+        <Route path="/order/*" element={<OrderPage />} />
       </Routes>
     </div>
   </HashRouter>

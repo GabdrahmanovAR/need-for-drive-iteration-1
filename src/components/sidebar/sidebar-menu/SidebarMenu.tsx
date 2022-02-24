@@ -18,6 +18,7 @@ interface IProps {
 
 const SidebarMenu = ({ isOpen, sidebarMenu }: IProps) => {
   const location = useLocation();
+  const regexPath = new RegExp(/\/order\/[A-z]*/);
 
   const handleSidebarBtnClick = () => {
     sidebarMenu(!isOpen);
@@ -52,7 +53,7 @@ const SidebarMenu = ({ isOpen, sidebarMenu }: IProps) => {
       <footer className="sidebar-menu__lang-btn">
         <LangButton />
       </footer>
-      <section className={`${location.pathname !== '/order' && 'sidebar-menu__empty'}`} />
+      <section className={`${!regexPath.test(location.pathname) && 'sidebar-menu__empty'}`} />
     </div>
   );
 };
