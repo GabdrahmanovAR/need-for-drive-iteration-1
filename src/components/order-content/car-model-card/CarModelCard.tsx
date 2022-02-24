@@ -3,8 +3,8 @@ import './CarModelCard.scss';
 
 interface IProps {
   carName: string,
-  minPrice: number,
-  maxPrice: number,
+  minPrice: string,
+  maxPrice: string,
   carImage: string,
 }
 

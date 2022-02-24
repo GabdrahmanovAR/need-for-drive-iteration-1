@@ -18,11 +18,30 @@
     }
   }
   &__car-image {
+    display: flex;
+    justify-content: flex-end;
+    align-items: flex-end;
     height: 60%;
-    text-align: end;
   }
 }
 
 .car-info:hover {
+  cursor: pointer;
   border: 1px solid $main-green-color;
+}
+
+@media screen and (min-width: 320px) and (max-width: 767px){
+  .car-info {
+    width: 100%;
+  }
+}
+
+@media screen and (max-width: 419px){
+  .car-info {
+    &__car-image {
+      img {
+        width: calc(100% * .9);
+      }
+    }
+  }
 }

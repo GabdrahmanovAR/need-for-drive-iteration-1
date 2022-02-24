@@ -1,4 +1,4 @@
-import React, { BaseSyntheticEvent } from 'react';
+import React, { BaseSyntheticEvent, useState } from 'react';
 import './RadioButton.scss';
 
 interface IProps {
@@ -6,10 +6,10 @@ interface IProps {
 }
 
 const RadioButton = ({ btnNames }: IProps) => {
-  // const [checked, setChecked] = useState('radio-id-1');
+  const [checked, setChecked] = useState('radio-id-0');
 
   const handleOnChangeEvent = (event: BaseSyntheticEvent) => {
-    console.log(event.target);
+    setChecked(event.target.id);
   };
 
   return (
@@ -24,7 +24,12 @@ const RadioButton = ({ btnNames }: IProps) => {
               defaultChecked={index === 0}
               onChange={handleOnChangeEvent}
             />
-            <span className="form_radio__fieldset__name">{name}</span>
+            <span className={`
+              form_radio__fieldset__name 
+              ${checked === `radio-id-${index}` && 'form_radio__fieldset__name_active'}`}
+            >
+              {name}
+            </span>
           </div>
         ))}
       </fieldset>

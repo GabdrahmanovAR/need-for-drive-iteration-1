@@ -10,12 +10,13 @@ const CarModels = () => (
       <RadioButton btnNames={['Все модели', 'Эконом', 'Премиум']} />
     </header>
     <main className="car-models__car-list">
-      {Cars.map((carInfo: ICars) => (
+      {Cars.map((carInfo: ICars, index: number) => (
         <CarModelCard
           carName={carInfo.name}
           minPrice={carInfo.minPrice}
           maxPrice={carInfo.maxPrice}
           carImage={carInfo.image}
+          key={`model-card-${index}`}
         />
       ))}
     </main>
