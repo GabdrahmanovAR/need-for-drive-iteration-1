@@ -15,7 +15,7 @@ interface IProps {
 const OrderPage = ({ headerAddClass }: IProps) => {
   useEffect(() => {
     headerAddClass('order-page__header');
-  });
+  }, []);
 
   return (
     <main className="order-page">

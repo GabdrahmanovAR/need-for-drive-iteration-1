@@ -30,12 +30,12 @@ const YandexMaps = ({ cityCoords, changeLocationData }: IProps) => {
             height="45vh"
             width="100%"
           >
-            <Clusterer>
+            <Clusterer options={{ preset: 'islands#darkGreenClusterIcons' }}>
               {listOfCities.map((city: ICity) => (
                 city.markers.map((marker: ICityMarker, index: number) => (
                   <Placemark
                     geometry={marker.coordinates}
-                    options={{ preset: 'islands#blueCircleDotIcon' }}
+                    options={{ preset: 'islands#darkGreenCircleDotIcon' }}
                     onClick={() => handleMarkerClick(marker.street, marker.coordinates, city.name, city.coordinates)}
                     key={`marker-${index}`}
                   />
