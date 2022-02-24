@@ -1,0 +1,28 @@
+@import "src/constants/styles/common";
+
+.car-info {
+  height: 14rem;
+  width: 50%;
+  border: 1px solid $main-lightgrey-color;
+  padding: 1rem;
+
+  &__header {
+    height: 40%;
+
+    &__title {
+      margin: 0;
+      font-weight: 600;
+    }
+    &__description {
+      color: $main-grey-color
+    }
+  }
+  &__car-image {
+    height: 60%;
+    text-align: end;
+  }
+}
+
+.car-info:hover {
+  border: 1px solid $main-green-color;
+}
