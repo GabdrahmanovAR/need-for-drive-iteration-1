@@ -7,7 +7,10 @@ import { ICars } from '../../constants/fake-data/cars';
 
 export const initialCardModelCardState: ICardModelCardState = {
   activeCard: EMPTY_STRING,
-  selectedCarInfo: {} as ICars,
+  selectedCarInfo: {
+    name: EMPTY_STRING,
+    brand: EMPTY_STRING,
+  } as ICars,
 };
 
 const changeActiveCard = (draft: ICardModelCardState, activeCard?: string) => {

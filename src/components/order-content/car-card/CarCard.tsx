@@ -1,5 +1,5 @@
 import React, { BaseSyntheticEvent, useEffect } from 'react';
-import './CarModelCard.scss';
+import './CarCard.scss';
 import { useDispatch } from 'react-redux';
 import { changeActiveCardAction, changeSelectedCarInfoAction } from '../../../redux/actions/CarModelCardAction';
 import { ICars } from '../../../constants/fake-data/cars';
@@ -10,7 +10,7 @@ interface IProps {
   activeCard: string,
 }
 
-const CarModelCard = ({ id, carInfo, activeCard }: IProps) => {
+const CarCard = ({ id, carInfo, activeCard }: IProps) => {
   const dispatch = useDispatch();
 
   const handleCardClick = (event: BaseSyntheticEvent) => {
@@ -41,4 +41,4 @@ const CarModelCard = ({ id, carInfo, activeCard }: IProps) => {
   );
 };
 
-export default CarModelCard;
+export default CarCard;

@@ -42,7 +42,9 @@ const OrderInfo = ({ cityName, markerName }: IProps) => {
         <span>Модель</span>
         <span className="order-info__details__dots" />
         <div className="order-info__details__model">
-          {`${state.selectedCarInfo.brand}, ${state.selectedCarInfo.name}`}
+          {state.selectedCarInfo.name === EMPTY_STRING
+            ? 'Выберите авто'
+            : `${state.selectedCarInfo.brand}, ${state.selectedCarInfo.name}`}
         </div>
       </section>
       <section className="order-info__price">

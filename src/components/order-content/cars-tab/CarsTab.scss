@@ -20,3 +20,15 @@
     border-right: none;
   }
 }
+
+@media screen and (max-height: 780px){
+  .car-models {
+    height: max-content;
+  }
+}
+
+@media screen and (max-width: 360px){
+  .car-models {
+    padding-top: .5rem;
+  }
+}

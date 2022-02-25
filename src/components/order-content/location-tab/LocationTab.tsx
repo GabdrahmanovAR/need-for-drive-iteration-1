@@ -2,7 +2,7 @@ import React, { BaseSyntheticEvent, useEffect, useState } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { EMPTY_ARRAY, EMPTY_STRING } from '../../../constants/common';
-import './OrderLocation.scss';
+import './LocationTab.scss';
 import YandexMaps from '../../yandex-maps/YandexMaps';
 import { ICity, listOfCities } from '../../../constants/fake-data/cities';
 import { IState } from '../../../types/state';
@@ -15,7 +15,7 @@ interface IProps {
   changeLocationData: (name: string, coords: number[], key: string) => void,
 }
 
-const OrderLocation = ({ cityName, markerName, changeLocationData }: IProps) => {
+const LocationTab = ({ cityName, markerName, changeLocationData }: IProps) => {
   const [city, setCity] = useState(EMPTY_STRING);
   const [marker, setMarker] = useState(EMPTY_STRING);
   const [citiesMenu, setCitiesMenu] = useState(false);
@@ -120,4 +120,4 @@ export default connect(
   (dispatch) => ({
     changeLocationData: bindActionCreators(changeLocationDataAction, dispatch),
   }),
-)(OrderLocation);
+)(LocationTab);
