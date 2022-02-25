@@ -1,11 +1,12 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import './OrderInfo.scss';
-import { connect } from 'react-redux';
+import { connect, useSelector } from 'react-redux';
 import { useLocation } from 'react-router-dom';
 import Button from '../../button/Button';
 import { IState } from '../../../types/state';
 import { EMPTY_STRING, MODELS_URL_PATH } from '../../../constants/common';
 import { OrderInfoBtnText } from '../../../utils/OrderInfoBtnText';
+import { carModelCardSelector } from '../../../selectors/carModelCardSelector';
 
 const minPrice = '8000';
 const maxPrice = '12000';
@@ -17,10 +18,7 @@ interface IProps {
 
 const OrderInfo = ({ cityName, markerName }: IProps) => {
   const location = useLocation();
-
-  useEffect(() => {
-    console.log(location.pathname);
-  }, [location.pathname]);
+  const state = useSelector(carModelCardSelector);
 
   return (
     <div className="order-info">
@@ -43,7 +41,9 @@ const OrderInfo = ({ cityName, markerName }: IProps) => {
       >
         <span>Модель</span>
         <span className="order-info__details__dots" />
-        <div className="order-info__details__model">Машина</div>
+        <div className="order-info__details__model">
+          {`${state.selectedCarInfo.brand}, ${state.selectedCarInfo.name}`}
+        </div>
       </section>
       <section className="order-info__price">
         <span><strong>Цена:</strong></span>

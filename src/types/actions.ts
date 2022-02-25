@@ -1,3 +1,5 @@
+import {ICars} from "../constants/fake-data/cars";
+
 export interface IActionType {
   type: string;
 }
@@ -16,4 +18,9 @@ export interface IOrderLocationActionType extends IActionType {
   cityCoords?: Array<number>;
   markerCoords?: Array<number>;
   selectionCompleted?: boolean;
+}
+
+export interface ICarModelCardActionType extends IActionType {
+  activeCard?: string;
+  selectedCarInfo?: ICars;
 }

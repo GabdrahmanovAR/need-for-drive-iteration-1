@@ -23,6 +23,9 @@
     align-items: flex-end;
     height: 60%;
   }
+  &_active {
+    border: 1px solid $main-grey-color;
+  }
 }
 
 .car-info:hover {
