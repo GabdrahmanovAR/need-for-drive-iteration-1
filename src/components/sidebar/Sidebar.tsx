@@ -18,7 +18,7 @@ const Sidebar = ({ isOpen, sidebarMenu }: IProps) => {
   };
 
   return (
-    <div className="sidebar">
+    <aside className="sidebar">
       <header>
         <button
           className="sidebar__button"
@@ -31,7 +31,7 @@ const Sidebar = ({ isOpen, sidebarMenu }: IProps) => {
       <footer>
         <LangButton />
       </footer>
-    </div>
+    </aside>
   );
 };
 export default connect(

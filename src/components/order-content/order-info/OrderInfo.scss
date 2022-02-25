@@ -1,0 +1,76 @@
+@import "src/constants/styles/common";
+
+.order-info {
+  width: 30%;
+  padding: 2rem;
+
+  &__title {
+    text-align: end;
+    font-size: 1.125rem;
+
+    h3 {
+      margin: 0;
+    }
+  }
+  &__details {
+    display: flex;
+    align-items: flex-end;
+    margin: 1.5rem 0;
+    font-size: .875rem;
+
+    &__dots {
+      margin: 0.4rem 0.4rem 0.3rem;
+      color: gray;
+      flex-grow: 1;
+      border-bottom: 2px dotted $main-grey-color;
+    }
+    &__address {
+      display: flex;
+      flex-direction: column;
+      text-align: end;
+      color: $main-grey-color;
+
+      &_disable {
+        display: none;
+      }
+    }
+    &__model {
+      color: $main-grey-color;
+    }
+    &_disable {
+      display: none;
+    }
+  }
+  &__price {
+    margin-bottom: 1.5rem;
+  }
+}
+
+@media screen and (min-width: 1024px) and (max-width: 1439px){
+  .order-info {
+    &__details {
+      display: block;
+      text-align: start;
+
+      &__dots {
+        display: none;
+      }
+      &__address {
+        text-align: start;
+      }
+    }
+    &__title {
+      text-align: start;
+    }
+  }
+}
+@media screen and (max-width: 1023px){
+  .order-info {
+    width: 100%;
+    padding: 0 2rem 2rem 2rem;
+  }
+}
+
+@media screen and (min-width: 320px) and (max-width: 767px) {
+
+}
