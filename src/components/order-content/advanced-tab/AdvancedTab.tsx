@@ -1,28 +1,23 @@
-import React, { BaseSyntheticEvent, useState } from 'react';
+import React from 'react';
 import './AdvancedTab.scss';
+import { useDispatch, useSelector } from 'react-redux';
 import RadioButton from '../../radio-button/RadioButton';
 import InputField from '../../input-field/InputField';
 import { EMPTY_STRING } from '../../../constants/common';
+import Calendar from '../../calendar/Calendar';
+import { advancedTabSelector } from '../../../selectors/advancedTabSelector';
+import { setEndDayAction, setStartDayAction } from '../../../redux/actions/AdvancedTabAction';
 
 const AdvancedTab = () => {
-  const [startDay, setStartDay] = useState(EMPTY_STRING);
-  const [endDay, setEndDay] = useState(EMPTY_STRING);
-
-  // TODO Попытаться объединить функции обработки input и click
-  const handleStartDateInput = (event: BaseSyntheticEvent) => {
-    setStartDay(event.target.value);
-  };
+  const state = useSelector(advancedTabSelector);
+  const dispatch = useDispatch();
 
   const handleStartDateDeleteClick = () => {
-    setStartDay(EMPTY_STRING);
-  };
-
-  const handleEndDateInput = (event: BaseSyntheticEvent) => {
-    setEndDay(event.target.value);
+    dispatch(setStartDayAction(EMPTY_STRING));
   };
 
   const handleEndDateDeleteClick = () => {
-    setEndDay(EMPTY_STRING);
+    dispatch(setEndDayAction(EMPTY_STRING));
   };
 
   return (
@@ -35,18 +30,20 @@ const AdvancedTab = () => {
         <p>Дата аренды</p>
         <div className="advanced-tab__input-fields">
           <InputField
-            fieldValue={startDay}
-            placeholder="Введите дату и время"
+            id="start-day"
+            fieldValue={state.startDay}
+            placeholder="Выберите дату и время"
             title="С"
-            onInputFunc={handleStartDateInput}
             onClickBtnFunc={handleStartDateDeleteClick}
+            childComponent={<Calendar />}
           />
           <InputField
-            fieldValue={endDay}
-            placeholder="Введите дату и время"
+            id="end-day"
+            fieldValue={state.endDay}
+            placeholder="Выберите дату и время"
             title="По"
-            onInputFunc={handleEndDateInput}
             onClickBtnFunc={handleEndDateDeleteClick}
+            childComponent={<Calendar />}
           />
         </div>
       </section>

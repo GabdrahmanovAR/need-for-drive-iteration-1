@@ -33,7 +33,7 @@ const OrderInfo = ({ cityName, markerName }: IProps) => {
       <header className="order-info__title"><h3>Ваш заказ:</h3></header>
       {/* Информация Вкладка - Местоположение */}
       <section className="order-info__details">
-        <span>Пункт выдачи</span>
+        <span className="order-info__details__title">Пункт выдачи</span>
         <span className="order-info__details__dots" />
         <div className="order-info__details__address">
           <span>{`${cityName}${markerName !== EMPTY_STRING ? ',' : EMPTY_STRING}`}</span>

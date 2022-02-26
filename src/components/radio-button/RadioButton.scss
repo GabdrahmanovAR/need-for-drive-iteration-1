@@ -49,6 +49,10 @@
       background: url("../../assets/icons/check-mark.svg") no-repeat;
     }
 
+    &__input_checkbox:checked + span {
+      color: $main-black-color;
+    }
+
     &_column {
       flex-direction: column;
 

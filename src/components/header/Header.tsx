@@ -1,22 +1,22 @@
 import React from 'react';
-import { connect } from 'react-redux';
-import { bindActionCreators } from 'redux';
+import { useDispatch, useSelector } from 'react-redux';
 import menuButton from '../../assets/icons/menu_btn_black.svg';
 import locationIcon from '../../assets/icons/location-icon.svg';
-import { IState } from '../../types/state';
 import { sidebarMenuAction } from '../../redux/actions/SidebarMenuAction';
 import './Header.scss';
 import { EMPTY_STRING } from '../../constants/common';
+import { sidebarMenuSelector } from '../../selectors/sidebarMenuSelector';
 
 interface IProps {
-  isOpen: boolean;
-  sidebarMenu: (isOpen: boolean) => void,
-  customClass: string,
+  customClass?: string,
 }
 
-const Header = ({ isOpen, sidebarMenu, customClass }: IProps) => {
+const Header = ({ customClass }: IProps) => {
+  const sidebarMenuState = useSelector(sidebarMenuSelector);
+  const dispatch = useDispatch();
+
   const handleMenuBtnClick = () => {
-    sidebarMenu(!isOpen);
+    dispatch(sidebarMenuAction(!sidebarMenuState.isOpen));
   };
 
   return (
@@ -39,12 +39,8 @@ const Header = ({ isOpen, sidebarMenu, customClass }: IProps) => {
   );
 };
 
-export default connect(
-  (state: IState) => ({
-    isOpen: state.sidebarMenu.isOpen,
-    customClass: state.header.customClass,
-  }),
-  (dispatch) => ({
-    sidebarMenu: bindActionCreators(sidebarMenuAction, dispatch),
-  }),
-)(Header);
+Header.defaultProps = {
+  customClass: EMPTY_STRING,
+};
+
+export default Header;

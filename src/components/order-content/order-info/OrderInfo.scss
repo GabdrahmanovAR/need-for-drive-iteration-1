@@ -17,6 +17,10 @@
     margin: 1.5rem 0;
     font-size: .875rem;
 
+    &__title {
+      display: flex;
+      align-items: flex-end;
+    }
     &__dots {
       margin: 0.4rem 0.4rem 0.3rem;
       color: gray;

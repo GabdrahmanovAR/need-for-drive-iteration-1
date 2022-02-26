@@ -21,7 +21,6 @@ const LocationTab = ({ cityName, markerName, changeLocationData }: IProps) => {
   const [citiesMenu, setCitiesMenu] = useState(false);
   const cyrillicRegexp = new RegExp(/^[А-я]*$/);
 
-  // TODO Попробовать уменьшить количество функций
   useEffect(() => {
     if (cityName !== EMPTY_STRING || markerName !== EMPTY_STRING) {
       setCity(cityName);
@@ -101,6 +100,7 @@ const LocationTab = ({ cityName, markerName, changeLocationData }: IProps) => {
     <div className="location-tab">
       <div className="location-tab__point">
         <InputField
+          id="city-field"
           title="Город"
           fieldValue={city}
           placeholder="Начните вводить город..."
@@ -110,6 +110,7 @@ const LocationTab = ({ cityName, markerName, changeLocationData }: IProps) => {
           childComponent={dropDownMenu()}
         />
         <InputField
+          id="marker-field"
           title="Пункт выдачи"
           fieldValue={marker}
           placeholder="Выберите пункт на карте"
