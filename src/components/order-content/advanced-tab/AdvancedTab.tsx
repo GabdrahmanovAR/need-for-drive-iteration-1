@@ -31,9 +31,9 @@ const AdvancedTab = () => {
         <p>Цвет</p>
         <RadioButton btnNames={['Любой', 'Красный', 'Голубой']} />
       </header>
-      <section className="advanced-tab__date">
+      <section>
         <p>Дата аренды</p>
-        <div className="advanced-tab__date__input-fields">
+        <div className="advanced-tab__input-fields">
           <InputField
             fieldValue={startDay}
             placeholder="Введите дату и время"
@@ -49,6 +49,21 @@ const AdvancedTab = () => {
             onClickBtnFunc={handleEndDateDeleteClick}
           />
         </div>
+      </section>
+      <section>
+        <p>Тариф</p>
+        <RadioButton
+          btnNames={['Поминутно, 7 ₽/мин', 'На сутки, 1999 ₽/сутки']}
+          direction="column"
+        />
+      </section>
+      <section>
+        <p>Доп. услуги</p>
+        <RadioButton
+          btnNames={['Полный бак, 500₽', 'Детское кресло, 200₽', 'Правый руль, 1600₽']}
+          type="checkbox"
+          direction="column"
+        />
       </section>
     </div>
   );

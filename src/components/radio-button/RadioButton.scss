@@ -8,7 +8,8 @@
     margin: 0;
 
     &__r-button {
-      margin-right: .5rem;
+      display: flex;
+      margin: .375rem .5rem .375rem 0;
     }
     &__name {
       font-size: .875rem;
@@ -18,7 +19,7 @@
         color: $main-black-color;
       }
     }
-    input {
+    &__input {
       -webkit-appearance: none;
       -moz-appearance: none;
       appearance: none;
@@ -33,12 +34,28 @@
 
       position: relative;
       top: .25rem;
+      cursor: pointer;
+
+      &_checkbox {
+        border-radius: 0;
+      }
     }
 
-    input:checked {
+    &__input:checked {
       border: 4px solid $main-green-color;
     }
+    &__input_checkbox:checked {
+      border: 2px solid $main-green-color;
+      background: url("../../assets/icons/check-mark.svg") no-repeat;
+    }
 
+    &_column {
+      flex-direction: column;
+
+      &__r-button {
+        margin-bottom: 1rem;
+      }
+    }
   }
 }
 
