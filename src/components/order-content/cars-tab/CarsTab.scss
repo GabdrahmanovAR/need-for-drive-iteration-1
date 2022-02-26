@@ -1,6 +1,6 @@
 @import "src/constants/styles/common";
 
-.car-models {
+.cars-tab {
   padding: 2rem;
   width: 70%;
   border-right: 1px solid $main-lightgrey-color;
@@ -15,20 +15,20 @@
 }
 
 @media screen and (max-width: 1023px){
-  .car-models {
+  .cars-tab {
     width: 100%;
     border-right: none;
   }
 }
 
 @media screen and (max-height: 780px){
-  .car-models {
+  .cars-tab {
     height: max-content;
   }
 }
 
 @media screen and (max-width: 360px){
-  .car-models {
+  .cars-tab {
     padding-top: .5rem;
   }
 }

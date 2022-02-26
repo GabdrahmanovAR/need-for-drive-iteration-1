@@ -13,6 +13,7 @@ interface IProps {
 }
 
 const OrderPage = ({ headerAddClass }: IProps) => {
+  // TODO Избавиться от useEffect. Переделать получение state через useSelector
   useEffect(() => {
     headerAddClass('order-page__header');
   }, []);

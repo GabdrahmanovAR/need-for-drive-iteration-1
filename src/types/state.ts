@@ -4,7 +4,7 @@ export interface IState {
   sidebarMenu: ISidebarMenuState;
   header: IHeaderState;
   orderLocation: IOrderLocationState;
-  carModelCard: ICardModelCardState;
+  carCard: ICarCardState;
 }
 
 export interface ISidebarMenuState {
@@ -23,7 +23,7 @@ export interface IOrderLocationState {
   selectionCompleted: boolean;
 }
 
-export interface ICardModelCardState {
+export interface ICarCardState {
   activeCard: string;
   selectedCarInfo: ICars;
 }

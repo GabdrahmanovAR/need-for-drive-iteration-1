@@ -6,7 +6,7 @@ import Button from '../../button/Button';
 import { IState } from '../../../types/state';
 import { EMPTY_STRING, MODELS_URL_PATH } from '../../../constants/common';
 import { OrderInfoBtnText } from '../../../utils/OrderInfoBtnText';
-import { carModelCardSelector } from '../../../selectors/carModelCardSelector';
+import { carCardSelector } from '../../../selectors/carCardSelector';
 
 const minPrice = '8000';
 const maxPrice = '12000';
@@ -18,7 +18,7 @@ interface IProps {
 
 const OrderInfo = ({ cityName, markerName }: IProps) => {
   const location = useLocation();
-  const state = useSelector(carModelCardSelector);
+  const state = useSelector(carCardSelector);
 
   return (
     <div className="order-info">

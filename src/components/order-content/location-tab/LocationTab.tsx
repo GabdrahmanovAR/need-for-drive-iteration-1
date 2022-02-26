@@ -7,7 +7,7 @@ import YandexMaps from '../../yandex-maps/YandexMaps';
 import { ICity, listOfCities } from '../../../constants/fake-data/cities';
 import { IState } from '../../../types/state';
 import { changeLocationDataAction } from '../../../redux/actions/OrderLocationAction';
-import OrderInputField from '../order-input-field/OrderInputField';
+import InputField from '../../input-field/InputField';
 
 interface IProps {
   cityName: string,
@@ -21,6 +21,7 @@ const LocationTab = ({ cityName, markerName, changeLocationData }: IProps) => {
   const [citiesMenu, setCitiesMenu] = useState(false);
   const cyrillicRegexp = new RegExp(/^[А-я]*$/);
 
+  // TODO Попробовать уменьшить количество функций
   useEffect(() => {
     if (cityName !== EMPTY_STRING || markerName !== EMPTY_STRING) {
       setCity(cityName);
@@ -72,43 +73,49 @@ const LocationTab = ({ cityName, markerName, changeLocationData }: IProps) => {
     setCitiesMenu(true);
   };
 
+  const dropDownMenu = () => (
+    <div className="location-tab__drop-down-menu">
+      <nav className={`location-tab__cities-list ${citiesMenu && 'location-tab__cities-list_active'}`}>
+        <ul>
+          {listOfCities.map((someCity: ICity, index: number) => {
+            if (someCity.name.slice(0, city.length) === city) {
+              return (
+                <li
+                  className="list-item"
+                  onClick={handleListItemClick}
+                  role="presentation"
+                  key={`city-${index}`}
+                >
+                  {someCity.name}
+                </li>
+              );
+            }
+            return null;
+          })}
+        </ul>
+      </nav>
+    </div>
+  );
+
   return (
-    <div className="order-location">
-      <OrderInputField
-        title="Город"
-        fieldValue={city}
-        placeholder="Начните вводить город..."
-        onInputFunc={handleCityInput}
-        onClickInputFunc={handleCityInputClick}
-        onClickBtnFunc={handleCityBtnClick}
-      />
-      <div className="order-location__drop-down-menu">
-        <nav className={`order-location__cities-list ${citiesMenu && 'order-location__cities-list_active'}`}>
-          <ul>
-            {listOfCities.map((someCity: ICity, index: number) => {
-              if (someCity.name.slice(0, city.length) === city) {
-                return (
-                  <li
-                    className="list-item"
-                    onClick={handleListItemClick}
-                    role="presentation"
-                    key={`city-${index}`}
-                  >
-                    {someCity.name}
-                  </li>
-                );
-              }
-              return null;
-            })}
-          </ul>
-        </nav>
+    <div className="location-tab">
+      <div className="location-tab__point">
+        <InputField
+          title="Город"
+          fieldValue={city}
+          placeholder="Начните вводить город..."
+          onInputFunc={handleCityInput}
+          onClickInputFunc={handleCityInputClick}
+          onClickBtnFunc={handleCityBtnClick}
+          childComponent={dropDownMenu()}
+        />
+        <InputField
+          title="Пункт выдачи"
+          fieldValue={marker}
+          placeholder="Выберите пункт на карте"
+          onClickBtnFunc={handleMarkerBtnClick}
+        />
       </div>
-      <OrderInputField
-        title="Пункт выдачи"
-        fieldValue={marker}
-        placeholder="Выберите пункт на карте"
-        onClickBtnFunc={handleMarkerBtnClick}
-      />
       <YandexMaps />
     </div>
   );

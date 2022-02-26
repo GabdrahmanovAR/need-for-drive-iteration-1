@@ -10,4 +10,18 @@
       margin-top: 0;
     }
   }
+  &__date {
+    margin-top: 2rem;
+
+    &__input-fields {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+      width: max-content;
+    }
+  }
+}
+
+.input-field__title {
+  min-width: max-content;
 }

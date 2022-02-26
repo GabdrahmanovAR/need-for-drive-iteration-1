@@ -1,4 +1,4 @@
-import {ICars} from "../constants/fake-data/cars";
+import { ICars } from '../constants/fake-data/cars';
 
 export interface IActionType {
   type: string;
@@ -20,7 +20,7 @@ export interface IOrderLocationActionType extends IActionType {
   selectionCompleted?: boolean;
 }
 
-export interface ICarModelCardActionType extends IActionType {
+export interface ICarCardActionType extends IActionType {
   activeCard?: string;
   selectedCarInfo?: ICars;
 }

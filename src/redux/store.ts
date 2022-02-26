@@ -4,14 +4,14 @@ import thunk from 'redux-thunk';
 import sidebarMenuReducer from './reducers/SidebarMenuReducer';
 import headerReducer from './reducers/HeaderReducer';
 import orderLocationReducer from './reducers/OrderLocationReducer';
-import cardModelCardReducer from './reducers/CardModelCardReducer';
+import cardModelCardReducer from './reducers/CardCardReducer';
 
 export const store = createStore(
   combineReducers({
     sidebarMenu: sidebarMenuReducer,
     header: headerReducer,
     orderLocation: orderLocationReducer,
-    carModelCard: cardModelCardReducer,
+    carCard: cardModelCardReducer,
   }),
   composeWithDevTools(applyMiddleware(thunk)),
 );

@@ -1,6 +1,6 @@
 @import "src/constants/styles/common";
 
-.car-info {
+.car-card {
   height: 14rem;
   width: 50%;
   border: 1px solid $main-lightgrey-color;
@@ -28,19 +28,19 @@
   }
 }
 
-.car-info:hover {
+.car-card:hover {
   cursor: pointer;
   border: 1px solid $main-green-color;
 }
 
 @media screen and (min-width: 320px) and (max-width: 767px){
-  .car-info {
+  .car-card {
     width: 100%;
   }
 }
 
 @media screen and (max-width: 419px){
-  .car-info {
+  .car-card {
     &__car-image {
       img {
         width: calc(100% * .9);

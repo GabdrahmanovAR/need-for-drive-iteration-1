@@ -25,16 +25,16 @@ const CarCard = ({ id, carInfo, activeCard }: IProps) => {
 
   return (
     <section
-      className={`car-info ${activeCard === id && 'car-info_active'}`}
+      className={`car-card ${activeCard === id && 'car-card_active'}`}
       onClick={handleCardClick}
       role="presentation"
       id={id}
     >
-      <header className="car-info__header">
-        <h3 className="car-info__header__title">{carInfo.name}</h3>
-        <span className="car-info__header__description">{`${carInfo.minPrice} - ${carInfo.maxPrice} ₽`}</span>
+      <header className="car-card__header">
+        <h3 className="car-card__header__title">{carInfo.name}</h3>
+        <span className="car-card__header__description">{`${carInfo.minPrice} - ${carInfo.maxPrice} ₽`}</span>
       </header>
-      <div className="car-info__car-image">
+      <div className="car-card__car-image">
         <img src={carInfo.image} alt="Car Model" />
       </div>
     </section>
