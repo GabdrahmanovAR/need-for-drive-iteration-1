@@ -17,6 +17,7 @@ const Header = ({ customClass }: IProps) => {
 
   const handleMenuBtnClick = () => {
     dispatch(sidebarMenuAction(!sidebarMenuState.isOpen));
+    document.body.style.overflow = 'hidden';
   };
 
   return (

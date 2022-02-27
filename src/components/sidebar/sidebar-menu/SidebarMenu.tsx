@@ -22,6 +22,7 @@ const SidebarMenu = ({ isOpen, sidebarMenu }: IProps) => {
 
   const handleSidebarBtnClick = () => {
     sidebarMenu(!isOpen);
+    document.body.style.overflow = 'unset';
   };
 
   return (

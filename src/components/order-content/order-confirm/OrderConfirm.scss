@@ -19,7 +19,7 @@
     text-align: center;
 
     &__title {
-      margin-bottom: 2rem;
+      margin-bottom: 4rem;
     }
     &__buttons {
       display: flex;
@@ -32,5 +32,31 @@
   }
   &__cancel-button:before {
     background: linear-gradient(to right, #493013, #7B0C3B);
+  }
+}
+
+@media screen and (max-width: 1023px){
+  .order-confirm {
+    &__block {
+      width: 60%;
+    }
+  }
+}
+
+@media screen and (max-width: 768px){
+  .order-confirm {
+    &__block {
+      width: 100%;
+      padding: 0 2rem;
+
+      &__buttons {
+        display: block;
+
+        div {
+          width: 100%;
+          margin-bottom: 2rem;
+        }
+      }
+    }
   }
 }

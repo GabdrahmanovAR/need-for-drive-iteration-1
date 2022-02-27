@@ -29,3 +29,7 @@ export interface IAdvancedTabActionType extends IActionType {
 export interface IInputFieldActionType extends IActionType{
   focusedField?: string;
 }
+
+export interface IOrderConfirmActionType extends IActionType {
+  isActive?: boolean;
+}

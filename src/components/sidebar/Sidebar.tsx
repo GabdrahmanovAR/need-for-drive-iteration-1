@@ -15,6 +15,7 @@ interface IProps {
 const Sidebar = ({ isOpen, sidebarMenu }: IProps) => {
   const handleSidebarBtnClick = () => {
     sidebarMenu(!isOpen);
+    document.body.style.overflow = 'hidden';
   };
 
   return (

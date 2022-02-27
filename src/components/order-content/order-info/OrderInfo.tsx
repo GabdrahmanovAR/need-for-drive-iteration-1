@@ -9,7 +9,7 @@ import {
 } from '../../../constants/common';
 import { OrderInfoBtnText } from '../../../utils/OrderInfoBtnText';
 import { carCardSelector } from '../../../selectors/carCardSelector';
-import OrderConfirm from '../order-confirm/OrderConfirm';
+import { NextTabUrl } from '../../../utils/NextTabUrl';
 
 const minPrice = '8000';
 const maxPrice = '12000';
@@ -76,15 +76,19 @@ const OrderInfo = ({ cityName, markerName }: IProps) => {
       </section>
       {/* Информация диапозон цен */}
       <section className="order-info__price">
-        <span><strong>Цена:</strong></span>
-        <span>{` от ${minPrice} до ${maxPrice} ₽`}</span>
+        <span><strong>Цена: </strong></span>
+        <span>
+          {location.pathname === RESULT_URL_PATH
+            ? '16 000₽'
+            : `от ${minPrice} до ${maxPrice} ₽`}
+        </span>
       </section>
+      {console.log(location.pathname)}
       <Button
         text={OrderInfoBtnText(location.pathname)}
         // isDisabled={((cityName === EMPTY_STRING || markerName === EMPTY_STRING))}
-        link={MODELS_URL_PATH}
+        link={NextTabUrl(location.pathname)}
       />
-      <OrderConfirm customClass="order-confirm_active" />
     </div>
   );
 };
