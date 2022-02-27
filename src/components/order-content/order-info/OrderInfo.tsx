@@ -9,6 +9,7 @@ import {
 } from '../../../constants/common';
 import { OrderInfoBtnText } from '../../../utils/OrderInfoBtnText';
 import { carCardSelector } from '../../../selectors/carCardSelector';
+import OrderConfirm from '../order-confirm/OrderConfirm';
 
 const minPrice = '8000';
 const maxPrice = '12000';
@@ -80,9 +81,10 @@ const OrderInfo = ({ cityName, markerName }: IProps) => {
       </section>
       <Button
         text={OrderInfoBtnText(location.pathname)}
-        isDisabled={((cityName === EMPTY_STRING || markerName === EMPTY_STRING))}
+        // isDisabled={((cityName === EMPTY_STRING || markerName === EMPTY_STRING))}
         link={MODELS_URL_PATH}
       />
+      <OrderConfirm customClass="order-confirm_active" />
     </div>
   );
 };
