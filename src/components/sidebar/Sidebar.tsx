@@ -15,10 +15,11 @@ interface IProps {
 const Sidebar = ({ isOpen, sidebarMenu }: IProps) => {
   const handleSidebarBtnClick = () => {
     sidebarMenu(!isOpen);
+    document.body.style.overflow = 'hidden';
   };
 
   return (
-    <div className="sidebar">
+    <aside className="sidebar">
       <header>
         <button
           className="sidebar__button"
@@ -31,7 +32,7 @@ const Sidebar = ({ isOpen, sidebarMenu }: IProps) => {
       <footer>
         <LangButton />
       </footer>
-    </div>
+    </aside>
   );
 };
 export default connect(
