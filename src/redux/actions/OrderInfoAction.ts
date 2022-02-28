@@ -18,6 +18,10 @@ const changeMarkerData = (markerName: string, markerCoords: number[]): IOrderInf
   },
 });
 
+// export const changeCarNameAction = (): IOrderCarInfoActionType => ({
+//
+// })
+
 export const changeLocationDataAction = (name: string, coords: number[], key: string) => (dispatch: Dispatch) => {
   if (key === 'city') dispatch(changeCityData(name, coords));
   else dispatch(changeMarkerData(name, coords));

@@ -2,7 +2,9 @@ import produce from 'immer';
 import { IOrderInfoState } from '../../types/state';
 import { EMPTY_ARRAY, EMPTY_STRING } from '../../constants/common';
 import { IOrderInfoActionType } from '../../types/actions';
-import { SET_CITY_DATA, SET_MARKER_DATA } from '../../constants/actions/orderInfo';
+import {
+  SET_CAR_INFO, SET_CITY_DATA, SET_MARKER_DATA,
+} from '../../constants/actions/orderInfo';
 
 const initialState: IOrderInfoState = {
   location: {
@@ -39,12 +41,19 @@ const changeMarkerData = (draft: IOrderInfoState, markerName?: string, markerCoo
   return draft;
 };
 
+const carInfo = (draft: IOrderInfoState, brand?: string, name?: string) => {
+  draft.car.brand = brand || EMPTY_STRING;
+  draft.car.name = name || EMPTY_STRING;
+  return draft;
+};
+
 export default (state = initialState, action: IOrderInfoActionType) => produce(
   state,
   (draft: IOrderInfoState) => {
     switch (action.type) {
       case SET_CITY_DATA: return changeCityData(draft, action.location?.cityName, action.location?.cityCoords);
       case SET_MARKER_DATA: return changeMarkerData(draft, action.location?.markerName, action.location?.markerCoords);
+      case SET_CAR_INFO: return carInfo(draft, action.car?.brand, action.car?.name);
       default: return state;
     }
   },

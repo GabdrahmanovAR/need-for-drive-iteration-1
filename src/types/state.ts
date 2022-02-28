@@ -33,7 +33,7 @@ export interface IOrderConfirmState {
 
 export interface IOrderInfoState {
   location: IOrderLocationState;
-  car: IOrderCarInfoState
+  car: IOrderCarInfoState;
 }
 
 export interface IOrderLocationState {
