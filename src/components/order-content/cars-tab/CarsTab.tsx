@@ -1,13 +1,18 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import RadioButton from '../../radio-button/RadioButton';
 import { Cars, ICars } from '../../../constants/fake-data/cars';
 import CarCard from '../car-card/CarCard';
 import './CarsTab.scss';
 import { carCardSelector } from '../../../selectors/carCardSelector';
+import { ScrollToTop } from '../../../utils/ScrollToTop';
 
 const CarsTab = () => {
   const state = useSelector(carCardSelector);
+
+  useEffect(() => {
+    ScrollToTop();
+  }, []);
 
   return (
     <div className="cars-tab">

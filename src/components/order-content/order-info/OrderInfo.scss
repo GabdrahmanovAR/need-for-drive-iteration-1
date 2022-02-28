@@ -3,6 +3,7 @@
 .order-info {
   width: 30%;
   padding: 2rem;
+  height: max-content;
 
   &__title {
     text-align: end;
@@ -80,6 +81,7 @@
     }
   }
 }
+
 @media screen and (max-width: 1023px){
   .order-info {
     width: 100%;
@@ -88,11 +90,4 @@
 }
 
 @media screen and (min-width: 320px) and (max-width: 767px) {
-
 }
-//
-//@media screen and (max-height: 780px) {
-//  .order-info {
-//    height: max-content;
-//  }
-//}

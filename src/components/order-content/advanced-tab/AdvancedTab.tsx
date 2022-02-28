@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import './AdvancedTab.scss';
 import { useDispatch, useSelector } from 'react-redux';
 import RadioButton from '../../radio-button/RadioButton';
@@ -7,10 +7,15 @@ import { EMPTY_STRING } from '../../../constants/common';
 import Calendar from '../../calendar/Calendar';
 import { advancedTabSelector } from '../../../selectors/advancedTabSelector';
 import { setEndDayAction, setStartDayAction } from '../../../redux/actions/AdvancedTabAction';
+import { ScrollToTop } from '../../../utils/ScrollToTop';
 
 const AdvancedTab = () => {
   const state = useSelector(advancedTabSelector);
   const dispatch = useDispatch();
+
+  useEffect(() => {
+    ScrollToTop();
+  }, []);
 
   const handleStartDateDeleteClick = () => {
     dispatch(setStartDayAction(EMPTY_STRING));

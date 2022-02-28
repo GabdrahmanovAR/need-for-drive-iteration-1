@@ -7,6 +7,7 @@
 }
 
 html, body, #root {
+  height: 100%;
   font-size: 16px;
 }
 
@@ -26,10 +27,4 @@ body+.sidebar-menu_open {
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
-}
-
-@media screen and (min-height: 780px) {
-  html, body, #root {
-    height: 100%;
-  }
 }
