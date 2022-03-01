@@ -5,3 +5,9 @@
   height: 100%;
   overflow: auto;
 }
+
+@media screen and (min-height: 811px) {
+  .main-page__slider {
+    width: calc(100vh * 0.8484);
+  }
+}

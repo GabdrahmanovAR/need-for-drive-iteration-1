@@ -36,8 +36,10 @@ const OrderInfo: FC<IOrderInfoProps> = ({ cityName, markerName }) => {
         <span className="order-info__details__title">Пункт выдачи</span>
         <span className="order-info__details__dots" />
         <div className="order-info__details__address">
-          <span>{cityName}</span>
-          {markerName !== EMPTY_STRING && <span>,</span>}
+          <div>
+            <span>{cityName}</span>
+            {markerName !== EMPTY_STRING && <span>,</span>}
+          </div>
           <span className={`
           ${markerName === EMPTY_STRING && 'order-info__details__address_disable'}`}
           >
