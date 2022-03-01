@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { FC } from 'react';
 import { useNavigate } from 'react-router-dom';
 import './Button.scss';
 import { useDispatch } from 'react-redux';
@@ -6,7 +6,7 @@ import { CONFIRM_TAB, EMPTY_STRING } from '../../constants/common';
 import Spinner from '../Spinner/Spinner';
 import { changeOrderConfirmAction } from '../../redux/actions/OrderConfirmAction';
 
-interface IProps {
+interface IButtonProps {
   text: string;
   customClass?: string;
   isDisabled?: boolean;
@@ -14,9 +14,9 @@ interface IProps {
   link?: string;
 }
 
-const Button = ({
-  text, customClass, isDisabled, isLoading, link,
-}: IProps) => {
+const Button: FC<IButtonProps> = ({
+  text, customClass = EMPTY_STRING, isDisabled, isLoading, link,
+}) => {
   const path = useNavigate();
   const dispatch = useDispatch();
 
@@ -40,13 +40,6 @@ const Button = ({
         : <span className={`${!isDisabled ? 'button__text' : 'button__text_disabled'}`}>{text}</span>}
     </button>
   );
-};
-
-Button.defaultProps = {
-  customClass: EMPTY_STRING,
-  isDisabled: false,
-  isLoading: false,
-  link: EMPTY_STRING,
 };
 
 export default Button;

@@ -8,7 +8,7 @@ import { carCardSelector } from '../../../selectors/carCardSelector';
 import { ScrollToTop } from '../../../utils/ScrollToTop';
 
 const CarsTab = () => {
-  const state = useSelector(carCardSelector);
+  const carCardState = useSelector(carCardSelector);
 
   useEffect(() => {
     ScrollToTop();
@@ -23,7 +23,7 @@ const CarsTab = () => {
         {Cars.map((carInfo: ICars, index: number) => (
           <CarCard
             carInfo={carInfo}
-            activeCard={state.activeCard}
+            activeCard={carCardState.activeCard}
             id={`model-card-${index}`}
             key={`model-card-${index}`}
           />
