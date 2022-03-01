@@ -24,10 +24,12 @@ const Slider = () => {
     switch (event.target.id) {
       case LEFT_ARROW:
         if (content === 1) setContent(4);
-        else setContent(content - 1); break;
+        else setContent(content - 1);
+        break;
       case RIGHT_ARROW:
         if (content === 4) setContent(1);
-        else setContent(content + 1); break;
+        else setContent(content + 1);
+        break;
       default: setContent(1);
     }
   };
@@ -43,13 +45,13 @@ const Slider = () => {
           <img src={leftArrowIcon} alt="Arrow icon" />
         </div>
         <section className="slider__layer__block slider-content">
-          {sliderContent(Slides[content].TITLE, Slides[content].DESCRIPTION)}
-          <footer className="slider-content__dots" onClick={handleDotsClick} role="presentation">
+          {sliderContent(Slides[content].title, Slides[content].description)}
+          <div className="slider-content__dots" onClick={handleDotsClick} role="presentation">
             <div id="1" className={`${content === 1 && 'slider-content__dots_active'}`} />
             <div id="2" className={`${content === 2 && 'slider-content__dots_active'}`} />
             <div id="3" className={`${content === 3 && 'slider-content__dots_active'}`} />
             <div id="4" className={`${content === 4 && 'slider-content__dots_active'}`} />
-          </footer>
+          </div>
         </section>
         <div id="right" className="slider__layer__right-arrow" onClick={handleArrowClick} role="presentation">
           <img src={rightArrowIcon} alt="Arrow icon" />
