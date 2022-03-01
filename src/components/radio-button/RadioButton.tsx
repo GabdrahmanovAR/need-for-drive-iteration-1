@@ -47,9 +47,4 @@ const RadioButton: FC<IRadioButtonProps> = ({ btnNames, type, direction }) => {
   );
 };
 
-RadioButton.defaultProps = {
-  type: 'radio',
-  direction: EMPTY_STRING,
-};
-
 export default RadioButton;

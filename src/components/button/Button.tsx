@@ -36,11 +36,4 @@ const Button: FC<IButtonProps> = ({
   );
 };
 
-Button.defaultProps = {
-  customClass: EMPTY_STRING,
-  isDisabled: false,
-  isLoading: false,
-  link: EMPTY_STRING,
-};
-
 export default Button;

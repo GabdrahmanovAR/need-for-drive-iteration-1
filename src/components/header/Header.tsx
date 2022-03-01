@@ -39,8 +39,4 @@ const Header: FC<IHeaderProps> = ({ customClass }) => {
   );
 };
 
-Header.defaultProps = {
-  customClass: EMPTY_STRING,
-};
-
 export default Header;

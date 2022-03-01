@@ -1,6 +1,6 @@
 import React, { BaseSyntheticEvent, FC } from 'react';
 import { useDispatch } from 'react-redux';
-import { EMPTY_FUNC, EMPTY_STRING, EmptyFuncType } from '../../constants/common';
+import { EMPTY_STRING, EmptyFuncType } from '../../constants/common';
 import deleteIcon from '../../assets/icons/delete-city.svg';
 import './InputField.scss';
 import { setFocusedFieldAction } from '../../redux/actions/InputFieldAction';
@@ -61,13 +61,6 @@ const InputField: FC<IInputFieldProps> = ({
       </div>
     </div>
   );
-};
-
-InputField.defaultProps = {
-  onInputFunc: (e: BaseSyntheticEvent) => e,
-  onClickBtnFunc: EMPTY_FUNC,
-  onClickInputFunc: EMPTY_FUNC,
-  childComponent: <div />,
 };
 
 export default InputField;
