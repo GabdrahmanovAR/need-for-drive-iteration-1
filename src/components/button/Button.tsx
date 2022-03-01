@@ -12,9 +12,14 @@ interface IButtonProps {
   link?: string;
 }
 
-const Button: FC<IButtonProps> = ({
-  text, customClass, isDisabled, isLoading, link,
-}) => {
+const Button: FC<IButtonProps> = (props) => {
+  const {
+    text,
+    customClass,
+    isDisabled,
+    isLoading,
+    link,
+  } = props;
   const path = useNavigate();
 
   const handleRouteChange = () => {
@@ -34,13 +39,6 @@ const Button: FC<IButtonProps> = ({
         : <span className={`${!isDisabled ? 'button__text' : 'button__text_disabled'}`}>{text}</span>}
     </button>
   );
-};
-
-Button.defaultProps = {
-  customClass: EMPTY_STRING,
-  isDisabled: false,
-  isLoading: false,
-  link: EMPTY_STRING,
 };
 
 export default Button;
