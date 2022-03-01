@@ -27,10 +27,4 @@ const Button = ({
   </button>
 );
 
-Button.defaultProps = {
-  customClass: EMPTY_STRING,
-  isDisabled: false,
-  isLoading: false,
-};
-
 export default Button;

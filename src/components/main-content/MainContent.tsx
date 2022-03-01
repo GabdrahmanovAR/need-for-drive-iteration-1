@@ -37,10 +37,13 @@ const MainContent = ({ isOpen, sidebarMenu }: IProps) => {
         </div>
       </header>
       <main className="content__info">
-        <h1>Каршеринг</h1>
-        <h1>Need for drive</h1>
-        <p>Поминутная аренда авто твоего города</p>
-        <Button text="Забронировать" customClass="content__info__button" />
+        <div className="content__info__text-block">
+          <h1>Каршеринг</h1>
+          <h1>Need for drive</h1>
+          <p>Поминутная аренда авто твоего города</p>
+          <Button text="Забронировать" customClass="content__info__button" />
+        </div>
+        <div className="content__info__empty" />
       </main>
       <footer className="content__footer">
         <p>© 2016-2019 «Need for drive»</p>

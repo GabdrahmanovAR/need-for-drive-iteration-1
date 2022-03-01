@@ -9,18 +9,23 @@
     flex-grow: 1;
   }
   &__slider {
-    max-width: 688px;
-
+    width: 688px;
   }
 }
 
 @media screen and (min-width: 1024px) and (max-width: 1439px){
   .main-page__slider {
-    max-width: 614px;
+    width: 614px;
   }
 }
 @media screen and (max-width: 1023px){
   .main-page__slider {
     display: none;
+  }
+}
+
+@media screen and (min-height: 811px) {
+  .main-page__slider {
+    width: calc(100vh * 0.8484);
   }
 }

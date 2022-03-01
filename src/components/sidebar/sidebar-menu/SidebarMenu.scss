@@ -124,7 +124,7 @@
 @media screen and (min-height: 811px) {
   .sidebar-menu {
     &__empty {
-      max-width: calc(100vh * 0.8484);
+      width: calc(100vh * 0.8484);
     }
   }
 }
