@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { FC } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import menuButton from '../../assets/icons/menu_btn_black.svg';
@@ -8,13 +8,13 @@ import { sidebarMenuAction } from '../../redux/actions/SidebarMenuAction';
 import './Header.scss';
 import { EMPTY_STRING } from '../../constants/common';
 
-interface IProps {
+interface IHeaderProps {
   isOpen: boolean;
   sidebarMenu: (isOpen: boolean) => void,
   customClass: string,
 }
 
-const Header = ({ isOpen, sidebarMenu, customClass }: IProps) => {
+const Header: FC<IHeaderProps> = ({ isOpen, sidebarMenu, customClass }) => {
   const handleMenuBtnClick = () => {
     sidebarMenu(!isOpen);
   };

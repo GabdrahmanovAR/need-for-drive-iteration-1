@@ -1,4 +1,6 @@
-import React, { BaseSyntheticEvent, useEffect, useState } from 'react';
+import React, {
+  BaseSyntheticEvent, FC, useEffect, useState,
+} from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { EMPTY_ARRAY, EMPTY_STRING } from '../../../constants/common';
@@ -9,13 +11,13 @@ import { ICity, listOfCities } from '../../../constants/cities';
 import { IState } from '../../../types/state';
 import { changeLocationDataAction } from '../../../redux/actions/OrderLocationAction';
 
-interface IProps {
+interface IOrderLocationProps {
   cityName: string,
   markerName: string,
   changeLocationData: (name: string, coords: number[], key: string) => void,
 }
 
-const OrderLocation = ({ cityName, markerName, changeLocationData }: IProps) => {
+const OrderLocation: FC<IOrderLocationProps> = ({ cityName, markerName, changeLocationData }) => {
   const [city, setCity] = useState(EMPTY_STRING);
   const [marker, setMarker] = useState(EMPTY_STRING);
   const [citiesMenu, setCitiesMenu] = useState(false);
@@ -29,14 +31,13 @@ const OrderLocation = ({ cityName, markerName, changeLocationData }: IProps) => 
   }, [cityName, markerName]);
 
   useEffect(() => {
-    if (city !== EMPTY_STRING) {
-      listOfCities.map((someCity: ICity) => {
-        if (someCity.name === city) {
-          changeLocationData(someCity.name, someCity.coordinates, 'city');
-        }
-        return null;
-      });
-    }
+    if (city === EMPTY_STRING) return;
+    listOfCities.forEach((someCity: ICity) => {
+      if (someCity.name === city) {
+        changeLocationData(someCity.name, someCity.coordinates, 'city');
+      }
+      return null;
+    });
   }, [city]);
 
   const handleCityInput = (event: BaseSyntheticEvent) => {
@@ -68,30 +69,6 @@ const OrderLocation = ({ cityName, markerName, changeLocationData }: IProps) => 
     setCitiesMenu(false);
   };
 
-  // const inputField = (fieldName: string, onInputFunc?: (e: BaseSyntheticEvent) => void, onClickFunc?: EmptyFunc) => (
-  //   <div className="order-location__input-block">
-  //     <span className="order-location__input-block__title">{fieldName}</span>
-  //     <input
-  //       className="order-location__input-block__input"
-  //       type="text"
-  //       value={city}
-  //       placeholder="Начните вводить пункт..."
-  //       onInput={onInputFunc}
-  //     />
-  //     <button
-  //       type="button"
-  //       className="order-location__input-block__btn city-button"
-  //       onClick={onClickFunc}
-  //     >
-  //       <img
-  //         className={`city-button__icon ${city !== EMPTY_STRING && 'city-button__icon_active'}`}
-  //         src={deleteIcon}
-  //         alt="Delete"
-  //       />
-  //     </button>
-  //   </div>
-  // );
-
   return (
     <div className="order-location">
       <div className="order-location__input-block">
@@ -120,19 +97,17 @@ const OrderLocation = ({ cityName, markerName, changeLocationData }: IProps) => 
         <nav className={`order-location__cities-list ${citiesMenu && 'order-location__cities-list_active'}`}>
           <ul>
             {listOfCities.map((someCity: ICity, index: number) => {
-              if (someCity.name.slice(0, city.length) === city) {
-                return (
-                  <li
-                    className="list-item"
-                    onClick={handleListItemClick}
-                    role="presentation"
-                    key={`city-${index}`}
-                  >
-                    {someCity.name}
-                  </li>
-                );
-              }
-              return null;
+              if (someCity.name.slice(0, city.length) !== city) return null;
+              return (
+                <li
+                  className="list-item"
+                  onClick={handleListItemClick}
+                  role="presentation"
+                  key={`city-${index}`}
+                >
+                  {someCity.name}
+                </li>
+              );
             })}
           </ul>
         </nav>
