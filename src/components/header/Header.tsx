@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { FC } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import menuButton from '../../assets/icons/menu_btn_black.svg';
 import locationIcon from '../../assets/icons/location-icon.svg';
@@ -7,11 +7,11 @@ import './Header.scss';
 import { EMPTY_STRING } from '../../constants/common';
 import { sidebarMenuSelector } from '../../selectors/sidebarMenuSelector';
 
-interface IProps {
+interface IHeaderProps {
   customClass?: string,
 }
 
-const Header = ({ customClass }: IProps) => {
+const Header: FC<IHeaderProps> = ({ customClass }) => {
   const sidebarMenuState = useSelector(sidebarMenuSelector);
   const dispatch = useDispatch();
 

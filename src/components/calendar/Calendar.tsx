@@ -6,11 +6,11 @@ import { setEndDayAction, setStartDayAction } from '../../redux/actions/Advanced
 import { inputFieldSelector } from '../../selectors/inputFieldSelector';
 
 const Calendar = () => {
-  const state = useSelector(inputFieldSelector);
+  const inputFieldState = useSelector(inputFieldSelector);
   const dispatch = useDispatch();
 
   const onChange = (value: any, dateString: string) => {
-    if (state.focusedField === 'start-day') dispatch(setStartDayAction(dateString));
+    if (inputFieldState.focusedField === 'start-day') dispatch(setStartDayAction(dateString));
     else dispatch(setEndDayAction(dateString));
   };
 

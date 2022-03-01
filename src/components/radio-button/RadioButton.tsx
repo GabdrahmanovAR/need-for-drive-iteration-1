@@ -1,14 +1,14 @@
-import React, { BaseSyntheticEvent, useState } from 'react';
+import React, { BaseSyntheticEvent, FC, useState } from 'react';
 import './RadioButton.scss';
 import { EMPTY_STRING } from '../../constants/common';
 
-interface IProps {
+interface IRadioButtonProps {
   btnNames: string[],
   type?: string,
   direction?: string,
 }
 
-const RadioButton = ({ btnNames, type, direction }: IProps) => {
+const RadioButton: FC<IRadioButtonProps> = ({ btnNames, type, direction }) => {
   const [checked, setChecked] = useState(type === 'radio' ? 'radio-id-0' : EMPTY_STRING);
 
   const handleOnChangeEvent = (event: BaseSyntheticEvent) => {

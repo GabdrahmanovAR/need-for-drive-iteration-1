@@ -1,16 +1,16 @@
-import React, { BaseSyntheticEvent, useEffect } from 'react';
+import React, { BaseSyntheticEvent, FC, useEffect } from 'react';
 import './CarCard.scss';
 import { useDispatch } from 'react-redux';
 import { changeActiveCardAction, changeSelectedCarInfoAction } from '../../../redux/actions/CarModelCardAction';
 import { ICars } from '../../../constants/fake-data/cars';
 
-interface IProps {
+interface ICarCardProps {
   id: string,
   carInfo: ICars,
   activeCard: string,
 }
 
-const CarCard = ({ id, carInfo, activeCard }: IProps) => {
+const CarCard: FC<ICarCardProps> = ({ id, carInfo, activeCard }) => {
   const dispatch = useDispatch();
 
   const handleCardClick = (event: BaseSyntheticEvent) => {
@@ -18,9 +18,7 @@ const CarCard = ({ id, carInfo, activeCard }: IProps) => {
   };
 
   useEffect(() => {
-    if (activeCard === id) {
-      dispatch(changeSelectedCarInfoAction(carInfo));
-    }
+    if (activeCard === id) dispatch(changeSelectedCarInfoAction(carInfo));
   }, [activeCard]);
 
   return (

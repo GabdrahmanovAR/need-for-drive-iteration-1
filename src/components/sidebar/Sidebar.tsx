@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { FC } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import menuButton from '../../assets/icons/menu_btn.svg';
@@ -7,12 +7,12 @@ import { IState } from '../../types/state';
 import { sidebarMenuAction } from '../../redux/actions/SidebarMenuAction';
 import LangButton from '../lang-button/LangButton';
 
-interface IProps {
+interface ISidebarProps {
   isOpen: boolean;
   sidebarMenu: (isOpen: boolean) => void,
 }
 
-const Sidebar = ({ isOpen, sidebarMenu }: IProps) => {
+const Sidebar: FC<ISidebarProps> = ({ isOpen, sidebarMenu }) => {
   const handleSidebarBtnClick = () => {
     sidebarMenu(!isOpen);
   };
