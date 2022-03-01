@@ -10,7 +10,7 @@ import { setEndDayAction, setStartDayAction } from '../../../redux/actions/Advan
 import { ScrollToTop } from '../../../utils/ScrollToTop';
 
 const AdvancedTab = () => {
-  const state = useSelector(advancedTabSelector);
+  const advancedTabState = useSelector(advancedTabSelector);
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -36,7 +36,7 @@ const AdvancedTab = () => {
         <div className="advanced-tab__input-fields">
           <InputField
             id="start-day"
-            fieldValue={state.startDay}
+            fieldValue={advancedTabState.startDay}
             placeholder="Выберите дату и время"
             title="С"
             onClickBtnFunc={handleStartDateDeleteClick}
@@ -44,7 +44,7 @@ const AdvancedTab = () => {
           />
           <InputField
             id="end-day"
-            fieldValue={state.endDay}
+            fieldValue={advancedTabState.endDay}
             placeholder="Выберите дату и время"
             title="По"
             onClickBtnFunc={handleEndDateDeleteClick}

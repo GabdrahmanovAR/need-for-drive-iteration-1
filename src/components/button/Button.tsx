@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { FC } from 'react';
 import { useNavigate } from 'react-router-dom';
 import './Button.scss';
 import { useDispatch } from 'react-redux';
@@ -6,7 +6,7 @@ import { CONFIRM_TAB, EMPTY_STRING } from '../../constants/common';
 import Spinner from '../Spinner/Spinner';
 import { changeOrderConfirmAction } from '../../redux/actions/OrderConfirmAction';
 
-interface IProps {
+interface IButtonProps {
   text: string;
   customClass?: string;
   isDisabled?: boolean;
@@ -14,16 +14,15 @@ interface IProps {
   link?: string;
 }
 
-const Button = ({
+const Button: FC<IButtonProps> = ({
   text, customClass, isDisabled, isLoading, link,
-}: IProps) => {
+}) => {
   const path = useNavigate();
   const dispatch = useDispatch();
 
   const handleButtonClick = () => {
     if (link !== EMPTY_STRING && link === CONFIRM_TAB) {
       dispatch(changeOrderConfirmAction(true));
-      window.scrollTo({ top: 0 });
       document.body.style.overflow = 'hidden';
     } else if (link !== EMPTY_STRING) path(link || EMPTY_STRING);
   };

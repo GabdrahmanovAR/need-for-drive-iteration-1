@@ -6,14 +6,8 @@
   height: 100%;
 }
 
-@media screen and (min-width: 1024px) and (max-width: 1439px){
-
-}
 @media screen and (max-width: 1023px){
   .order-content {
     flex-direction: column;
   }
-}
-
-@media screen and (min-width: 320px) and (max-width: 767px){
 }

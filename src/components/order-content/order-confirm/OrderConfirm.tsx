@@ -6,7 +6,7 @@ import { orderConfirmSelector } from '../../../selectors/orderConfirmSelector';
 import { changeOrderConfirmAction } from '../../../redux/actions/OrderConfirmAction';
 
 const OrderConfirm = () => {
-  const state = useSelector(orderConfirmSelector);
+  const orderConfirmState = useSelector(orderConfirmSelector);
   const dispatch = useDispatch();
 
   const handleCancelBtnClick = () => {
@@ -15,7 +15,7 @@ const OrderConfirm = () => {
   };
 
   return (
-    <div className={`order-confirm ${state.isActive && 'order-confirm_active'}`}>
+    <div className={`order-confirm ${orderConfirmState.isActive && 'order-confirm_active'}`}>
       <div className="order-confirm__block">
         <h1 className="order-confirm__block__title">Подтвердить заказ</h1>
         <div className="order-confirm__block__buttons">
