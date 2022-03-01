@@ -1,8 +1,8 @@
-import React, { BaseSyntheticEvent } from 'react';
+import React, { BaseSyntheticEvent, FC } from 'react';
 import { EMPTY_FUNC, EMPTY_STRING, EmptyFuncType } from '../../../constants/common';
 import deleteIcon from '../../../assets/icons/delete-city.svg';
 
-interface IProps {
+interface IOrderInputFieldProps {
   title: string,
   fieldName: string,
   onInputFunc?: (e: BaseSyntheticEvent) => void,
@@ -11,9 +11,9 @@ interface IProps {
   childComponent?: React.ReactNode,
 }
 
-const OrderInputField = ({
+const OrderInputField: FC<IOrderInputFieldProps> = ({
   title, fieldName, onInputFunc, onClickInputFunc, onClickBtnFunc, childComponent,
-}: IProps) => (
+}) => (
   <div className="order-location__input-block">
     <span className="order-location__input-block__title">{title}</span>
     <div>

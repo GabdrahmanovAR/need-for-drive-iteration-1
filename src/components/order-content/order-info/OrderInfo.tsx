@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { FC } from 'react';
 import './OrderInfo.scss';
 import { connect, useSelector } from 'react-redux';
 import { useLocation } from 'react-router-dom';
@@ -8,15 +8,15 @@ import { EMPTY_STRING, MODELS_URL_PATH } from '../../../constants/common';
 import { OrderInfoBtnText } from '../../../utils/OrderInfoBtnText';
 import { carModelCardSelector } from '../../../selectors/carModelCardSelector';
 
-const minPrice = '8000';
-const maxPrice = '12000';
+const MIN_PRICE = '8000';
+const MAX_PRICE = '12000';
 
-interface IProps {
+interface IOrderInfoProps {
   cityName: string,
   markerName: string,
 }
 
-const OrderInfo = ({ cityName, markerName }: IProps) => {
+const OrderInfo: FC<IOrderInfoProps> = ({ cityName, markerName }) => {
   const location = useLocation();
   const state = useSelector(carModelCardSelector);
 
@@ -27,7 +27,8 @@ const OrderInfo = ({ cityName, markerName }: IProps) => {
         <span>Пункт выдачи</span>
         <span className="order-info__details__dots" />
         <div className="order-info__details__address">
-          <span>{`${cityName}${markerName !== EMPTY_STRING ? ',' : EMPTY_STRING}`}</span>
+          <span>{cityName}</span>
+          {markerName !== EMPTY_STRING && <span>,</span>}
           <span className={`
           ${markerName === EMPTY_STRING && 'order-info__details__address_disable'}`}
           >
@@ -49,7 +50,7 @@ const OrderInfo = ({ cityName, markerName }: IProps) => {
       </section>
       <section className="order-info__price">
         <span><strong>Цена:</strong></span>
-        <span>{` от ${minPrice} до ${maxPrice} ₽`}</span>
+        <span>{` от ${MIN_PRICE} до ${MAX_PRICE} ₽`}</span>
       </section>
       <Button
         text={OrderInfoBtnText(location.pathname)}

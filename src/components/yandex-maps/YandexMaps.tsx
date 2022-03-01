@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { FC } from 'react';
 import {
   Clusterer, Map, Placemark, YMaps,
 } from 'react-yandex-maps';
@@ -9,12 +9,12 @@ import { IState } from '../../types/state';
 import { ICity, ICityMarker, listOfCities } from '../../constants/fake-data/cities';
 import { changeLocationDataAction } from '../../redux/actions/OrderLocationAction';
 
-interface IProps {
+interface IYandexMapsProps {
   cityCoords: number[],
   changeLocationData: (name: string, coords: number[], key: string) => void,
 }
 
-const YandexMaps = ({ cityCoords, changeLocationData }: IProps) => {
+const YandexMaps: FC<IYandexMapsProps> = ({ cityCoords, changeLocationData }) => {
   const handleMarkerClick = (markerName: string, markerCoords: number[], markerCity: string, markerCityCoords: number[]) => {
     changeLocationData(markerCity, markerCityCoords, 'city');
     changeLocationData(markerName, markerCoords, 'marker');

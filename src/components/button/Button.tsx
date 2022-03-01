@@ -1,10 +1,10 @@
-import React from 'react';
+import React, { FC } from 'react';
 import { useNavigate } from 'react-router-dom';
 import './Button.scss';
 import { EMPTY_STRING } from '../../constants/common';
 import Spinner from '../Spinner/Spinner';
 
-interface IProps {
+interface IButtonProps {
   text: string;
   customClass?: string;
   isDisabled?: boolean;
@@ -12,9 +12,9 @@ interface IProps {
   link?: string;
 }
 
-const Button = ({
+const Button: FC<IButtonProps> = ({
   text, customClass, isDisabled, isLoading, link,
-}: IProps) => {
+}) => {
   const path = useNavigate();
 
   const handleRouteChange = () => {

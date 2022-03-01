@@ -1,11 +1,11 @@
-import React, { BaseSyntheticEvent, useState } from 'react';
+import React, { BaseSyntheticEvent, FC, useState } from 'react';
 import './RadioButton.scss';
 
-interface IProps {
+interface IRadioButtonProps {
   btnNames: string[],
 }
 
-const RadioButton = ({ btnNames }: IProps) => {
+const RadioButton: FC<IRadioButtonProps> = ({ btnNames }) => {
   const [checked, setChecked] = useState('radio-id-0');
 
   const handleOnChangeEvent = (event: BaseSyntheticEvent) => {

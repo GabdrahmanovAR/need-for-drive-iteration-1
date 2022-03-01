@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { FC, useEffect } from 'react';
 import './OrderPage.scss';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
@@ -8,11 +8,11 @@ import { IState } from '../../types/state';
 import { headerAddClassAction } from '../../redux/actions/HeaderAction';
 import OrderStep from '../../components/order-step/OrderStep';
 
-interface IProps {
+interface IOrderPageProps {
   headerAddClass: (customClass: string) => void,
 }
 
-const OrderPage = ({ headerAddClass }: IProps) => {
+const OrderPage: FC<IOrderPageProps> = ({ headerAddClass }) => {
   useEffect(() => {
     headerAddClass('order-page__header');
   }, []);

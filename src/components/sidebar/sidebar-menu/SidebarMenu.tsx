@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { FC } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { useLocation } from 'react-router-dom';
@@ -11,12 +11,12 @@ import { sidebarMenuAction } from '../../../redux/actions/SidebarMenuAction';
 import menuCloseButton from '../../../assets/icons/menu_close_btn.svg';
 import LangButton from '../../lang-button/LangButton';
 
-interface IProps {
+interface ISidebarMenuProps {
   isOpen: boolean;
   sidebarMenu: (isOpen: boolean) => void,
 }
 
-const SidebarMenu = ({ isOpen, sidebarMenu }: IProps) => {
+const SidebarMenu: FC<ISidebarMenuProps> = ({ isOpen, sidebarMenu }) => {
   const location = useLocation();
   const regexPath = new RegExp(/\/order\/[A-z]*/);
 
