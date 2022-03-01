@@ -66,6 +66,7 @@
       "import/no-named-as-default": "off",
       "import/no-extraneous-dependencies": "off",
       "react/jsx-props-no-spreading": "off",
+      "react/require-default-props": "off",
       "max-len": [
         1,
         120
