@@ -1,6 +1,14 @@
 import { Dispatch } from 'redux';
 import { IOrderInfoActionType } from '../../types/actions';
-import { SET_CAR_INFO, SET_CITY_DATA, SET_MARKER_DATA } from '../../constants/actions/orderInfo';
+import {
+  SET_CAR_COLOR,
+  SET_CAR_INFO,
+  SET_CITY_DATA,
+  SET_MARKER_DATA,
+  SET_RENTAL_DURATION_ED,
+  SET_RENTAL_DURATION_SD,
+  SET_TARIFF,
+} from '../../constants/actions/orderInfo';
 
 const changeCityData = (cityName: string, cityCoords: number[]): IOrderInfoActionType => ({
   type: SET_CITY_DATA,
@@ -27,6 +35,38 @@ export const changeCarInfoAction = (brand: string, name: string, minPrice: strin
     maxPrice,
     image,
     selectedCar,
+  },
+});
+
+export const setCarColorAction = (color: string): IOrderInfoActionType => ({
+  type: SET_CAR_COLOR,
+  car: {
+    color,
+  },
+});
+
+export const startDayRentAction = (startDay: string): IOrderInfoActionType => ({
+  type: SET_RENTAL_DURATION_SD,
+  car: {
+    rentalDuration: {
+      from: startDay,
+    },
+  },
+});
+
+export const endDayRentAction = (endDay: string): IOrderInfoActionType => ({
+  type: SET_RENTAL_DURATION_ED,
+  car: {
+    rentalDuration: {
+      to: endDay,
+    },
+  },
+});
+
+export const setTariffAction = (tariff: string): IOrderInfoActionType => ({
+  type: SET_TARIFF,
+  car: {
+    tariff,
   },
 });
 

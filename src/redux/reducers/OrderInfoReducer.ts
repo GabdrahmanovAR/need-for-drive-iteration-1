@@ -2,7 +2,14 @@ import produce from 'immer';
 import { IOrderInfoState } from '../../types/state';
 import { EMPTY_ARRAY, EMPTY_STRING } from '../../constants/common';
 import { IOrderCarInfoActionType, IOrderInfoActionType } from '../../types/actions';
-import { SET_CAR_INFO, SET_CITY_DATA, SET_MARKER_DATA } from '../../constants/actions/orderInfo';
+import {
+  SET_CAR_COLOR,
+  SET_CAR_INFO,
+  SET_CITY_DATA,
+  SET_MARKER_DATA,
+  SET_RENTAL_DURATION_ED,
+  SET_RENTAL_DURATION_SD, SET_TARIFF,
+} from '../../constants/actions/orderInfo';
 
 const initialState: IOrderInfoState = {
   location: {
@@ -19,7 +26,7 @@ const initialState: IOrderInfoState = {
     selectedCar: EMPTY_STRING,
     maxPrice: EMPTY_STRING,
     minPrice: EMPTY_STRING,
-    color: EMPTY_STRING,
+    color: 'Любой',
     babyChair: false,
     fullTank: false,
     rentalDuration: {
@@ -27,7 +34,7 @@ const initialState: IOrderInfoState = {
       to: EMPTY_STRING,
     },
     rightHandDrive: false,
-    tariff: EMPTY_STRING,
+    tariff: 'Поминутно',
   },
 };
 
@@ -61,6 +68,26 @@ const carInfo = (draft: IOrderInfoState, props?: IOrderCarInfoActionType) => {
   return draft;
 };
 
+const setCarColor = (draft: IOrderInfoState, color?: string) => {
+  draft.car.color = color || EMPTY_STRING;
+  return draft;
+};
+
+const startDayRent = (draft: IOrderInfoState, startDay?: string) => {
+  draft.car.rentalDuration.from = startDay || EMPTY_STRING;
+  return draft;
+};
+
+const endDayRent = (draft: IOrderInfoState, endDay?: string) => {
+  draft.car.rentalDuration.to = endDay || EMPTY_STRING;
+  return draft;
+};
+
+const setTariff = (draft: IOrderInfoState, tariff?: string) => {
+  draft.car.tariff = tariff || EMPTY_STRING;
+  return draft;
+};
+
 export default (state = initialState, action: IOrderInfoActionType) => produce(
   state,
   (draft: IOrderInfoState) => {
@@ -68,6 +95,10 @@ export default (state = initialState, action: IOrderInfoActionType) => produce(
       case SET_CITY_DATA: return changeCityData(draft, action.location?.cityName, action.location?.cityCoords);
       case SET_MARKER_DATA: return changeMarkerData(draft, action.location?.markerName, action.location?.markerCoords);
       case SET_CAR_INFO: return carInfo(draft, action.car);
+      case SET_CAR_COLOR: return setCarColor(draft, action.car?.color);
+      case SET_RENTAL_DURATION_SD: return startDayRent(draft, action.car?.rentalDuration?.from);
+      case SET_RENTAL_DURATION_ED: return endDayRent(draft, action.car?.rentalDuration?.to);
+      case SET_TARIFF: return setTariff(draft, action.car?.tariff);
       default: return state;
     }
   },

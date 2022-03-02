@@ -5,12 +5,12 @@ import RadioButton from '../../radio-button/RadioButton';
 import InputField from '../../input-field/InputField';
 import { EMPTY_STRING } from '../../../constants/common';
 import Calendar from '../../calendar/Calendar';
-import { advancedTabSelector } from '../../../selectors/advancedTabSelector';
 import { setEndDayAction, setStartDayAction } from '../../../redux/actions/AdvancedTabAction';
 import { ScrollToTop } from '../../../utils/ScrollToTop';
+import { orderInfoSelector } from '../../../selectors/orderInfoSelector';
 
 const AdvancedTab = () => {
-  const advancedTabState = useSelector(advancedTabSelector);
+  const { car } = useSelector(orderInfoSelector);
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -29,14 +29,17 @@ const AdvancedTab = () => {
     <div className="advanced-tab">
       <header className="advanced-tab__header">
         <p>Цвет</p>
-        <RadioButton btnNames={['Любой', 'Красный', 'Голубой']} />
+        <RadioButton
+          formName="color"
+          btnNames={['Любой', 'Красный', 'Голубой']}
+        />
       </header>
       <section>
         <p>Дата аренды</p>
         <div className="advanced-tab__input-fields">
           <InputField
             id="start-day"
-            fieldValue={advancedTabState.startDay}
+            fieldValue={car.rentalDuration.from}
             placeholder="Выберите дату и время"
             title="С"
             onClickBtnFunc={handleStartDateDeleteClick}
@@ -44,7 +47,7 @@ const AdvancedTab = () => {
           />
           <InputField
             id="end-day"
-            fieldValue={advancedTabState.endDay}
+            fieldValue={car.rentalDuration.to}
             placeholder="Выберите дату и время"
             title="По"
             onClickBtnFunc={handleEndDateDeleteClick}
@@ -55,6 +58,7 @@ const AdvancedTab = () => {
       <section>
         <p>Тариф</p>
         <RadioButton
+          formName="tariff"
           btnNames={['Поминутно, 7 ₽/мин', 'На сутки, 1999 ₽/сутки']}
           direction="column"
         />
@@ -62,6 +66,7 @@ const AdvancedTab = () => {
       <section>
         <p>Доп. услуги</p>
         <RadioButton
+          formName="advanced"
           btnNames={['Полный бак, 500₽', 'Детское кресло, 200₽', 'Правый руль, 1600₽']}
           type="checkbox"
           direction="column"

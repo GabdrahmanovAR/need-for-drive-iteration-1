@@ -6,7 +6,6 @@ import OrderLocation from './location-tab/LocationTab';
 import CarsTab from './cars-tab/CarsTab';
 import AdvancedTab from './advanced-tab/AdvancedTab';
 import ResultTab from './result-tab/ResultTab';
-import OrderConfirm from './order-confirm/OrderConfirm';
 
 const OrderContent = () => (
   <section className="order-content">
@@ -17,7 +16,6 @@ const OrderContent = () => (
       <Route path="/result" element={<ResultTab />} />
     </Routes>
     <OrderInfo />
-    <OrderConfirm />
   </section>
 );
 

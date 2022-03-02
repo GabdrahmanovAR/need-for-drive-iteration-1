@@ -17,7 +17,10 @@ const CarsTab = () => {
   return (
     <div className="cars-tab">
       <header className="cars-tab__header">
-        <RadioButton btnNames={['Все модели', 'Эконом', 'Премиум']} />
+        <RadioButton
+          formName="cars"
+          btnNames={['Все модели', 'Эконом', 'Премиум']}
+        />
       </header>
       <main className="cars-tab__car-list">
         {Cars.map((carInfo: ICarsFakeData, index: number) => (

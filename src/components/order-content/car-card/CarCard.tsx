@@ -17,12 +17,6 @@ const CarCard: FC<ICarCardProps> = ({ id, carInfo, activeCard }) => {
     dispatch(changeCarInfoAction(carInfo.brand, carInfo.name, carInfo.minPrice, carInfo.maxPrice, carInfo.image, event.currentTarget.id));
   };
 
-  // useEffect(() => {
-  //   if (activeCard === id) {
-  //     dispatch(changeSelectedCarInfoAction(carInfo));
-  //   }
-  // }, [activeCard]);
-
   return (
     <section
       className={`car-card ${activeCard === id && 'car-card_active'}`}

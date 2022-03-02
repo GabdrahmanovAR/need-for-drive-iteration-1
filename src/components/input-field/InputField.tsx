@@ -16,9 +16,17 @@ interface IInputFieldProps {
   childComponent?: React.ReactNode,
 }
 
-const InputField: FC<IInputFieldProps> = ({
-  title, fieldValue, placeholder, id, onInputFunc, onClickInputFunc, onClickBtnFunc, childComponent,
-}) => {
+const InputField: FC<IInputFieldProps> = (props) => {
+  const {
+    title,
+    fieldValue,
+    placeholder,
+    id,
+    onInputFunc,
+    onClickInputFunc,
+    onClickBtnFunc,
+    childComponent,
+  } = props;
   const dispatch = useDispatch();
 
   const handleInputFieldClick = (event: BaseSyntheticEvent) => {

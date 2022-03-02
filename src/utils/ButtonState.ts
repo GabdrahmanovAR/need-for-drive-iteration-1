@@ -37,7 +37,7 @@ export const ButtonState = (currentLocation: string, orderInfo: IOrderInfoState)
       dispatch(changeAdvTabStateAction(true));
       return false;
     }
-    case RESULT_URL_PATH: return true;
+    case RESULT_URL_PATH: return false;
     default: return false;
   }
 };
