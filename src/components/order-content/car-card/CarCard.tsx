@@ -1,12 +1,12 @@
-import React, { BaseSyntheticEvent, FC, useEffect } from 'react';
+import React, { BaseSyntheticEvent, FC } from 'react';
 import './CarCard.scss';
 import { useDispatch } from 'react-redux';
-import { changeActiveCardAction, changeSelectedCarInfoAction } from '../../../redux/actions/CarModelCardAction';
-import { ICars } from '../../../constants/fake-data/cars';
+import { ICarsFakeData } from '../../../constants/fake-data/cars';
+import { changeCarInfoAction } from '../../../redux/actions/OrderInfoAction';
 
 interface ICarCardProps {
   id: string,
-  carInfo: ICars,
+  carInfo: ICarsFakeData,
   activeCard: string,
 }
 
@@ -14,14 +14,14 @@ const CarCard: FC<ICarCardProps> = ({ id, carInfo, activeCard }) => {
   const dispatch = useDispatch();
 
   const handleCardClick = (event: BaseSyntheticEvent) => {
-    dispatch(changeActiveCardAction(event.currentTarget.id));
+    dispatch(changeCarInfoAction(carInfo.brand, carInfo.name, carInfo.minPrice, carInfo.maxPrice, carInfo.image, event.currentTarget.id));
   };
 
-  useEffect(() => {
-    if (activeCard === id) {
-      dispatch(changeSelectedCarInfoAction(carInfo));
-    }
-  }, [activeCard]);
+  // useEffect(() => {
+  //   if (activeCard === id) {
+  //     dispatch(changeSelectedCarInfoAction(carInfo));
+  //   }
+  // }, [activeCard]);
 
   return (
     <section

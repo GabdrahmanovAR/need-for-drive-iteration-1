@@ -1,4 +1,4 @@
-import { ICars } from '../constants/fake-data/cars';
+import { ICarsFakeData } from '../constants/fake-data/cars';
 
 export interface IState {
   sidebarMenu: ISidebarMenuState;
@@ -7,6 +7,7 @@ export interface IState {
   inputField: IInputFieldState;
   orderConfirm: IOrderConfirmState;
   orderInfo: IOrderInfoState;
+  orderStep: IOrderStepState;
 }
 
 export interface ISidebarMenuState {
@@ -15,7 +16,7 @@ export interface ISidebarMenuState {
 
 export interface ICarCardState {
   activeCard: string;
-  selectedCarInfo: ICars;
+  selectedCarInfo: ICarsFakeData;
 }
 
 export interface IAdvancedTabState {
@@ -47,6 +48,9 @@ export interface IOrderLocationState {
 export interface IOrderCarInfoState {
   brand: string;
   name: string;
+  minPrice: string,
+  maxPrice: string,
+  image: string,
   color: string;
   rentalDuration: {
     from: string,
@@ -56,4 +60,12 @@ export interface IOrderCarInfoState {
   fullTank: boolean;
   babyChair: boolean;
   rightHandDrive: boolean;
+  selectedCar: string,
+}
+
+export interface IOrderStepState {
+  locationTabCompleted: boolean;
+  modelTabCompleted: boolean;
+  advancedTabCompleted: boolean;
+  activeTab: string;
 }

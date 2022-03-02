@@ -7,7 +7,6 @@ import {
   ADVANCED_URL_PATH, EMPTY_STRING, MODELS_URL_PATH, RESULT_URL_PATH,
 } from '../../../constants/common';
 import { ButtonText } from '../../../utils/ButtonText';
-import { carCardSelector } from '../../../selectors/carCardSelector';
 import { NextTabUrl } from '../../../utils/NextTabUrl';
 import { ButtonState } from '../../../utils/ButtonState';
 import { orderInfoSelector } from '../../../selectors/orderInfoSelector';
@@ -17,7 +16,6 @@ const MAX_PRICE = '12000';
 
 const OrderInfo = () => {
   const { location, car } = useSelector(orderInfoSelector);
-  const carCardState = useSelector(carCardSelector);
   const locationPath = useLocation();
 
   const advancedInfoElement = (title: string, value: string) => (
@@ -53,9 +51,9 @@ const OrderInfo = () => {
         <span>Модель</span>
         <span className="order-info__details__dots" />
         <div className="order-info__details__info">
-          {carCardState.selectedCarInfo.name === EMPTY_STRING
+          {car.name === EMPTY_STRING
             ? 'Выберите авто'
-            : `${carCardState.selectedCarInfo.brand}, ${carCardState.selectedCarInfo.name}`}
+            : `${car.brand}, ${car.name}`}
         </div>
       </section>
       {/* Информация Вкладка - Дополнительно */}
@@ -67,9 +65,9 @@ const OrderInfo = () => {
           {advancedInfoElement('Цвет', 'Любой')}
           {advancedInfoElement('Длительность аренды', '1д 2ч')}
           {advancedInfoElement('Тариф', 'На сутки')}
-          {advancedInfoElement('Полный бак', 'Да')}
-          {advancedInfoElement('Детское кресло', 'Да')}
-          {advancedInfoElement('Правый руль', 'Да')}
+          {advancedInfoElement('Полный бак', 'Не выбрано')}
+          {advancedInfoElement('Детское кресло', 'Не выбрано')}
+          {advancedInfoElement('Правый руль', 'Не выбрано')}
         </div>
       </section>
       {/* Информация диапозон цен */}

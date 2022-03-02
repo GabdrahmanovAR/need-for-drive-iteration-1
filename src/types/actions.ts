@@ -1,4 +1,4 @@
-import { ICars } from '../constants/fake-data/cars';
+import { ICarsFakeData } from '../constants/fake-data/cars';
 
 export interface IActionType {
   type: string;
@@ -18,7 +18,7 @@ export interface IOrderLocationActionType {
 
 export interface ICarCardActionType extends IActionType {
   activeCard?: string;
-  selectedCarInfo?: ICars;
+  selectedCarInfo?: ICarsFakeData;
 }
 
 export interface IAdvancedTabActionType extends IActionType {
@@ -42,6 +42,9 @@ export interface IOrderInfoActionType extends IActionType {
 export interface IOrderCarInfoActionType {
   brand?: string;
   name?: string;
+  minPrice?: string,
+  maxPrice?: string,
+  image?: string,
   color?: string;
   rentalDuration?: {
     from?: string,
@@ -51,4 +54,12 @@ export interface IOrderCarInfoActionType {
   fullTank?: boolean;
   babyChair?: boolean;
   rightHandDrive?: boolean;
+  selectedCar?: string,
+}
+
+export interface IOrderStepActionType extends IActionType {
+  locationTabCompleted?: boolean;
+  modelTabCompleted?: boolean;
+  advancedTabCompleted?: boolean;
+  activeTab?: string;
 }

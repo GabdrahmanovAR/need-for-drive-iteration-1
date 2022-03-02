@@ -8,7 +8,7 @@ interface IRadioButtonProps {
   direction?: string,
 }
 
-const RadioButton: FC<IRadioButtonProps> = ({ btnNames, type, direction }) => {
+const RadioButton: FC<IRadioButtonProps> = ({ btnNames, type = 'radio', direction = EMPTY_STRING }) => {
   const [checked, setChecked] = useState(type === 'radio' ? 'radio-id-0' : EMPTY_STRING);
 
   const handleOnChangeEvent = (event: BaseSyntheticEvent) => {
