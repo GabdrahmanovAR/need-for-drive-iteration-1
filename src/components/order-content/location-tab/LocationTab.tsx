@@ -1,7 +1,7 @@
 import React, {
   BaseSyntheticEvent, FC, useEffect, useState,
 } from 'react';
-import { connect } from 'react-redux';
+import { connect, useDispatch } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { EMPTY_ARRAY, EMPTY_STRING } from '../../../constants/common';
 import './LocationTab.scss';
@@ -11,6 +11,7 @@ import { IState } from '../../../types/state';
 import { changeLocationDataAction } from '../../../redux/actions/OrderInfoAction';
 import InputField from '../../input-field/InputField';
 import DropDownMenu from '../../dropdown-menu/DropDownMenu';
+import { changeLocTabStateAction } from '../../../redux/actions/OrderStepAction';
 
 interface ILocationTabProps {
   cityName: string,
@@ -24,6 +25,7 @@ const LocationTab: FC<ILocationTabProps> = ({ cityName, markerName, changeLocati
   const [citiesMenuActive, setCitiesMenuActive] = useState(false);
   const [markerMenuActive, setMarkerMenuActive] = useState(false);
   const cyrillicRegexp = new RegExp(/^[А-я]*$/);
+  const dispatch = useDispatch();
 
   useEffect(() => {
     if (cityName !== EMPTY_STRING || markerName !== EMPTY_STRING) {
@@ -90,12 +92,14 @@ const LocationTab: FC<ILocationTabProps> = ({ cityName, markerName, changeLocati
     changeLocationData(EMPTY_STRING, [55.753215, 37.622504], 'city');
     setCitiesMenuActive(false);
     setMarkerMenuActive(false);
+    dispatch(changeLocTabStateAction(false));
   };
 
   const handleMarkerBtnClick = () => {
     setMarker(EMPTY_STRING);
     changeLocationData(EMPTY_STRING, EMPTY_ARRAY, 'marker');
     setCitiesMenuActive(false);
+    dispatch(changeLocTabStateAction(false));
   };
 
   const handleCityInputClick = () => {

@@ -4,6 +4,7 @@ import { ICity, ICityMarker } from '../../constants/fake-data/cities';
 import './DropDownMenu.scss';
 import { EMPTY_STRING } from '../../constants/common';
 import { inputFieldSelector } from '../../selectors/inputFieldSelector';
+import { orderInfoSelector } from '../../selectors/orderInfoSelector';
 
 interface IDropDownMenu {
   data: ICity[],
@@ -20,6 +21,7 @@ const DropDownMenu: FC<IDropDownMenu> = (props) => {
     cityName = EMPTY_STRING,
   } = props;
   const inputFieldState = useSelector(inputFieldSelector);
+  const { location } = useSelector(orderInfoSelector);
 
   return (
     <div className="drop-down-menu">
@@ -39,16 +41,33 @@ const DropDownMenu: FC<IDropDownMenu> = (props) => {
                 </li>
               );
             }))
-            : (data.map((someCity: ICity) => someCity.markers.map((marker: ICityMarker, index: number) => (
-              <li
-                className="list-item"
-                onClick={onClickFunc}
-                role="presentation"
-                key={`marker-${index}`}
-              >
-                {marker.street}
-              </li>
-            ))))}
+            : (data.map((someCity: ICity) => someCity.markers.map((marker: ICityMarker, index: number) => {
+              if (location.cityName === EMPTY_STRING) {
+                return (
+                  <li
+                    className="list-item"
+                    onClick={onClickFunc}
+                    role="presentation"
+                    key={`marker-${index}`}
+                  >
+                    {marker.street}
+                  </li>
+                );
+              }
+              if (someCity.name === location.cityName) {
+                return (
+                  <li
+                    className="list-item"
+                    onClick={onClickFunc}
+                    role="presentation"
+                    key={`marker-${index}`}
+                  >
+                    {marker.street}
+                  </li>
+                );
+              }
+              return null;
+            })))}
         </ul>
       </nav>
     </div>

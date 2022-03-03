@@ -3,21 +3,19 @@ import {
   Clusterer, Map, Placemark, YMaps,
 } from 'react-yandex-maps';
 import './YandexMaps.scss';
-import { connect } from 'react-redux';
-import { bindActionCreators } from 'redux';
-import { IState } from '../../types/state';
+import { useDispatch, useSelector } from 'react-redux';
 import { ICity, ICityMarker, listOfCities } from '../../constants/fake-data/cities';
 import { changeLocationDataAction } from '../../redux/actions/OrderInfoAction';
+import { orderInfoSelector } from '../../selectors/orderInfoSelector';
+import { EMPTY_ARRAY } from '../../constants/common';
 
-interface IProps {
-  cityCoords: number[],
-  changeLocationData: (name: string, coords: number[], key: string) => void,
-}
+const YandexMaps = () => {
+  const { location } = useSelector(orderInfoSelector);
+  const dispatch = useDispatch();
 
-const YandexMaps = ({ cityCoords, changeLocationData }: IProps) => {
   const handleMarkerClick = (markerName: string, markerCoords: number[], markerCity: string, markerCityCoords: number[]) => {
-    changeLocationData(markerCity, markerCityCoords, 'city');
-    changeLocationData(markerName, markerCoords, 'marker');
+    dispatch(changeLocationDataAction(markerCity, markerCityCoords, 'city'));
+    dispatch(changeLocationDataAction(markerName, markerCoords, 'marker'));
   };
 
   return (
@@ -26,7 +24,10 @@ const YandexMaps = ({ cityCoords, changeLocationData }: IProps) => {
       <main>
         <YMaps>
           <Map
-            state={{ center: cityCoords, zoom: 9 }}
+            state={{
+              center: location.markerCoords === EMPTY_ARRAY ? location.cityCoords : location.markerCoords,
+              zoom: location.markerCoords === EMPTY_ARRAY ? 9 : 14,
+            }}
             height="45vh"
             width="100%"
           >
@@ -49,11 +50,4 @@ const YandexMaps = ({ cityCoords, changeLocationData }: IProps) => {
   );
 };
 
-export default connect(
-  (state: IState) => ({
-    cityCoords: state.orderInfo.location.cityCoords,
-  }),
-  (dispatch) => ({
-    changeLocationData: bindActionCreators(changeLocationDataAction, dispatch),
-  }),
-)(YandexMaps);
+export default YandexMaps;
