@@ -1,36 +1,50 @@
-import React from 'react';
+import React, { FC } from 'react';
+import { useNavigate } from 'react-router-dom';
 import './Button.scss';
-import { Spin } from 'antd';
-import { LoadingOutlined } from '@ant-design/icons';
-import { EMPTY_STRING } from '../../constants/common';
+import { useDispatch } from 'react-redux';
+import { CONFIRM_TAB, EMPTY_STRING } from '../../constants/common';
+import Spinner from '../Spinner/Spinner';
+import { changeOrderConfirmAction } from '../../redux/actions/OrderConfirmAction';
 
-interface IProps {
+interface IButtonProps {
   text: string;
   customClass?: string;
   isDisabled?: boolean;
   isLoading?: boolean;
+  link?: string;
 }
 
-const Button = ({
-  text, customClass, isDisabled, isLoading,
-}: IProps) => (
-  <button
-    type="button"
-    className={`button 
-      ${(customClass !== EMPTY_STRING && !isDisabled) && customClass} 
-      ${isDisabled && 'button_disabled'}`}
-    disabled={isDisabled}
-  >
-    {isLoading
-      ? <Spin indicator={<LoadingOutlined spin />} />
-      : <span className="button__text">{text}</span>}
-  </button>
-);
+const Button: FC<IButtonProps> = (props) => {
+  const {
+    text,
+    customClass = EMPTY_STRING,
+    isDisabled,
+    isLoading,
+    link,
+  } = props;
+  const path = useNavigate();
+  const dispatch = useDispatch();
 
-Button.defaultProps = {
-  customClass: EMPTY_STRING,
-  isDisabled: false,
-  isLoading: false,
+  const handleButtonClick = () => {
+    if (link !== EMPTY_STRING && link === CONFIRM_TAB) {
+      dispatch(changeOrderConfirmAction(true));
+      document.body.style.overflow = 'hidden';
+    } else if (link !== EMPTY_STRING) path(link || EMPTY_STRING);
+  };
+
+  return (
+    <button
+      type="button"
+      className={`${!isDisabled ? 'button' : 'button_disabled'} 
+      ${(customClass !== EMPTY_STRING && !isDisabled) && customClass}`}
+      disabled={isDisabled}
+      onClick={handleButtonClick}
+    >
+      {isLoading
+        ? <Spinner />
+        : <span className={`${!isDisabled ? 'button__text' : 'button__text_disabled'}`}>{text}</span>}
+    </button>
+  );
 };
 
 export default Button;

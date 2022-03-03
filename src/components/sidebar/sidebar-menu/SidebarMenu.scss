@@ -39,6 +39,12 @@
     color: $main-white-color;
     padding-left: 4rem;
 
+    nav {
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
     &__list {
       list-style-type: none;
       margin: 0;
@@ -75,16 +81,17 @@
   }
 }
 
-@media screen and (min-width: 1024px) and (max-width: 1439px){
+@media screen and (min-width: 1024px) and (max-width: 1439px) {
   .sidebar-menu {
     &__navigation {
-      min-width: 500px;
+      min-width: 608px;
     }
     &__empty {
       width: 614px;
     }
   }
 }
+
 @media screen and (max-width: 1023px){
   .sidebar-menu {
     &__empty {
@@ -124,7 +131,15 @@
 @media screen and (min-height: 811px) {
   .sidebar-menu {
     &__empty {
-      max-width: calc(100vh * 0.8484);
+      width: calc(100vh * 0.8484);
+    }
+  }
+}
+
+@media screen and (min-width: 1440px) and (min-height: 811px) {
+  .sidebar-menu {
+    &__navigation {
+      min-width: 608px;
     }
   }
 }
