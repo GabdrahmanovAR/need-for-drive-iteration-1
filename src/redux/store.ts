@@ -7,6 +7,7 @@ import inputFieldReducer from './reducers/InputFieldReducer';
 import orderConfirmReducer from './reducers/OrderConfirmReducer';
 import orderInfoReducer from './reducers/OrderInfoReducer';
 import orderStepReducer from './reducers/OrderStepReducer';
+import pointsDataReducer from './reducers/PointsDataReducer';
 
 export const store = createStore(
   combineReducers({
@@ -16,6 +17,7 @@ export const store = createStore(
     orderConfirm: orderConfirmReducer,
     orderInfo: orderInfoReducer,
     orderStep: orderStepReducer,
+    pointsData: pointsDataReducer,
   }),
   composeWithDevTools(applyMiddleware(thunk)),
 );

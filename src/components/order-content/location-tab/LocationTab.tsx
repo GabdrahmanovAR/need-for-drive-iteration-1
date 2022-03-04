@@ -12,6 +12,7 @@ import { changeLocationDataAction } from '../../../redux/actions/OrderInfoAction
 import InputField from '../../input-field/InputField';
 import DropDownMenu from '../../dropdown-menu/DropDownMenu';
 import { changeLocTabStateAction } from '../../../redux/actions/OrderStepAction';
+import { dataAction } from '../../../redux/actions/PointsDataAction';
 
 interface ILocationTabProps {
   cityName: string,
@@ -26,6 +27,10 @@ const LocationTab: FC<ILocationTabProps> = ({ cityName, markerName, changeLocati
   const [markerMenuActive, setMarkerMenuActive] = useState(false);
   const cyrillicRegexp = new RegExp(/^[А-я]*$/);
   const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(dataAction());
+  }, []);
 
   useEffect(() => {
     if (cityName !== EMPTY_STRING || markerName !== EMPTY_STRING) {

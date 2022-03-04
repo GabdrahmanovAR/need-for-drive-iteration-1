@@ -1,4 +1,5 @@
 import { ICarsFakeData } from '../constants/fake-data/cars';
+import { IPoint } from './api';
 
 export interface IActionType {
   type: string;
@@ -62,4 +63,9 @@ export interface IOrderStepActionType extends IActionType {
   modelTabCompleted?: boolean;
   advancedTabCompleted?: boolean;
   activeTab?: string;
+}
+
+export interface IPointsDataActionType extends IActionType {
+  data?: Array<IPoint>;
+  isLoading?: boolean;
 }

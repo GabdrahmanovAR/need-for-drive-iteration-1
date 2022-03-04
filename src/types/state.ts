@@ -1,4 +1,5 @@
 import { ICarsFakeData } from '../constants/fake-data/cars';
+import { IPoint } from './api';
 
 export interface IState {
   sidebarMenu: ISidebarMenuState;
@@ -8,6 +9,7 @@ export interface IState {
   orderConfirm: IOrderConfirmState;
   orderInfo: IOrderInfoState;
   orderStep: IOrderStepState;
+  pointsData: IPointsDataState;
 }
 
 export interface ISidebarMenuState {
@@ -68,4 +70,9 @@ export interface IOrderStepState {
   modelTabCompleted: boolean;
   advancedTabCompleted: boolean;
   activeTab: string;
+}
+
+export interface IPointsDataState {
+  data: Array<IPoint>;
+  isLoading: boolean;
 }

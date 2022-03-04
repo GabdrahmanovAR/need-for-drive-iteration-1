@@ -1,6 +1,6 @@
 import React from 'react';
 import {
-  Clusterer, Map, Placemark, YMaps,
+  Clusterer, Map, Placemark, YMaps, YMapsApi,
 } from 'react-yandex-maps';
 import './YandexMaps.scss';
 import { useDispatch, useSelector } from 'react-redux';
@@ -18,18 +18,39 @@ const YandexMaps = () => {
     dispatch(changeLocationDataAction(markerName, markerCoords, 'marker'));
   };
 
+  const cities = ['Москва', 'Санкт-Петербург'];
+
+  const handleOnLoadMap = (maps: YMapsApi) => {
+    cities.forEach((city) => {
+      maps.geocode(city, { results: 1 })
+        .then((response: any) => {
+          const mark = response.geoObjects.get(0);
+          const coords = mark.geometry.getCoordinates();
+          console.log(coords);
+        });
+    });
+  };
+
   return (
     <section className="maps">
       <header className="maps__header">Выбрать на карте:</header>
       <main>
-        <YMaps>
+        <YMaps
+          query={{
+            ns: 'use-load-option',
+            apikey: '70daecdb-7319-4705-83ef-c1f61e7799a7',
+            load: 'geocode',
+          }}
+        >
           <Map
+            onLoad={handleOnLoadMap}
             state={{
               center: location.markerCoords === EMPTY_ARRAY ? location.cityCoords : location.markerCoords,
               zoom: location.markerCoords === EMPTY_ARRAY ? 9 : 14,
             }}
             height="45vh"
             width="100%"
+            modules={['geocode']}
           >
             <Clusterer options={{ preset: 'islands#darkGreenClusterIcons' }}>
               {listOfCities.map((city: ICity) => (
