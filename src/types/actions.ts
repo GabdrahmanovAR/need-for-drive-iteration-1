@@ -1,5 +1,6 @@
 import { ICarsFakeData } from '../constants/fake-data/cars';
 import { IPoint } from './api';
+import { IPointCityCoordsState, IPointMarkerCoordsState } from './state';
 
 export interface IActionType {
   type: string;
@@ -67,5 +68,7 @@ export interface IOrderStepActionType extends IActionType {
 
 export interface IPointsDataActionType extends IActionType {
   data?: Array<IPoint>;
+  cityCoords?: Array<IPointCityCoordsState>;
+  markerCoords?: Array<IPointMarkerCoordsState>;
   isLoading?: boolean;
 }

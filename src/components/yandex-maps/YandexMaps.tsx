@@ -1,35 +1,44 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import {
   Clusterer, Map, Placemark, YMaps, YMapsApi,
 } from 'react-yandex-maps';
 import './YandexMaps.scss';
 import { useDispatch, useSelector } from 'react-redux';
-import { ICity, ICityMarker, listOfCities } from '../../constants/fake-data/cities';
 import { changeLocationDataAction } from '../../redux/actions/OrderInfoAction';
 import { orderInfoSelector } from '../../selectors/orderInfoSelector';
 import { EMPTY_ARRAY } from '../../constants/common';
+import { pointsDataSelector } from '../../selectors/pointsData';
+import { GetCoordinates } from '../../utils/GetCoordinates';
+import { IPointCityCoordsState, IPointMarkerCoordsState } from '../../types/state';
+import { changeCityCoords, changeMarkerCoords } from '../../redux/actions/PointsDataAction';
 
 const YandexMaps = () => {
   const { location } = useSelector(orderInfoSelector);
+  const pointsDataState = useSelector(pointsDataSelector);
   const dispatch = useDispatch();
+  const [someCityCoords, setSomeCityCoords] = useState([] as IPointCityCoordsState[]);
+  const [someMarkerCoords, setSomeMarkerCoords] = useState([] as IPointMarkerCoordsState[]);
 
   const handleMarkerClick = (markerName: string, markerCoords: number[], markerCity: string, markerCityCoords: number[]) => {
     dispatch(changeLocationDataAction(markerCity, markerCityCoords, 'city'));
     dispatch(changeLocationDataAction(markerName, markerCoords, 'marker'));
   };
 
-  const cities = ['Москва', 'Санкт-Петербург'];
-
   const handleOnLoadMap = (maps: YMapsApi) => {
-    cities.forEach((city) => {
-      maps.geocode(city, { results: 1 })
-        .then((response: any) => {
-          const mark = response.geoObjects.get(0);
-          const coords = mark.geometry.getCoordinates();
-          console.log(coords);
-        });
+    const array: any = GetCoordinates(maps, pointsDataState.data);
+    console.log('Результат выполнения GetCoordinates');
+    array.then((result: any) => {
+      setSomeCityCoords(result[0]);
+      setSomeMarkerCoords(result[1]);
     });
   };
+
+  useEffect(() => {
+    if (someCityCoords !== [] || someMarkerCoords !== []) {
+      dispatch(changeCityCoords(someCityCoords));
+      dispatch(changeMarkerCoords(someMarkerCoords));
+    }
+  }, [someCityCoords, someMarkerCoords]);
 
   return (
     <section className="maps">
@@ -53,16 +62,24 @@ const YandexMaps = () => {
             modules={['geocode']}
           >
             <Clusterer options={{ preset: 'islands#darkGreenClusterIcons' }}>
-              {listOfCities.map((city: ICity) => (
-                city.markers.map((marker: ICityMarker, index: number) => (
-                  <Placemark
-                    geometry={marker.coordinates}
-                    options={{ preset: 'islands#darkGreenCircleDotIcon' }}
-                    onClick={() => handleMarkerClick(marker.street, marker.coordinates, city.name, city.coordinates)}
-                    key={`marker-${index}`}
-                  />
-                ))
+              {pointsDataState.markerCoords.map((marker: IPointCityCoordsState, index: number) => (
+                <Placemark
+                  geometry={marker.coordinates}
+                  options={{ preset: 'islands#darkGreenCircleDotIcon' }}
+                  onClick={() => handleMarkerClick(marker.id, marker.coordinates, marker.id, marker.coordinates)}
+                  key={`marker-${index}`}
+                />
               ))}
+              {/* {listOfCities.map((city: ICity) => ( */}
+              {/*  city.markers.map((marker: ICityMarker, index: number) => ( */}
+              {/*    <Placemark */}
+              {/*      geometry={marker.coordinates} */}
+              {/*      options={{ preset: 'islands#darkGreenCircleDotIcon' }} */}
+              {/*      onClick={() => handleMarkerClick(marker.street, marker.coordinates, city.name, city.coordinates)} */}
+              {/*      key={`marker-${index}`} */}
+              {/*    /> */}
+              {/*  )) */}
+              {/* ))} */}
             </Clusterer>
           </Map>
         </YMaps>

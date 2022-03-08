@@ -74,5 +74,17 @@ export interface IOrderStepState {
 
 export interface IPointsDataState {
   data: Array<IPoint>;
+  cityCoords: Array<IPointCityCoordsState>;
+  markerCoords: Array<IPointMarkerCoordsState>;
   isLoading: boolean;
+}
+
+export interface IPointCityCoordsState {
+  id: string;
+  coordinates: number[];
+}
+
+export interface IPointMarkerCoordsState {
+  id: string;
+  coordinates: number[];
 }

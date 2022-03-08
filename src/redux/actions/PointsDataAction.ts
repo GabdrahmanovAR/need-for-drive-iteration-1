@@ -1,29 +1,39 @@
 import { Dispatch } from 'redux';
 import { IPointsDataActionType } from '../../types/actions';
-import { HIDE_POINTS_LOADER, LOAD_POINTS_SUCCESS, SHOW_POINTS_LOADER } from '../../constants/actions/pointsData';
+import {
+  CHANGE_CITY_COORDS, CHANGE_MARKER_COORDS, LOAD_POINTS_SUCCESS,
+} from '../../constants/actions/pointsData';
 import { getPickupPoints } from '../../api-request/apiRequest';
+import { IPointCityCoordsState, IPointMarkerCoordsState } from '../../types/state';
 
-export const showPointsLoaderAction = (): IPointsDataActionType => ({
-  type: SHOW_POINTS_LOADER,
-});
+// const showPointsLoader = (): IPointsDataActionType => ({
+//   type: SHOW_POINTS_LOADER,
+// });
+//
+// const hidePointsLoader = (): IPointsDataActionType => ({
+//   type: HIDE_POINTS_LOADER,
+// });
 
-export const hidePointsLoaderAction = (): IPointsDataActionType => ({
-  type: HIDE_POINTS_LOADER,
-});
-
-export const loadPointsDataAction = (data: any): IPointsDataActionType => ({
+const loadPointsData = (data: any): IPointsDataActionType => ({
   type: LOAD_POINTS_SUCCESS,
   data,
 });
 
-export const dataAction = () => async (dispatch: Dispatch) => {
+export const getPointsAction = () => async (dispatch: Dispatch) => {
   try {
-    dispatch(showPointsLoaderAction());
     const response = await getPickupPoints();
-    dispatch(loadPointsDataAction(response.data.data));
+    dispatch(loadPointsData(response.data.data));
   } catch (error) {
     console.log(error);
-  } finally {
-    dispatch(hidePointsLoaderAction());
   }
 };
+
+export const changeCityCoords = (cityCoords: IPointCityCoordsState[]): IPointsDataActionType => ({
+  type: CHANGE_CITY_COORDS,
+  cityCoords,
+});
+
+export const changeMarkerCoords = (markerCoords: IPointMarkerCoordsState[]): IPointsDataActionType => ({
+  type: CHANGE_MARKER_COORDS,
+  markerCoords,
+});
