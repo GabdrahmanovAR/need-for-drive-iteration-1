@@ -1,5 +1,6 @@
 import { ICarsFakeData } from '../constants/fake-data/cars';
-import { IPoint } from './api';
+// eslint-disable-next-line import/no-cycle
+import { ICarInfoData, IPoint } from './api';
 
 export interface IState {
   sidebarMenu: ISidebarMenuState;
@@ -10,6 +11,7 @@ export interface IState {
   orderInfo: IOrderInfoState;
   orderStep: IOrderStepState;
   pointsData: IPointsDataState;
+  carsData: ICarsDataState;
 }
 
 export interface ISidebarMenuState {
@@ -87,4 +89,10 @@ export interface IPointCityCoordsState {
 export interface IPointMarkerCoordsState {
   id: string;
   coordinates: number[];
+}
+
+export interface ICarsDataState {
+  count: number;
+  data: Array<ICarInfoData>;
+  isLoading: boolean;
 }

@@ -55,7 +55,7 @@ const OrderInfo = () => {
         <div className="order-info__details__info">
           {car.name === EMPTY_STRING
             ? 'Выберите авто'
-            : `${car.brand}, ${car.name}`}
+            : car.name}
         </div>
       </section>
       {/* Информация Вкладка - Дополнительно */}

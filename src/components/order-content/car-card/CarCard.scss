@@ -22,6 +22,10 @@
     justify-content: flex-end;
     align-items: flex-end;
     height: 60%;
+
+    img {
+      width: 50%;
+    }
   }
   &_active {
     border: 1px solid $main-grey-color;

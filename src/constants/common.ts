@@ -13,3 +13,7 @@ export const ADVANCED_URL_PATH = '/order/advanced';
 export const RESULT_URL_PATH = '/order/result';
 
 export const CONFIRM_TAB = 'order-confirm';
+
+export const MOSCOW_CITY_COORDS = [55.753215, 37.622504];
+export const CITY_KEY = 'city';
+export const MARKER_KEY = 'marker';

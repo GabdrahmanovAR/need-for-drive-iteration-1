@@ -1,12 +1,12 @@
 import React, { BaseSyntheticEvent, FC } from 'react';
 import './CarCard.scss';
 import { useDispatch } from 'react-redux';
-import { ICarsFakeData } from '../../../constants/fake-data/cars';
 import { changeCarInfoAction } from '../../../redux/actions/OrderInfoAction';
+import { ICarInfoData } from '../../../types/api';
 
 interface ICarCardProps {
   id: string,
-  carInfo: ICarsFakeData,
+  carInfo: ICarInfoData,
   activeCard: string,
 }
 
@@ -14,7 +14,7 @@ const CarCard: FC<ICarCardProps> = ({ id, carInfo, activeCard }) => {
   const dispatch = useDispatch();
 
   const handleCardClick = (event: BaseSyntheticEvent) => {
-    dispatch(changeCarInfoAction(carInfo.brand, carInfo.name, carInfo.minPrice, carInfo.maxPrice, carInfo.image, event.currentTarget.id));
+    dispatch(changeCarInfoAction(carInfo.name, carInfo.name, carInfo.priceMin.toString(), carInfo.priceMax.toString(), carInfo.thumbnail.path, event.currentTarget.id));
   };
 
   return (
@@ -26,10 +26,10 @@ const CarCard: FC<ICarCardProps> = ({ id, carInfo, activeCard }) => {
     >
       <header className="car-card__header">
         <h3 className="car-card__header__title">{carInfo.name}</h3>
-        <span className="car-card__header__description">{`${carInfo.minPrice} - ${carInfo.maxPrice} ₽`}</span>
+        <span className="car-card__header__description">{`${carInfo.priceMin} - ${carInfo.priceMax} ₽`}</span>
       </header>
       <div className="car-card__car-image">
-        <img src={carInfo.image} alt="Car Model" />
+        <img src={carInfo.thumbnail.path} alt="Car Model" />
       </div>
     </section>
   );
