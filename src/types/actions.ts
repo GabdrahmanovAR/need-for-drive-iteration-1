@@ -1,6 +1,6 @@
 import { ICarsFakeData } from '../constants/fake-data/cars';
-import { IPoint } from './api';
-import { IPointCityCoordsState, IPointMarkerCoordsState } from './state';
+import { ICarsData, IPoint } from './api';
+import { IPointCityCoordsState, IPointMarkerCoordsState, IRateInfoState } from './state';
 
 export interface IActionType {
   type: string;
@@ -12,7 +12,9 @@ export interface ISidebarMenuActionType extends IActionType {
 
 export interface IOrderLocationActionType {
   cityName?: string;
+  cityId?: string;
   markerName?: string;
+  markerId?: string;
   cityCoords?: Array<number>;
   markerCoords?: Array<number>;
   selectionCompleted?: boolean;
@@ -42,12 +44,15 @@ export interface IOrderInfoActionType extends IActionType {
 }
 
 export interface IOrderCarInfoActionType {
-  brand?: string;
+  id?: string;
   name?: string;
+  number?: string;
+  tank?: number;
   minPrice?: string,
   maxPrice?: string,
   image?: string,
-  color?: string;
+  currentColor?: string;
+  colors?: string[];
   rentalDuration?: {
     from?: string,
     to?: string,
@@ -57,6 +62,7 @@ export interface IOrderCarInfoActionType {
   babyChair?: boolean;
   rightHandDrive?: boolean;
   selectedCar?: string,
+  totalCost?: number,
 }
 
 export interface IOrderStepActionType extends IActionType {
@@ -71,4 +77,25 @@ export interface IPointsDataActionType extends IActionType {
   cityCoords?: Array<IPointCityCoordsState>;
   markerCoords?: Array<IPointMarkerCoordsState>;
   isLoading?: boolean;
+}
+
+export interface ICarsDataActionType extends IActionType {
+  data?: ICarsData;
+}
+
+export interface IRadioButtonActionType extends IActionType {
+  selectedItem?: string;
+  radioCar?: string,
+  radioColor?: string,
+  radioTariff?: string,
+  checkboxAdvanced?: string[],
+}
+
+export interface IRateActionType extends IActionType {
+  count?: number;
+  data?: IRateInfoState[],
+}
+
+export interface IUploadingOrderActionType extends IActionType {
+  uploading?: boolean;
 }

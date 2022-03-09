@@ -44,7 +44,7 @@ const InputField: FC<IInputFieldProps> = (props) => {
       role="presentation"
     >
       <span className="input-field__title">{title}</span>
-      <div>
+      <div className="input-field__container">
         <div>
           <input
             className="input-field__input"

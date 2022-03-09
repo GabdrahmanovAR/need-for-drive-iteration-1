@@ -6,6 +6,9 @@
   padding: .375rem 0;
   width: fit-content;
 
+  &__container {
+    border-bottom: .09375rem solid $main-grey-color;
+  }
   &__title {
     display: flex;
     align-items: flex-end;
@@ -16,7 +19,6 @@
   &__input {
     width: 12.75rem;
     border: none;
-    border-bottom: .09375rem solid $main-grey-color;
     padding-left: .5rem;
     font-size: .875rem
   }
@@ -26,8 +28,6 @@
   &__close-btn {
     border: none;
     background-color: transparent;
-    border-bottom: 1.5px solid gray;
-    line-height: inherit;
 
     &__icon {
       cursor: pointer;

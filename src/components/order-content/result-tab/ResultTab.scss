@@ -9,6 +9,12 @@
   &__car-info, &__car-img {
     width: 50%;
   }
+  &__car-img {
+    text-align: end;
+    img {
+      height: 160px;
+    }
+  }
   &__car-info {
     &__number {
       border: 1px solid $main-grey-color;
@@ -23,9 +29,6 @@
         font-weight: bold;
       }
     }
-  }
-  &__car-img {
-    margin-top: 2.7rem;
   }
 }
 

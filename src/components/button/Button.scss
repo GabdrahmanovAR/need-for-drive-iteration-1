@@ -22,6 +22,10 @@
       cursor: default;
     }
   }
+  &__spinner {
+    border: 0.125rem solid white !important;
+    border-bottom-color: transparent !important;
+  }
   div {
     color: $main-white-color;
   }

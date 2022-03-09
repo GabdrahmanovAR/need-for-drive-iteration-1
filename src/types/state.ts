@@ -1,5 +1,5 @@
 import { ICarsFakeData } from '../constants/fake-data/cars';
-import { IPoint } from './api';
+import { ICarInfoData, IPoint } from './api';
 
 export interface IState {
   sidebarMenu: ISidebarMenuState;
@@ -10,6 +10,10 @@ export interface IState {
   orderInfo: IOrderInfoState;
   orderStep: IOrderStepState;
   pointsData: IPointsDataState;
+  carsData: ICarsDataState;
+  radioButton: IRadioButtonState;
+  rate: IRateState;
+  uploadingOrder: IUploadingOrderState;
 }
 
 export interface ISidebarMenuState {
@@ -41,19 +45,24 @@ export interface IOrderInfoState {
 
 export interface IOrderLocationState {
   cityName: string;
+  cityId: string;
   markerName: string;
+  markerId: string;
   cityCoords: Array<number>;
   markerCoords: Array<number>;
   selectionCompleted: boolean;
 }
 
 export interface IOrderCarInfoState {
-  brand: string;
+  id: string;
   name: string;
+  number: string;
+  tank: number;
   minPrice: string,
   maxPrice: string,
   image: string,
-  color: string;
+  currentColor: string;
+  colors: string[];
   rentalDuration: {
     from: string,
     to: string,
@@ -63,6 +72,7 @@ export interface IOrderCarInfoState {
   babyChair: boolean;
   rightHandDrive: boolean;
   selectedCar: string,
+  totalCost: number,
 }
 
 export interface IOrderStepState {
@@ -87,4 +97,41 @@ export interface IPointCityCoordsState {
 export interface IPointMarkerCoordsState {
   id: string;
   coordinates: number[];
+}
+
+export interface ICarsDataState {
+  count: number;
+  data: Array<ICarInfoData>;
+  isLoading: boolean;
+}
+
+export interface IRadioButtonState {
+  selectedItem: string;
+  radioCar: string;
+  radioColor: string;
+  radioTariff: string;
+  checkboxAdvanced: string[];
+}
+
+export interface IRateState {
+  count: number;
+  data: IRateInfoState[],
+}
+
+export interface IRateInfoState {
+  updatedAt: number;
+  createdAt: number;
+  price: number;
+  rateTypeId: IRateTypeInfoState;
+  id: string;
+}
+
+interface IRateTypeInfoState {
+  unit: string;
+  name: string;
+  id: string;
+}
+
+export interface IUploadingOrderState {
+  uploading: boolean;
 }

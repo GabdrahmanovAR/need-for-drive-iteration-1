@@ -1,20 +1,54 @@
 import React, { BaseSyntheticEvent, FC } from 'react';
 import './CarCard.scss';
-import { useDispatch } from 'react-redux';
-import { ICarsFakeData } from '../../../constants/fake-data/cars';
-import { changeCarInfoAction } from '../../../redux/actions/OrderInfoAction';
+import { useDispatch, useSelector } from 'react-redux';
+import carPicture from '../../../assets/images/car-picture.png';
+import { changeCarInfoAction, resetCarInfoAction } from '../../../redux/actions/OrderInfoAction';
+import { ICarInfoData } from '../../../types/api';
+import { orderInfoSelector } from '../../../selectors/orderInfoSelector';
+import { EMPTY_STRING } from '../../../constants/common';
+import { resetRadioBtnAction } from '../../../redux/actions/RadioButtonAction';
+import { changeAdvTabStateAction } from '../../../redux/actions/OrderStepAction';
 
 interface ICarCardProps {
   id: string,
-  carInfo: ICarsFakeData,
+  carInfo: ICarInfoData,
   activeCard: string,
 }
 
 const CarCard: FC<ICarCardProps> = ({ id, carInfo, activeCard }) => {
+  const { car } = useSelector((orderInfoSelector));
   const dispatch = useDispatch();
+  const regex = new RegExp(/^(data:image\/)(jpeg|png);base64/);
 
   const handleCardClick = (event: BaseSyntheticEvent) => {
-    dispatch(changeCarInfoAction(carInfo.brand, carInfo.name, carInfo.minPrice, carInfo.maxPrice, carInfo.image, event.currentTarget.id));
+    if (car.name === EMPTY_STRING) {
+      dispatch(changeCarInfoAction(
+        carInfo.id,
+        carInfo.name,
+        carInfo.number,
+        carInfo.tank,
+        carInfo.priceMin.toString(),
+        carInfo.priceMax.toString(),
+        carInfo.thumbnail.path,
+        carInfo.colors,
+        event.currentTarget.id,
+      ));
+    } else {
+      dispatch(resetCarInfoAction());
+      dispatch(resetRadioBtnAction());
+      dispatch(changeAdvTabStateAction(false));
+      dispatch(changeCarInfoAction(
+        carInfo.id,
+        carInfo.name,
+        carInfo.number,
+        carInfo.tank,
+        carInfo.priceMin.toString(),
+        carInfo.priceMax.toString(),
+        carInfo.thumbnail.path,
+        carInfo.colors,
+        event.currentTarget.id,
+      ));
+    }
   };
 
   return (
@@ -26,10 +60,15 @@ const CarCard: FC<ICarCardProps> = ({ id, carInfo, activeCard }) => {
     >
       <header className="car-card__header">
         <h3 className="car-card__header__title">{carInfo.name}</h3>
-        <span className="car-card__header__description">{`${carInfo.minPrice} - ${carInfo.maxPrice} ₽`}</span>
+        <span className="car-card__header__description">{`${carInfo.priceMin} - ${carInfo.priceMax} ₽`}</span>
       </header>
       <div className="car-card__car-image">
-        <img src={carInfo.image} alt="Car Model" />
+        <img
+          src={regex.exec(carInfo.thumbnail.path)
+            ? carInfo.thumbnail.path
+            : carPicture}
+          alt="Car Model"
+        />
       </div>
     </section>
   );

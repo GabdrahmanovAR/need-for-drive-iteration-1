@@ -10,9 +10,7 @@ import { ButtonText } from '../../../utils/ButtonText';
 import { NextTabUrl } from '../../../utils/NextTabUrl';
 import { ButtonState } from '../../../utils/ButtonState';
 import { orderInfoSelector } from '../../../selectors/orderInfoSelector';
-
-const MIN_PRICE = '8000';
-const MAX_PRICE = '12000';
+import { CalculateRentalDuration } from '../../../utils/CalculateRentalDuration';
 
 const OrderInfo = () => {
   const { location, car } = useSelector(orderInfoSelector);
@@ -55,7 +53,7 @@ const OrderInfo = () => {
         <div className="order-info__details__info">
           {car.name === EMPTY_STRING
             ? 'Выберите авто'
-            : `${car.brand}, ${car.name}`}
+            : car.name}
         </div>
       </section>
       {/* Информация Вкладка - Дополнительно */}
@@ -64,22 +62,28 @@ const OrderInfo = () => {
         : 'order-info__details_disable'}`}
       >
         <div className="order-info__details__multiple-info multiple-info">
-          {advancedInfoElement('Цвет', car.color)}
-          {advancedInfoElement('Длительность аренды', '1д 2ч')}
+          {advancedInfoElement('Цвет', car.currentColor)}
+          {advancedInfoElement('Длительность аренды', CalculateRentalDuration(car.rentalDuration.from, car.rentalDuration.to))}
           {advancedInfoElement('Тариф', car.tariff.split(',')[0])}
-          {advancedInfoElement('Полный бак', 'Не выбрано')}
-          {advancedInfoElement('Детское кресло', 'Не выбрано')}
-          {advancedInfoElement('Правый руль', 'Не выбрано')}
+          {advancedInfoElement('Полный бак', car.fullTank ? 'Да' : 'Не выбрано')}
+          {advancedInfoElement('Детское кресло', car.babyChair ? 'Да' : 'Не выбрано')}
+          {advancedInfoElement('Правый руль', car.rightHandDrive ? 'Да' : 'Не выбрано')}
         </div>
       </section>
       {/* Информация диапозон цен */}
       <section className="order-info__price">
         <span><strong>Цена: </strong></span>
-        <span>
-          {locationPath.pathname === RESULT_URL_PATH
-            ? '16 000₽'
-            : `от ${MIN_PRICE} до ${MAX_PRICE} ₽`}
-        </span>
+        {car.totalCost === 0 || locationPath.pathname !== '/order/result'
+          ? (
+            <span>
+              {(car.minPrice && car.maxPrice) === EMPTY_STRING
+                ? 'автомобиль не выбран'
+                : `от ${car.minPrice} до ${car.maxPrice} ₽`}
+            </span>
+          )
+          : (
+            <span>{`${car.totalCost}₽`}</span>
+          )}
       </section>
       <Button
         text={ButtonText(locationPath.pathname)}
