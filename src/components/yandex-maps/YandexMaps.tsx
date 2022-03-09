@@ -6,11 +6,12 @@ import './YandexMaps.scss';
 import { useDispatch, useSelector } from 'react-redux';
 import { changeLocationDataAction } from '../../redux/actions/OrderInfoAction';
 import { orderInfoSelector } from '../../selectors/orderInfoSelector';
-import { EMPTY_ARRAY } from '../../constants/common';
+import { EMPTY_ARRAY, EMPTY_STRING } from '../../constants/common';
 import { pointsDataSelector } from '../../selectors/pointsData';
 import { GetCoordinates } from '../../utils/GetCoordinates';
 import { IPointCityCoordsState, IPointMarkerCoordsState } from '../../types/state';
 import { changeCityCoords, changeMarkerCoords } from '../../redux/actions/PointsDataAction';
+import { IPoint } from '../../types/api';
 
 const YandexMaps = () => {
   const { location } = useSelector(orderInfoSelector);
@@ -19,7 +20,26 @@ const YandexMaps = () => {
   const [someCityCoords, setSomeCityCoords] = useState([] as IPointCityCoordsState[]);
   const [someMarkerCoords, setSomeMarkerCoords] = useState([] as IPointMarkerCoordsState[]);
 
-  const handleMarkerClick = (markerName: string, markerCoords: number[], markerCity: string, markerCityCoords: number[]) => {
+  const handleMarkerClick = (markerId: string, markerCoords: number[]) => {
+    let markerName = EMPTY_STRING;
+    let markerCity = EMPTY_STRING;
+    let markerCityId = EMPTY_STRING;
+    let markerCityCoords: number[] = [];
+
+    pointsDataState.data.forEach((point: IPoint) => {
+      if (point.id === markerId) {
+        markerName = point.address;
+        markerCity = point.cityId.name;
+        markerCityId = point.cityId.id;
+      }
+    });
+
+    pointsDataState.cityCoords.forEach((city: IPointCityCoordsState) => {
+      if (city.id === markerCityId) {
+        markerCityCoords = city.coordinates;
+      }
+    });
+
     dispatch(changeLocationDataAction(markerCity, markerCityCoords, 'city'));
     dispatch(changeLocationDataAction(markerName, markerCoords, 'marker'));
   };
@@ -65,7 +85,7 @@ const YandexMaps = () => {
                 <Placemark
                   geometry={marker.coordinates}
                   options={{ preset: 'islands#darkGreenCircleDotIcon' }}
-                  onClick={() => handleMarkerClick(marker.id, marker.coordinates, marker.id, marker.coordinates)}
+                  onClick={() => handleMarkerClick(marker.id, marker.coordinates)}
                   key={`marker-${index}`}
                 />
               ))}

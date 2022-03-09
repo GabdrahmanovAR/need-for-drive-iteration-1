@@ -56,7 +56,7 @@ const DropDownMenu: FC<IDropDownMenu> = (props) => {
                   </li>
                 );
               }
-              if (someMarker.name === location.cityName) {
+              if (someMarker.cityId !== null && someMarker.cityId.name === location.cityName) {
                 return (
                   <li
                     className="list-item"

@@ -6,7 +6,6 @@ import { bindActionCreators } from 'redux';
 import { EMPTY_ARRAY, EMPTY_STRING } from '../../../constants/common';
 import './LocationTab.scss';
 import YandexMaps from '../../yandex-maps/YandexMaps';
-import { ICity, ICityMarker, listOfCities } from '../../../constants/fake-data/cities';
 import { IState } from '../../../types/state';
 import { changeLocationDataAction } from '../../../redux/actions/OrderInfoAction';
 import InputField from '../../input-field/InputField';
@@ -14,7 +13,7 @@ import DropDownMenu from '../../dropdown-menu/DropDownMenu';
 import { changeLocTabStateAction } from '../../../redux/actions/OrderStepAction';
 import { pointsDataSelector } from '../../../selectors/pointsData';
 import { IPoint } from '../../../types/api';
-import { GetCityCoordinates } from '../../../utils/GetCityCoordinates';
+import { GetPointCoordinates } from '../../../utils/GetPointCoordinates';
 
 interface ILocationTabProps {
   cityName: string,
@@ -43,21 +42,21 @@ const LocationTab: FC<ILocationTabProps> = ({ cityName, markerName, changeLocati
     if (city === EMPTY_STRING) return;
     pointsDataState.data.forEach((someCity: IPoint) => {
       if (someCity.cityId !== null && someCity.cityId.name === city) {
-        changeLocationData(someCity.cityId.name, GetCityCoordinates(pointsDataState, someCity.cityId.id), 'city');
+        const cityCoordinates = GetPointCoordinates(pointsDataState, someCity.cityId.id, 'city');
+        changeLocationData(someCity.cityId.name, cityCoordinates, 'city');
       }
     });
   }, [city]);
 
   useEffect(() => {
     if (marker === EMPTY_STRING) return;
-    listOfCities.forEach((someCity: ICity) => {
-      someCity.markers.forEach((someMarker: ICityMarker) => {
-        if (someMarker.street === marker) {
-          changeLocationData(someMarker.street, someMarker.coordinates, 'marker');
-          changeLocationData(someCity.name, someCity.coordinates, 'city');
-        }
-        return null;
-      });
+    pointsDataState.data.forEach((point: IPoint) => {
+      if (point.cityId !== null && point.address === marker) {
+        const cityCoordinates = GetPointCoordinates(pointsDataState, point.cityId.id, 'city');
+        const markerCoordinates = GetPointCoordinates(pointsDataState, point.id, 'marker');
+        changeLocationData(point.cityId.name, cityCoordinates, 'city');
+        changeLocationData(point.address, markerCoordinates, 'marker');
+      }
     });
   }, [marker]);
 
