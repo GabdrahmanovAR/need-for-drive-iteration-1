@@ -1,7 +1,7 @@
 import React, {
   BaseSyntheticEvent, FC, useEffect, useState,
 } from 'react';
-import { connect, useDispatch } from 'react-redux';
+import { connect, useDispatch, useSelector } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { EMPTY_ARRAY, EMPTY_STRING } from '../../../constants/common';
 import './LocationTab.scss';
@@ -12,6 +12,9 @@ import { changeLocationDataAction } from '../../../redux/actions/OrderInfoAction
 import InputField from '../../input-field/InputField';
 import DropDownMenu from '../../dropdown-menu/DropDownMenu';
 import { changeLocTabStateAction } from '../../../redux/actions/OrderStepAction';
+import { pointsDataSelector } from '../../../selectors/pointsData';
+import { IPoint } from '../../../types/api';
+import { GetCityCoordinates } from '../../../utils/GetCityCoordinates';
 
 interface ILocationTabProps {
   cityName: string,
@@ -25,6 +28,8 @@ const LocationTab: FC<ILocationTabProps> = ({ cityName, markerName, changeLocati
   const [citiesMenuActive, setCitiesMenuActive] = useState(false);
   const [markerMenuActive, setMarkerMenuActive] = useState(false);
   const cyrillicRegexp = new RegExp(/^[А-я]*$/);
+
+  const pointsDataState = useSelector((pointsDataSelector));
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -36,11 +41,10 @@ const LocationTab: FC<ILocationTabProps> = ({ cityName, markerName, changeLocati
 
   useEffect(() => {
     if (city === EMPTY_STRING) return;
-    listOfCities.forEach((someCity: ICity) => {
-      if (someCity.name === city) {
-        changeLocationData(someCity.name, someCity.coordinates, 'city');
+    pointsDataState.data.forEach((someCity: IPoint) => {
+      if (someCity.cityId !== null && someCity.cityId.name === city) {
+        changeLocationData(someCity.cityId.name, GetCityCoordinates(pointsDataState, someCity.cityId.id), 'city');
       }
-      return null;
     });
   }, [city]);
 
@@ -103,11 +107,11 @@ const LocationTab: FC<ILocationTabProps> = ({ cityName, markerName, changeLocati
   };
 
   const handleCityInputClick = () => {
-    setCitiesMenuActive(true);
+    setCitiesMenuActive(!citiesMenuActive);
   };
 
   const handleMarkerInputClick = () => {
-    setMarkerMenuActive(true);
+    setMarkerMenuActive(!markerMenuActive);
   };
 
   return (
@@ -123,7 +127,7 @@ const LocationTab: FC<ILocationTabProps> = ({ cityName, markerName, changeLocati
           onClickBtnFunc={handleCityBtnClick}
           childComponent={(
             <DropDownMenu
-              data={listOfCities}
+              pointData={pointsDataState}
               isActive={citiesMenuActive}
               onClickFunc={handleCityListItemClick}
               cityName={city}
@@ -139,7 +143,7 @@ const LocationTab: FC<ILocationTabProps> = ({ cityName, markerName, changeLocati
           onClickBtnFunc={handleMarkerBtnClick}
           childComponent={(
             <DropDownMenu
-              data={listOfCities}
+              pointData={pointsDataState}
               isActive={markerMenuActive}
               onClickFunc={handleMarkerListItemClick}
             />

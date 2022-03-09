@@ -12,7 +12,7 @@ export const GetCoordinates = async (maps: YMapsApi, data: Array<IPoint>) => {
       await directGeocoding(maps, point.cityId.name)
         .then((response: YMapsApi) => {
           cityCoordinates.push({
-            id: point.cityId.name,
+            id: point.cityId.id,
             coordinates: response.geoObjects.get(0).geometry.getCoordinates(),
           });
         });
@@ -21,10 +21,10 @@ export const GetCoordinates = async (maps: YMapsApi, data: Array<IPoint>) => {
 
   await Promise.all(data.map(async (point) => {
     if (point.cityId !== null) {
-      await directGeocoding(maps, point.address)
+      await directGeocoding(maps, point.cityId.name, point.address)
         .then((response: YMapsApi) => {
           markerCoordinates.push({
-            id: point.address,
+            id: point.id,
             coordinates: response.geoObjects.get(0).geometry.getCoordinates(),
           });
         });

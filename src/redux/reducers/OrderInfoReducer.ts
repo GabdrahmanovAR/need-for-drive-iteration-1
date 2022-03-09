@@ -13,9 +13,9 @@ import {
 
 const initialState: IOrderInfoState = {
   location: {
-    cityName: 'Ульяновск',
+    cityName: EMPTY_STRING,
     markerName: EMPTY_STRING,
-    cityCoords: [54.314192, 48.403132],
+    cityCoords: [55.755819, 37.617644],
     markerCoords: EMPTY_ARRAY,
     selectionCompleted: false,
   },

@@ -26,7 +26,6 @@ const YandexMaps = () => {
 
   const handleOnLoadMap = (maps: YMapsApi) => {
     const array: any = GetCoordinates(maps, pointsDataState.data);
-    console.log('Результат выполнения GetCoordinates');
     array.then((result: any) => {
       setSomeCityCoords(result[0]);
       setSomeMarkerCoords(result[1]);
@@ -70,16 +69,6 @@ const YandexMaps = () => {
                   key={`marker-${index}`}
                 />
               ))}
-              {/* {listOfCities.map((city: ICity) => ( */}
-              {/*  city.markers.map((marker: ICityMarker, index: number) => ( */}
-              {/*    <Placemark */}
-              {/*      geometry={marker.coordinates} */}
-              {/*      options={{ preset: 'islands#darkGreenCircleDotIcon' }} */}
-              {/*      onClick={() => handleMarkerClick(marker.street, marker.coordinates, city.name, city.coordinates)} */}
-              {/*      key={`marker-${index}`} */}
-              {/*    /> */}
-              {/*  )) */}
-              {/* ))} */}
             </Clusterer>
           </Map>
         </YMaps>

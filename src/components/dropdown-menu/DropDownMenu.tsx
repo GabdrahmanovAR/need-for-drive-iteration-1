@@ -1,13 +1,14 @@
 import React, { BaseSyntheticEvent, FC } from 'react';
 import { useSelector } from 'react-redux';
-import { ICity, ICityMarker } from '../../constants/fake-data/cities';
 import './DropDownMenu.scss';
 import { EMPTY_STRING } from '../../constants/common';
 import { inputFieldSelector } from '../../selectors/inputFieldSelector';
 import { orderInfoSelector } from '../../selectors/orderInfoSelector';
+import { IPointsDataState } from '../../types/state';
+import { IPoint } from '../../types/api';
 
 interface IDropDownMenu {
-  data: ICity[],
+  pointData: IPointsDataState,
   isActive: boolean;
   onClickFunc: (e: BaseSyntheticEvent) => void,
   cityName?: string,
@@ -16,7 +17,7 @@ interface IDropDownMenu {
 const DropDownMenu: FC<IDropDownMenu> = (props) => {
   const {
     isActive,
-    data,
+    pointData,
     onClickFunc,
     cityName = EMPTY_STRING,
   } = props;
@@ -27,9 +28,10 @@ const DropDownMenu: FC<IDropDownMenu> = (props) => {
     <div className="drop-down-menu">
       <nav className={`drop-down-menu__list ${isActive && 'drop-down-menu__list_active'}`}>
         <ul>
+
           {inputFieldState.focusedField === 'city-field'
-            ? (data.map((someCity: ICity, index: number) => {
-              if (someCity.name.slice(0, cityName.length) !== cityName) return null;
+            ? (pointData.data.map((someCity: IPoint, index: number) => {
+              if (someCity.cityId === null || someCity.cityId.name.slice(0, cityName.length) !== cityName) return null;
               return (
                 <li
                   className="list-item"
@@ -37,12 +39,12 @@ const DropDownMenu: FC<IDropDownMenu> = (props) => {
                   role="presentation"
                   key={`city-${index}`}
                 >
-                  {someCity.name}
+                  {someCity.cityId !== null && someCity.cityId.name}
                 </li>
               );
             }))
-            : (data.map((someCity: ICity) => someCity.markers.map((marker: ICityMarker, index: number) => {
-              if (location.cityName === EMPTY_STRING) {
+            : (pointData.data.map((someMarker: IPoint, index: number) => {
+              if (location.cityName === EMPTY_STRING && someMarker.cityId !== null) {
                 return (
                   <li
                     className="list-item"
@@ -50,11 +52,11 @@ const DropDownMenu: FC<IDropDownMenu> = (props) => {
                     role="presentation"
                     key={`marker-${index}`}
                   >
-                    {marker.street}
+                    {someMarker.address}
                   </li>
                 );
               }
-              if (someCity.name === location.cityName) {
+              if (someMarker.name === location.cityName) {
                 return (
                   <li
                     className="list-item"
@@ -62,12 +64,12 @@ const DropDownMenu: FC<IDropDownMenu> = (props) => {
                     role="presentation"
                     key={`marker-${index}`}
                   >
-                    {marker.street}
+                    {someMarker.address}
                   </li>
                 );
               }
               return null;
-            })))}
+            }))}
         </ul>
       </nav>
     </div>
