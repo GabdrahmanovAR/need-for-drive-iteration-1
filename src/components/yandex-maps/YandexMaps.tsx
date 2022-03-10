@@ -1,5 +1,4 @@
 import React from 'react';
-import {
   Clusterer, Map, Placemark, YMaps,
 } from 'react-yandex-maps';
 import './YandexMaps.scss';

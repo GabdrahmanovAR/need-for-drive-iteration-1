@@ -103,7 +103,6 @@
     background: url("../../assets/images/4-slide.jpg") no-repeat;
     background-size: cover;
   }
-}
 
 @media screen and (min-width: 1024px) and (max-width: 1439px) {
   .slider {
@@ -124,6 +123,18 @@
         }
       }
     }
+  }
+}
+
+@media screen and (max-width: 1023px){
+  .slider {
+    display: none;
+  }
+}
+
+@media screen and (min-height: 811px) {
+  .slider {
+    width: calc(100vh * 0.8484);
   }
 }
 
