@@ -4,7 +4,6 @@ import thunk from 'redux-thunk';
 import sidebarMenuReducer from './reducers/SidebarMenuReducer';
 import orderLocationReducer from './reducers/OrderLocationReducer';
 import cardModelCardReducer from './reducers/CardCardReducer';
-// eslint-disable-next-line import/no-named-as-default-member
 import advancedTabReducer from './reducers/AdvancedTabReducer';
 import inputFieldReducer from './reducers/InputFieldReducer';
 
