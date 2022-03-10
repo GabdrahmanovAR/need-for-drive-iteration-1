@@ -1,0 +1,50 @@
+@import "src/constants/styles/common";
+
+.car-info {
+  height: 14rem;
+  width: 50%;
+  border: 1px solid $main-lightgrey-color;
+  padding: 1rem;
+
+  &__header {
+    height: 40%;
+
+    &__title {
+      margin: 0;
+      font-weight: 600;
+    }
+    &__description {
+      color: $main-grey-color
+    }
+  }
+  &__car-image {
+    display: flex;
+    justify-content: flex-end;
+    align-items: flex-end;
+    height: 60%;
+  }
+  &_active {
+    border: 1px solid $main-grey-color;
+  }
+}
+
+.car-info:hover {
+  cursor: pointer;
+  border: 1px solid $main-green-color;
+}
+
+@media screen and (min-width: 320px) and (max-width: 767px){
+  .car-info {
+    width: 100%;
+  }
+}
+
+@media screen and (max-width: 419px){
+  .car-info {
+    &__car-image {
+      img {
+        width: calc(100% * .9);
+      }
+    }
+  }
+}

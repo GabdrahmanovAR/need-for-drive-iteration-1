@@ -6,7 +6,7 @@ import './YandexMaps.scss';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { IState } from '../../types/state';
-import { ICity, ICityMarker, listOfCities } from '../../constants/cities';
+import { ICity, ICityMarker, listOfCities } from '../../constants/fake-data/cities';
 import { changeLocationDataAction } from '../../redux/actions/OrderLocationAction';
 
 interface IYandexMapsProps {
@@ -30,12 +30,12 @@ const YandexMaps: FC<IYandexMapsProps> = ({ cityCoords, changeLocationData }) =>
             height="45vh"
             width="100%"
           >
-            <Clusterer>
+            <Clusterer options={{ preset: 'islands#darkGreenClusterIcons' }}>
               {listOfCities.map((city: ICity) => (
                 city.markers.map((marker: ICityMarker, index: number) => (
                   <Placemark
                     geometry={marker.coordinates}
-                    options={{ preset: 'islands#blueCircleDotIcon' }}
+                    options={{ preset: 'islands#darkGreenCircleDotIcon' }}
                     onClick={() => handleMarkerClick(marker.street, marker.coordinates, city.name, city.coordinates)}
                     key={`marker-${index}`}
                   />

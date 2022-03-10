@@ -11,7 +11,7 @@ const MainContent = () => (
         <h1>Каршеринг</h1>
         <h1>Need for drive</h1>
         <p>Поминутная аренда авто твоего города</p>
-        <Button text="Забронировать" customClass="main-content__info__button" link="/order" />
+        <Button text="Забронировать" customClass="main-content__info__button" link="/order/location" />
       </div>
       <div className="main-content__info__empty" />
     </main>

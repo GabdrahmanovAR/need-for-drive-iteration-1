@@ -1,9 +1,8 @@
 import React, { FC } from 'react';
 import { useNavigate } from 'react-router-dom';
 import './Button.scss';
-import { Spin } from 'antd';
-import { LoadingOutlined } from '@ant-design/icons';
 import { EMPTY_STRING } from '../../constants/common';
+import Spinner from '../Spinner/Spinner';
 
 interface IButtonProps {
   text: string;
@@ -36,7 +35,7 @@ const Button: FC<IButtonProps> = (props) => {
       onClick={handleRouteChange}
     >
       {isLoading
-        ? <Spin indicator={<LoadingOutlined spin />} />
+        ? <Spinner />
         : <span className={`${!isDisabled ? 'button__text' : 'button__text_disabled'}`}>{text}</span>}
     </button>
   );
