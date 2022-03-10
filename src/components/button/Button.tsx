@@ -1,30 +1,45 @@
-import React from 'react';
+import React, { FC } from 'react';
+import { useNavigate } from 'react-router-dom';
 import './Button.scss';
 import { Spin } from 'antd';
 import { LoadingOutlined } from '@ant-design/icons';
 import { EMPTY_STRING } from '../../constants/common';
 
-interface IProps {
+interface IButtonProps {
   text: string;
   customClass?: string;
   isDisabled?: boolean;
   isLoading?: boolean;
+  link?: string;
 }
 
-const Button = ({
-  text, customClass, isDisabled, isLoading,
-}: IProps) => (
-  <button
-    type="button"
-    className={`button 
-      ${(customClass !== EMPTY_STRING && !isDisabled) && customClass} 
-      ${isDisabled && 'button_disabled'}`}
-    disabled={isDisabled}
-  >
-    {isLoading
-      ? <Spin indicator={<LoadingOutlined spin />} />
-      : <span className="button__text">{text}</span>}
-  </button>
-);
+const Button: FC<IButtonProps> = (props) => {
+  const {
+    text,
+    customClass,
+    isDisabled,
+    isLoading,
+    link,
+  } = props;
+  const path = useNavigate();
+
+  const handleRouteChange = () => {
+    if (link !== EMPTY_STRING) path(link || EMPTY_STRING);
+  };
+
+  return (
+    <button
+      type="button"
+      className={`${!isDisabled ? 'button' : 'button_disabled'} 
+      ${(customClass !== EMPTY_STRING && !isDisabled) && customClass}`}
+      disabled={isDisabled}
+      onClick={handleRouteChange}
+    >
+      {isLoading
+        ? <Spin indicator={<LoadingOutlined spin />} />
+        : <span className={`${!isDisabled ? 'button__text' : 'button__text_disabled'}`}>{text}</span>}
+    </button>
+  );
+};
 
 export default Button;

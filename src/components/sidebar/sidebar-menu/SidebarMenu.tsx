@@ -1,6 +1,7 @@
-import React from 'react';
+import React, { FC } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
+import { useLocation } from 'react-router-dom';
 import facebookIcon from '../../../assets/icons/facebook.svg';
 import telegramIcon from '../../../assets/icons/telegram.svg';
 import instagramIcon from '../../../assets/icons/instagram.svg';
@@ -10,12 +11,15 @@ import { sidebarMenuAction } from '../../../redux/actions/SidebarMenuAction';
 import menuCloseButton from '../../../assets/icons/menu_close_btn.svg';
 import LangButton from '../../lang-button/LangButton';
 
-interface IProps {
+interface ISidebarMenuProps {
   isOpen: boolean;
   sidebarMenu: (isOpen: boolean) => void,
 }
 
-const SidebarMenu = ({ isOpen, sidebarMenu }: IProps) => {
+const SidebarMenu: FC<ISidebarMenuProps> = ({ isOpen, sidebarMenu }) => {
+  const location = useLocation();
+  const regexPath = new RegExp(/\/order\/[A-z]*/);
+
   const handleSidebarBtnClick = () => {
     sidebarMenu(!isOpen);
   };
@@ -49,7 +53,7 @@ const SidebarMenu = ({ isOpen, sidebarMenu }: IProps) => {
       <footer className="sidebar-menu__lang-btn">
         <LangButton />
       </footer>
-      <section className="sidebar-menu__empty" />
+      <section className={`${!regexPath.test(location.pathname) && 'sidebar-menu__empty'}`} />
     </div>
   );
 };

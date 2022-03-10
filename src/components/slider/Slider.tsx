@@ -10,14 +10,14 @@ const Slider = () => {
   const [content, setContent] = useState(1);
 
   const sliderContent = (title: string, description: string) => (
-    <main className="slider-content__info">
+    <div className="slider-content__info">
       <div className="slider-content__info__text-block">
         <h1 className="slider-content__info__title">{title}</h1>
         <p className="slider-content__info__description">{description}</p>
         <Button text="Подробнее" customClass={`slider-content__info__button active-${content}`} />
       </div>
       <div className="slider-content__info__empty" />
-    </main>
+    </div>
   );
 
   const handleArrowClick = (event: any) => {
@@ -39,12 +39,12 @@ const Slider = () => {
   };
 
   return (
-    <div className={`slider slider_bg-img-${content}`}>
+    <section className={`slider slider_bg-img-${content}`}>
       <div className="slider__layer">
-        <div id="left" className="slider__layer__left-arrow" onClick={handleArrowClick} role="presentation">
+        <aside id="left" className="slider__layer__left-arrow" onClick={handleArrowClick} role="presentation">
           <img src={leftArrowIcon} alt="Arrow icon" />
-        </div>
-        <section className="slider__layer__block slider-content">
+        </aside>
+        <main className="slider__layer__block slider-content">
           {sliderContent(Slides[content].title, Slides[content].description)}
           <div className="slider-content__dots" onClick={handleDotsClick} role="presentation">
             <div id="1" className={`${content === 1 && 'slider-content__dots_active'}`} />
@@ -52,12 +52,12 @@ const Slider = () => {
             <div id="3" className={`${content === 3 && 'slider-content__dots_active'}`} />
             <div id="4" className={`${content === 4 && 'slider-content__dots_active'}`} />
           </div>
-        </section>
-        <div id="right" className="slider__layer__right-arrow" onClick={handleArrowClick} role="presentation">
+        </main>
+        <aside id="right" className="slider__layer__right-arrow" onClick={handleArrowClick} role="presentation">
           <img src={rightArrowIcon} alt="Arrow icon" />
-        </div>
+        </aside>
       </div>
-    </div>
+    </section>
   );
 };
 

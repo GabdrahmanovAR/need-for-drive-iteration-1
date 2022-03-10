@@ -75,16 +75,17 @@
   }
 }
 
-@media screen and (min-width: 1024px) and (max-width: 1439px){
+@media screen and (min-width: 1024px) and (max-width: 1439px) {
   .sidebar-menu {
     &__navigation {
-      min-width: 500px;
+      min-width: 608px;
     }
     &__empty {
       width: 614px;
     }
   }
 }
+
 @media screen and (max-width: 1023px){
   .sidebar-menu {
     &__empty {
@@ -125,6 +126,14 @@
   .sidebar-menu {
     &__empty {
       width: calc(100vh * 0.8484);
+    }
+  }
+}
+
+@media screen and (min-width: 1440px) and (min-height: 811px) {
+  .sidebar-menu {
+    &__navigation {
+      min-width: 608px;
     }
   }
 }

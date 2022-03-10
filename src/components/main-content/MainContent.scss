@@ -1,47 +1,13 @@
 @import "src/constants/styles/common";
 
-.content {
+.main-content {
   display: flex;
   flex-direction: column;
   height: 100%;
   box-sizing: border-box;
   padding: 2rem 4rem;
+  flex-grow: 1;
 
-  &__header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-
-    h1 {
-      color: $main-green-color;
-      font-size: 1.875rem;
-      margin: 0;
-      line-height: 1;
-    }
-    &__sidebar-btn {
-      display: none;
-      background: transparent;
-      border: none;
-      padding: 0;
-    }
-    &__sidebar-btn:hover {
-      cursor: pointer;
-    }
-    &__location {
-      display: flex;
-      align-items: center;
-
-      img {
-        width: .9375rem;
-        height: 1.125rem;
-        padding-right: .375rem;
-      }
-      span {
-        color: $main-grey-color;
-        font-size: .875rem;
-      }
-    }
-  }
   &__info {
     display: flex;
     justify-content: center;
@@ -62,7 +28,7 @@
       color: $main-green-color;
     }
     &__button {
-      width: 250px;
+      width: 250px !important;
       margin-bottom: 2rem;
     }
     &__text-block {
@@ -90,25 +56,20 @@
   }
 }
 
-@media screen and (min-width: 320px) and (max-width: 767px){
-  .content {
-    padding: 0;
-
-    &__header {
-      display: block;
-      padding: 1rem 1rem 0 1rem;
-
-      &__title {
-        display: flex;
-        justify-content: space-between;
-      }
-      &__location {
-        justify-content: flex-end;
-      }
-      &__sidebar-btn {
-        display: block;
+@media screen and (min-width: 1024px) {
+  .main-content {
+    &__info {
+      &__text-block {
+        min-width: 480px;
       }
     }
+  }
+}
+
+@media screen and (min-width: 320px) and (max-width: 767px){
+  .main-content {
+    padding: 0;
+
     &__info {
       h1 {
         margin: 0 1rem 0 1rem;
@@ -119,7 +80,7 @@
         margin: 2rem 1rem 4rem 1rem;
       }
       &__button {
-        width: 100%;
+        width: 100% !important;
       }
     }
     &__footer {
@@ -135,6 +96,18 @@
       :last-child {
         color: $main-green-color;
         margin-top: .75rem;
+      }
+    }
+  }
+}
+
+@media screen and (max-height: 500px) {
+  .main-content {
+    &__info__text-block {
+      padding-top: 1rem;
+
+      h1 {
+        font-size: 3rem;
       }
     }
   }

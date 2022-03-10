@@ -2,6 +2,7 @@
 
 .slider {
   height: 100%;
+  width: 688px;
 
   &__layer {
     display: flex;
@@ -102,12 +103,37 @@
     background: url("../../assets/images/4-slide.jpg") no-repeat;
     background-size: cover;
   }
+
+@media screen and (min-width: 1024px) and (max-width: 1439px) {
+  .slider {
+    width: 614px;
+
+    &__layer {
+      &__left-arrow, &__right-arrow {
+        min-width: 2rem;
+      }
+    }
+    .slider-content {
+      &__info {
+        &__title {
+          font-size: 1.8rem;
+        }
+        &__description {
+          font-size: 1rem;
+        }
+      }
+    }
+  }
 }
 
-@media screen and (min-width: 1024px) and (max-width: 1439px){
-  .slider__layer {
-    &__left-arrow, &__right-arrow {
-      min-width: 2rem;
-    }
+@media screen and (max-width: 1023px){
+  .slider {
+    display: none;
+  }
+}
+
+@media screen and (min-height: 811px) {
+  .slider {
+    width: calc(100vh * 0.8484);
   }
 }
