@@ -20,6 +20,7 @@ const CarsTab = () => {
 
   const [page, setPage] = useState(1);
   const [fetching, setFetching] = useState(true);
+  // const [isScrollBtnVisible, setIsScrollBtnVisible] = useState(false);
 
   useEffect(() => {
     if (carsDataState.data.length === 0 && fetching) {
@@ -36,6 +37,8 @@ const CarsTab = () => {
     if (event.target.scrollHeight - event.target.scrollTop < event.target.clientHeight) {
       setFetching(true);
     }
+    // if (event.target.scrollTop > 200) setIsScrollBtnVisible(true);
+    // else setIsScrollBtnVisible(false);
   };
 
   return (
@@ -59,6 +62,7 @@ const CarsTab = () => {
           <Spinner customClass="cars-tab__spinner_black" />
         </div>
       </main>
+      {/* <ScrollToTopBtn isVisible={isScrollBtnVisible} /> */}
       {!orderStepState.locationTabCompleted && path('/order/location')}
     </div>
   );
