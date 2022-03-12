@@ -2,9 +2,10 @@
 
 .cars-tab {
   padding: 2rem;
-  height: max-content;
   width: 70%;
   border-right: 1px solid $main-lightgrey-color;
+  overflow-y: scroll;
+  overflow-x: hidden;
 
   &__car-list {
     display: flex;
@@ -14,6 +15,15 @@
     overflow: auto;
   }
   &__spinner {
+    display: none;
+
+    &_visible {
+      display: block;
+      width: 100%;
+      padding: 1rem 0;
+    }
+  }
+  &__spinner_black {
     border-bottom-color: $main-black-color !important;
   }
 }
