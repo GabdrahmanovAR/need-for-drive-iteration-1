@@ -16,7 +16,14 @@ const CarCard: FC<ICarCardProps> = ({ id, carInfo, activeCard }) => {
   const regex = new RegExp(/^(data:image\/)(jpeg|png);base64/);
 
   const handleCardClick = (event: BaseSyntheticEvent) => {
-    dispatch(changeCarInfoAction(carInfo.name, carInfo.name, carInfo.priceMin.toString(), carInfo.priceMax.toString(), carInfo.thumbnail.path, event.currentTarget.id));
+    dispatch(changeCarInfoAction(
+      carInfo.name,
+      carInfo.priceMin.toString(),
+      carInfo.priceMax.toString(),
+      carInfo.thumbnail.path,
+      carInfo.colors,
+      event.currentTarget.id,
+    ));
   };
 
   return (
