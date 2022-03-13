@@ -6,27 +6,31 @@ import RadioButton from '../../radio-button/RadioButton';
 import InputField from '../../input-field/InputField';
 import { EMPTY_STRING } from '../../../constants/common';
 import Calendar from '../../calendar/Calendar';
-import { setEndDayAction, setStartDayAction } from '../../../redux/actions/AdvancedTabAction';
 import { ScrollToTop } from '../../../utils/ScrollToTop';
 import { orderInfoSelector } from '../../../selectors/orderInfoSelector';
 import { orderStepSelector } from '../../../selectors/orderStepSelector';
+import { endDayRentAction, startDayRentAction } from '../../../redux/actions/OrderInfoAction';
+import { CalculateRentalDuration } from '../../../utils/CalculateRentalDuration';
+import { CheckEndDayValue } from '../../../utils/CheckEndDayValue';
 
 const AdvancedTab = () => {
   const { car } = useSelector(orderInfoSelector);
-  const dispatch = useDispatch();
   const orderStepState = useSelector(orderStepSelector);
+  const dispatch = useDispatch();
   const path = useNavigate();
 
   useEffect(() => {
     ScrollToTop();
+    CalculateRentalDuration('2022-03-16 14:00:00', '2022-03-17 16:00:00');
   }, []);
 
   const handleStartDateDeleteClick = () => {
-    dispatch(setStartDayAction(EMPTY_STRING));
+    dispatch(startDayRentAction(EMPTY_STRING));
+    dispatch(endDayRentAction(EMPTY_STRING));
   };
 
   const handleEndDateDeleteClick = () => {
-    dispatch(setEndDayAction(EMPTY_STRING));
+    dispatch(endDayRentAction(EMPTY_STRING));
   };
 
   return (
@@ -51,7 +55,7 @@ const AdvancedTab = () => {
           />
           <InputField
             id="end-day"
-            fieldValue={car.rentalDuration.to}
+            fieldValue={CheckEndDayValue(car.rentalDuration.from, car.rentalDuration.to)}
             placeholder="Выберите дату и время"
             title="По"
             onClickBtnFunc={handleEndDateDeleteClick}
