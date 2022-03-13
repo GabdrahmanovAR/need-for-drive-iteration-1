@@ -1,7 +1,8 @@
 {
   "files": {
-    "main.css": "/need-for-drive-iteration-1/static/css/main.7ed83594.css",
-    "main.js": "/need-for-drive-iteration-1/static/js/main.b20dc02e.js",
+    "main.css": "/need-for-drive-iteration-1/static/css/main.90de9320.css",
+    "main.js": "/need-for-drive-iteration-1/static/js/main.c7a130bc.js",
+    "static/media/car-picture.png": "/need-for-drive-iteration-1/static/media/car-picture.a9d926c8d4161c8b877f.png",
     "static/media/4-slide.jpg": "/need-for-drive-iteration-1/static/media/4-slide.d53618c6b186bbeab088.jpg",
     "static/media/3-slide.jpg": "/need-for-drive-iteration-1/static/media/3-slide.950c0c32ce3ab9999851.jpg",
     "static/media/2-slide.jpg": "/need-for-drive-iteration-1/static/media/2-slide.0db3e7e6509dbdbde206.jpg",
@@ -19,11 +20,11 @@
     "static/media/left-arrow.svg": "/need-for-drive-iteration-1/static/media/left-arrow.1752ae9160db5265a941d6120fcaeadb.svg",
     "static/media/right-arrow.svg": "/need-for-drive-iteration-1/static/media/right-arrow.7591c327fb5160f95b31d713c84e5cc5.svg",
     "static/media/location-arrow.svg": "/need-for-drive-iteration-1/static/media/location-arrow.3f54b55d7d55c4a8870ecaeb995be364.svg",
-    "main.7ed83594.css.map": "/need-for-drive-iteration-1/static/css/main.7ed83594.css.map",
-    "main.b20dc02e.js.map": "/need-for-drive-iteration-1/static/js/main.b20dc02e.js.map"
+    "main.90de9320.css.map": "/need-for-drive-iteration-1/static/css/main.90de9320.css.map",
+    "main.c7a130bc.js.map": "/need-for-drive-iteration-1/static/js/main.c7a130bc.js.map"
   },
   "entrypoints": [
-    "static/css/main.7ed83594.css",
-    "static/js/main.b20dc02e.js"
+    "static/css/main.90de9320.css",
+    "static/js/main.c7a130bc.js"
   ]
 }
