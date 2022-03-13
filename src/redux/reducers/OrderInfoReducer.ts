@@ -3,6 +3,8 @@ import { IOrderInfoState } from '../../types/state';
 import { EMPTY_ARRAY, EMPTY_STRING } from '../../constants/common';
 import { IOrderCarInfoActionType, IOrderInfoActionType } from '../../types/actions';
 import {
+  BABY_CHAIR_NEEDED,
+  FULL_TANK_NEEDED, RIGHT_HAND_NEEDED,
   SET_CAR_COLOR,
   SET_CAR_INFO,
   SET_CITY_DATA,
@@ -89,6 +91,21 @@ const setTariff = (draft: IOrderInfoState, tariff?: string) => {
   return draft;
 };
 
+const setBabyChair = (draft: IOrderInfoState, babyChair?: boolean) => {
+  draft.car.babyChair = babyChair || false;
+  return draft;
+};
+
+const setRightHandDrive = (draft: IOrderInfoState, rightHandDrive?: boolean) => {
+  draft.car.rightHandDrive = rightHandDrive || false;
+  return draft;
+};
+
+const setFullTank = (draft: IOrderInfoState, fullTank?: boolean) => {
+  draft.car.fullTank = fullTank || false;
+  return draft;
+};
+
 export default (state = initialState, action: IOrderInfoActionType) => produce(
   state,
   (draft: IOrderInfoState) => {
@@ -100,6 +117,9 @@ export default (state = initialState, action: IOrderInfoActionType) => produce(
       case SET_RENTAL_DURATION_SD: return startDayRent(draft, action.car?.rentalDuration?.from);
       case SET_RENTAL_DURATION_ED: return endDayRent(draft, action.car?.rentalDuration?.to);
       case SET_TARIFF: return setTariff(draft, action.car?.tariff);
+      case FULL_TANK_NEEDED: return setFullTank(draft, action.car?.fullTank);
+      case BABY_CHAIR_NEEDED: return setBabyChair(draft, action.car?.babyChair);
+      case RIGHT_HAND_NEEDED: return setRightHandDrive(draft, action.car?.rightHandDrive);
       default: return state;
     }
   },

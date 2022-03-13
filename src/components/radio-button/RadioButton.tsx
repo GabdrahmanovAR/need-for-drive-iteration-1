@@ -1,9 +1,15 @@
 import React, { BaseSyntheticEvent, FC, useState } from 'react';
 import './RadioButton.scss';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { EMPTY_STRING } from '../../constants/common';
-import { setCarColorAction, setTariffAction } from '../../redux/actions/OrderInfoAction';
+import {
+  setBabyChairAction,
+  setCarColorAction,
+  setFullTankAction, setRightHandDriveAction,
+  setTariffAction,
+} from '../../redux/actions/OrderInfoAction';
 import { changeSelectedItem } from '../../redux/actions/RadioButtonAction';
+import { orderInfoSelector } from '../../selectors/orderInfoSelector';
 
 interface IRadioButtonProps {
   formName: string,
@@ -20,6 +26,7 @@ const RadioButton: FC<IRadioButtonProps> = (props) => {
     direction = EMPTY_STRING,
   } = props;
   const [checked, setChecked] = useState(type === 'radio' ? 'radio-id-0' : EMPTY_STRING);
+  const { car } = useSelector(orderInfoSelector);
   const dispatch = useDispatch();
 
   const handleOnChangeEvent = (event: BaseSyntheticEvent) => {
@@ -33,6 +40,12 @@ const RadioButton: FC<IRadioButtonProps> = (props) => {
       case 'Эконом': dispatch(changeSelectedItem('economy'));
         break;
       case 'Премиум': dispatch(changeSelectedItem('premium'));
+        break;
+      case 'Полный бак, 500₽': dispatch(setFullTankAction(!car.fullTank));
+        break;
+      case 'Детское кресло, 200₽': dispatch(setBabyChairAction(!car.babyChair));
+        break;
+      case 'Правый руль, 1600₽': dispatch(setRightHandDriveAction(!car.rightHandDrive));
         break;
       default:
     }

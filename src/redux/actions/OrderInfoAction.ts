@@ -1,6 +1,8 @@
 import { Dispatch } from 'redux';
 import { IOrderInfoActionType } from '../../types/actions';
 import {
+  BABY_CHAIR_NEEDED,
+  FULL_TANK_NEEDED, RIGHT_HAND_NEEDED,
   SET_CAR_COLOR,
   SET_CAR_INFO,
   SET_CITY_DATA,
@@ -76,3 +78,24 @@ export const changeLocationDataAction = (name: string, coords: number[], key: st
   if (key === 'city') dispatch(changeCityData(name, coords));
   else dispatch(changeMarkerData(name, coords));
 };
+
+export const setFullTankAction = (isNeeded: boolean): IOrderInfoActionType => ({
+  type: FULL_TANK_NEEDED,
+  car: {
+    fullTank: isNeeded,
+  },
+});
+
+export const setBabyChairAction = (isNeeded: boolean): IOrderInfoActionType => ({
+  type: BABY_CHAIR_NEEDED,
+  car: {
+    babyChair: isNeeded,
+  },
+});
+
+export const setRightHandDriveAction = (isNeeded: boolean): IOrderInfoActionType => ({
+  type: RIGHT_HAND_NEEDED,
+  car: {
+    rightHandDrive: isNeeded,
+  },
+});
