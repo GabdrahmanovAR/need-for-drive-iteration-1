@@ -12,10 +12,6 @@ const ScrollToTopBtn: FC<IScrollToTopProps> = ({ isVisible }) => (
     {isVisible && (
     <div onClick={ScrollToTop} role="presentation">
       <ArrowUpOutlined style={{ fontSize: 24 }} />
-      {/* <img */}
-      {/*  src="https://i.postimg.cc/44Ytsk8Z/top-arrow-emoj.png" */}
-      {/*  alt="Go to top" */}
-      {/* /> */}
     </div>
     )}
   </div>

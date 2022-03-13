@@ -12,6 +12,7 @@ export interface IState {
   orderStep: IOrderStepState;
   pointsData: IPointsDataState;
   carsData: ICarsDataState;
+  radioButton: IRadioButtonState;
 }
 
 export interface ISidebarMenuState {
@@ -95,4 +96,8 @@ export interface ICarsDataState {
   count: number;
   data: Array<ICarInfoData>;
   isLoading: boolean;
+}
+
+export interface IRadioButtonState {
+  selectedItem: string;
 }

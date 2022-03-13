@@ -76,3 +76,7 @@ export interface IPointsDataActionType extends IActionType {
 export interface ICarsDataActionType extends IActionType {
   data?: ICarsData;
 }
+
+export interface IRadioButtonActionType extends IActionType {
+  selectedItem?: string;
+}
