@@ -51,12 +51,12 @@ export interface IOrderLocationState {
 }
 
 export interface IOrderCarInfoState {
-  brand: string;
   name: string;
   minPrice: string,
   maxPrice: string,
   image: string,
-  color: string;
+  currentColor: string;
+  colors: string[];
   rentalDuration: {
     from: string,
     to: string,

@@ -61,7 +61,7 @@ const OrderInfo = () => {
         : 'order-info__details_disable'}`}
       >
         <div className="order-info__details__multiple-info multiple-info">
-          {advancedInfoElement('Цвет', car.color)}
+          {advancedInfoElement('Цвет', car.currentColor)}
           {advancedInfoElement('Длительность аренды', '1д 2ч')}
           {advancedInfoElement('Тариф', car.tariff.split(',')[0])}
           {advancedInfoElement('Полный бак', 'Не выбрано')}

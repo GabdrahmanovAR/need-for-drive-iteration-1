@@ -35,7 +35,7 @@ const AdvancedTab = () => {
         <p>Цвет</p>
         <RadioButton
           formName="color"
-          btnNames={['Любой', 'Красный', 'Голубой']}
+          btnNames={['Любой', ...car.colors]}
         />
       </header>
       <section>

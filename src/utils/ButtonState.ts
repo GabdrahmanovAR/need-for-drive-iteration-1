@@ -24,13 +24,13 @@ export const ButtonState = (currentLocation: string, orderInfo: IOrderInfoState)
       return false;
     }
     case MODELS_URL_PATH: {
-      if (car.brand === EMPTY_STRING || car.name === EMPTY_STRING) return true;
+      if (car.name === EMPTY_STRING) return true;
       dispatch(changeModelTabStateAction(true));
       return false;
     }
     case ADVANCED_URL_PATH: {
       if (
-        car.color === EMPTY_STRING
+        car.currentColor === EMPTY_STRING
         || car.rentalDuration.from === EMPTY_STRING
         || car.rentalDuration.to === EMPTY_STRING
         || car.tariff === EMPTY_STRING) return true;

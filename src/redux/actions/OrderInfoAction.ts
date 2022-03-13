@@ -26,14 +26,16 @@ const changeMarkerData = (markerName: string, markerCoords: number[]): IOrderInf
   },
 });
 
-export const changeCarInfoAction = (brand: string, name: string, minPrice: string, maxPrice: string, image: string, selectedCar: string): IOrderInfoActionType => ({
+export const changeCarInfoAction = (
+  name: string, minPrice: string, maxPrice: string, image: string, colors: string[], selectedCar: string,
+): IOrderInfoActionType => ({
   type: SET_CAR_INFO,
   car: {
-    brand,
     name,
     minPrice,
     maxPrice,
     image,
+    colors,
     selectedCar,
   },
 });
@@ -41,7 +43,7 @@ export const changeCarInfoAction = (brand: string, name: string, minPrice: strin
 export const setCarColorAction = (color: string): IOrderInfoActionType => ({
   type: SET_CAR_COLOR,
   car: {
-    color,
+    currentColor: color,
   },
 });
 

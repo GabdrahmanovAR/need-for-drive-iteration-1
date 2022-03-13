@@ -42,12 +42,12 @@ export interface IOrderInfoActionType extends IActionType {
 }
 
 export interface IOrderCarInfoActionType {
-  brand?: string;
   name?: string;
   minPrice?: string,
   maxPrice?: string,
   image?: string,
-  color?: string;
+  currentColor?: string;
+  colors?: string[];
   rentalDuration?: {
     from?: string,
     to?: string,

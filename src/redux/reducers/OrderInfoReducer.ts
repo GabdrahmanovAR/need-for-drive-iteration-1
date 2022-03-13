@@ -21,12 +21,12 @@ const initialState: IOrderInfoState = {
   },
   car: {
     name: EMPTY_STRING,
-    brand: EMPTY_STRING,
     image: EMPTY_STRING,
     selectedCar: EMPTY_STRING,
     maxPrice: EMPTY_STRING,
     minPrice: EMPTY_STRING,
-    color: 'Любой',
+    currentColor: 'Любой',
+    colors: EMPTY_ARRAY,
     babyChair: false,
     fullTank: false,
     rentalDuration: {
@@ -52,24 +52,24 @@ const changeMarkerData = (draft: IOrderInfoState, markerName?: string, markerCoo
 
 const carInfo = (draft: IOrderInfoState, props?: IOrderCarInfoActionType) => {
   const {
-    brand,
     name,
     minPrice,
     maxPrice,
     image,
+    colors,
     selectedCar,
   } = { ...props };
-  draft.car.brand = brand || EMPTY_STRING;
   draft.car.name = name || EMPTY_STRING;
   draft.car.minPrice = minPrice || EMPTY_STRING;
   draft.car.maxPrice = maxPrice || EMPTY_STRING;
   draft.car.image = image || EMPTY_STRING;
+  draft.car.colors = colors || EMPTY_ARRAY;
   draft.car.selectedCar = selectedCar || EMPTY_STRING;
   return draft;
 };
 
 const setCarColor = (draft: IOrderInfoState, color?: string) => {
-  draft.car.color = color || EMPTY_STRING;
+  draft.car.currentColor = color || EMPTY_STRING;
   return draft;
 };
 
@@ -95,7 +95,7 @@ export default (state = initialState, action: IOrderInfoActionType) => produce(
       case SET_CITY_DATA: return changeCityData(draft, action.location?.cityName, action.location?.cityCoords);
       case SET_MARKER_DATA: return changeMarkerData(draft, action.location?.markerName, action.location?.markerCoords);
       case SET_CAR_INFO: return carInfo(draft, action.car);
-      case SET_CAR_COLOR: return setCarColor(draft, action.car?.color);
+      case SET_CAR_COLOR: return setCarColor(draft, action.car?.currentColor);
       case SET_RENTAL_DURATION_SD: return startDayRent(draft, action.car?.rentalDuration?.from);
       case SET_RENTAL_DURATION_ED: return endDayRent(draft, action.car?.rentalDuration?.to);
       case SET_TARIFF: return setTariff(draft, action.car?.tariff);
