@@ -65,9 +65,9 @@ const OrderInfo = () => {
           {advancedInfoElement('Цвет', car.currentColor)}
           {advancedInfoElement('Длительность аренды', CalculateRentalDuration(car.rentalDuration.from, car.rentalDuration.to))}
           {advancedInfoElement('Тариф', car.tariff.split(',')[0])}
-          {advancedInfoElement('Полный бак', 'Не выбрано')}
-          {advancedInfoElement('Детское кресло', 'Не выбрано')}
-          {advancedInfoElement('Правый руль', 'Не выбрано')}
+          {advancedInfoElement('Полный бак', car.fullTank ? 'Да' : 'Не выбрано')}
+          {advancedInfoElement('Детское кресло', car.babyChair ? 'Да' : 'Не выбрано')}
+          {advancedInfoElement('Правый руль', car.rightHandDrive ? 'Да' : 'Не выбрано')}
         </div>
       </section>
       {/* Информация диапозон цен */}

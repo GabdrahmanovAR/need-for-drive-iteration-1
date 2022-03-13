@@ -10,7 +10,6 @@ import { ScrollToTop } from '../../../utils/ScrollToTop';
 import { orderInfoSelector } from '../../../selectors/orderInfoSelector';
 import { orderStepSelector } from '../../../selectors/orderStepSelector';
 import { endDayRentAction, startDayRentAction } from '../../../redux/actions/OrderInfoAction';
-import { CalculateRentalDuration } from '../../../utils/CalculateRentalDuration';
 import { CheckEndDayValue } from '../../../utils/CheckEndDayValue';
 
 const AdvancedTab = () => {
@@ -21,7 +20,6 @@ const AdvancedTab = () => {
 
   useEffect(() => {
     ScrollToTop();
-    CalculateRentalDuration('2022-03-16 14:00:00', '2022-03-17 16:00:00');
   }, []);
 
   const handleStartDateDeleteClick = () => {
