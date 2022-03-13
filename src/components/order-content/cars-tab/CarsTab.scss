@@ -1,0 +1,42 @@
+@import "src/constants/styles/common";
+
+.cars-tab {
+  padding: 2rem;
+  width: 70%;
+  border-right: 1px solid $main-lightgrey-color;
+  overflow-y: scroll;
+  overflow-x: hidden;
+
+  &__car-list {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    margin-top: 1.5rem;
+    overflow: auto;
+  }
+  &__spinner {
+    display: none;
+
+    &_visible {
+      display: block;
+      width: 100%;
+      padding: 1rem 0;
+    }
+  }
+  &__spinner_black {
+    border-bottom-color: $main-black-color !important;
+  }
+}
+
+@media screen and (max-width: 1023px){
+  .cars-tab {
+    width: 100%;
+    border-right: none;
+  }
+}
+
+@media screen and (max-width: 360px){
+  .cars-tab {
+    padding-top: .5rem;
+  }
+}
