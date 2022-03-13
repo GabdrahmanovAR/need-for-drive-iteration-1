@@ -10,6 +10,7 @@ import { ButtonText } from '../../../utils/ButtonText';
 import { NextTabUrl } from '../../../utils/NextTabUrl';
 import { ButtonState } from '../../../utils/ButtonState';
 import { orderInfoSelector } from '../../../selectors/orderInfoSelector';
+import { CalculateRentalDuration } from '../../../utils/CalculateRentalDuration';
 
 const OrderInfo = () => {
   const { location, car } = useSelector(orderInfoSelector);
@@ -62,7 +63,7 @@ const OrderInfo = () => {
       >
         <div className="order-info__details__multiple-info multiple-info">
           {advancedInfoElement('Цвет', car.currentColor)}
-          {advancedInfoElement('Длительность аренды', '1д 2ч')}
+          {advancedInfoElement('Длительность аренды', CalculateRentalDuration(car.rentalDuration.from, car.rentalDuration.to))}
           {advancedInfoElement('Тариф', car.tariff.split(',')[0])}
           {advancedInfoElement('Полный бак', 'Не выбрано')}
           {advancedInfoElement('Детское кресло', 'Не выбрано')}

@@ -8,7 +8,8 @@ import {
   SET_CITY_DATA,
   SET_MARKER_DATA,
   SET_RENTAL_DURATION_ED,
-  SET_RENTAL_DURATION_SD, SET_TARIFF,
+  SET_RENTAL_DURATION_SD,
+  SET_TARIFF,
 } from '../../constants/actions/orderInfo';
 
 const initialState: IOrderInfoState = {
@@ -60,10 +61,10 @@ const carInfo = (draft: IOrderInfoState, props?: IOrderCarInfoActionType) => {
     selectedCar,
   } = { ...props };
   draft.car.name = name || EMPTY_STRING;
-  draft.car.minPrice = minPrice || EMPTY_STRING;
-  draft.car.maxPrice = maxPrice || EMPTY_STRING;
+  draft.car.minPrice = Number(minPrice) < Number(maxPrice) ? minPrice || EMPTY_STRING : maxPrice || EMPTY_STRING;
+  draft.car.maxPrice = Number(minPrice) > Number(maxPrice) ? minPrice || EMPTY_STRING : maxPrice || EMPTY_STRING;
   draft.car.image = image || EMPTY_STRING;
-  draft.car.colors = colors || EMPTY_ARRAY;
+  draft.car.colors = Array.from(new Set(colors));
   draft.car.selectedCar = selectedCar || EMPTY_STRING;
   return draft;
 };

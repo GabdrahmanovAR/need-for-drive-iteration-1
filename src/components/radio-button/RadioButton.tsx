@@ -26,6 +26,7 @@ const RadioButton: FC<IRadioButtonProps> = (props) => {
     setChecked(event.target.id);
     if (event.target.id.includes('color')) dispatch(setCarColorAction(event.target.value));
     else if (event.target.id.includes('tariff')) dispatch(setTariffAction(event.target.value));
+
     switch (event.target.value) {
       case 'Все модели': dispatch(changeSelectedItem('all'));
         break;
