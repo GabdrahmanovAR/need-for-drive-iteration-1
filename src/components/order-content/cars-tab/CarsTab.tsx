@@ -11,6 +11,7 @@ import { getCarsAction } from '../../../redux/actions/CarsDataAction';
 import { ICarInfoData } from '../../../types/api';
 import Spinner from '../../Spinner/Spinner';
 import { radioButtonSelector } from '../../../selectors/radioButtonSelector';
+import { LIMIT_PER_PAGE } from '../../../constants/common';
 
 const CarsTab = () => {
   const orderInfoState = useSelector(orderInfoSelector);
@@ -27,11 +28,14 @@ const CarsTab = () => {
   const [fetching, setFetching] = useState(true);
 
   useEffect(() => {
-    if (carsDataState.data.length === 0 && fetching) {
-      dispatch(getCarsAction('0', '10'));
-      setFetching(false);
-    } else if (fetching && carsDataState.data.length < carsDataState.count) {
-      dispatch(getCarsAction(page.toString(), '10'));
+    if (carsDataState.data.length === 0) {
+      dispatch(getCarsAction('0', LIMIT_PER_PAGE));
+    }
+  }, []);
+
+  useEffect(() => {
+    if (fetching && carsDataState.data.length < carsDataState.count) {
+      dispatch(getCarsAction(page.toString(), LIMIT_PER_PAGE));
       setPage((prevState) => prevState + 1);
       setFetching(false);
     }
