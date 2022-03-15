@@ -25,7 +25,7 @@ const RadioButton: FC<IRadioButtonProps> = (props) => {
     type = 'radio',
     direction = EMPTY_STRING,
   } = props;
-  const [checked, setChecked] = useState(type === 'radio' ? 'radio-id-0' : EMPTY_STRING);
+  const [checked, setChecked] = useState(type === 'radio' ? `radio-${formName}-0` : EMPTY_STRING);
   const { car } = useSelector(orderInfoSelector);
   const dispatch = useDispatch();
 
@@ -70,10 +70,11 @@ const RadioButton: FC<IRadioButtonProps> = (props) => {
               defaultChecked={type === 'radio' && index === 0}
               onChange={handleOnChangeEvent}
               value={name}
+              // checked={type === 'radio' && index === 0}
             />
             <span className={`
               form_radio__fieldset__name 
-              ${checked === `radio-id-${index}` && 'form_radio__fieldset__name_active'}`}
+              ${checked === `radio-${formName}-${index}` && 'form_radio__fieldset__name_active'}`}
             >
               {name}
             </span>
