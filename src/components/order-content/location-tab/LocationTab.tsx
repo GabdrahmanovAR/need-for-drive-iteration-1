@@ -9,7 +9,7 @@ import YandexMaps from '../../yandex-maps/YandexMaps';
 import { ICity, listOfCities } from '../../../constants/fake-data/cities';
 import { IState } from '../../../types/state';
 import { changeLocationDataAction } from '../../../redux/actions/OrderLocationAction';
-import OrderInputField from '../order-input-field/OrderInputField';
+import InputField from '../../input-field/InputField';
 
 interface ILocationTabProps {
   cityName: string,
@@ -73,39 +73,49 @@ const LocationTab: FC<ILocationTabProps> = ({ cityName, markerName, changeLocati
     setCitiesMenu(true);
   };
 
+  const dropDownMenu = () => (
+    <div className="location-tab__drop-down-menu">
+      <nav className={`location-tab__cities-list ${citiesMenu && 'location-tab__cities-list_active'}`}>
+        <ul>
+          {listOfCities.map((someCity: ICity, index: number) => {
+            if (someCity.name.slice(0, city.length) !== city) return null;
+            return (
+              <li
+                className="list-item"
+                onClick={handleListItemClick}
+                role="presentation"
+                key={`city-${index}`}
+              >
+                {someCity.name}
+              </li>
+            );
+          })}
+        </ul>
+      </nav>
+    </div>
+  );
+
   return (
-    <div className="order-location">
-      <OrderInputField
-        title="Город"
-        fieldName={city}
-        onInputFunc={handleCityInput}
-        onClickInputFunc={handleCityInputClick}
-        onClickBtnFunc={handleCityBtnClick}
-      />
-      <div className="order-location__drop-down-menu">
-        <nav className={`order-location__cities-list ${citiesMenu && 'order-location__cities-list_active'}`}>
-          <ul>
-            {listOfCities.map((someCity: ICity, index: number) => {
-              if (someCity.name.slice(0, city.length) !== city) return null;
-              return (
-                <li
-                  className="list-item"
-                  onClick={handleListItemClick}
-                  role="presentation"
-                  key={`city-${index}`}
-                >
-                  {someCity.name}
-                </li>
-              );
-            })}
-          </ul>
-        </nav>
+    <div className="location-tab">
+      <div className="location-tab__point">
+        <InputField
+          id="city-field"
+          title="Город"
+          fieldValue={city}
+          placeholder="Начните вводить город..."
+          onInputFunc={handleCityInput}
+          onClickInputFunc={handleCityInputClick}
+          onClickBtnFunc={handleCityBtnClick}
+          childComponent={dropDownMenu()}
+        />
+        <InputField
+          id="marker-field"
+          title="Пункт выдачи"
+          fieldValue={marker}
+          placeholder="Выберите пункт на карте"
+          onClickBtnFunc={handleMarkerBtnClick}
+        />
       </div>
-      <OrderInputField
-        title="Пункт выдачи"
-        fieldName={marker}
-        onClickBtnFunc={handleMarkerBtnClick}
-      />
       <YandexMaps />
     </div>
   );

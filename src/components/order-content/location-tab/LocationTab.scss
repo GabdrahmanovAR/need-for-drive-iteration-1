@@ -1,46 +1,15 @@
 @import "src/constants/styles/common";
 
-.order-location {
+.location-tab {
   padding: 2rem;
   width: 70%;
   border-right: 1px solid $main-lightgrey-color;
 
-  &__input-block {
+  &__point {
     display: flex;
-    position: relative;
-    padding: .375rem 0;
-
-    &__title {
-      display: inline-block;
-      padding-right: .5rem;
-      min-width: 7.125rem;
-      text-align: end;
-      font-size: .875rem;
-    }
-    &__input {
-      width: 12.75rem;
-      border: none;
-      border-bottom: .09375rem solid $main-grey-color;
-      padding-left: .5rem;
-      font-size: .875rem
-    }
-    &__input:focus {
-      outline: none;
-    }
-  }
-  .city-button {
-    border: none;
-    background-color: transparent;
-    border-bottom: 1.5px solid gray;
-
-    &__icon {
-      cursor: pointer;
-      visibility: hidden;
-
-      &_active {
-        visibility: visible;
-      }
-    }
+    flex-direction: column;
+    align-items: flex-end;
+    width: max-content;
   }
   &__cities-list {
     display: none;
@@ -61,8 +30,6 @@
       position: absolute;
       z-index: 1;
       background-color: $main-white-color;
-      left: 7.2rem;
-      top: -0.35rem;
     }
   }
   .list-item {
@@ -78,25 +45,14 @@
 }
 
 @media screen and (max-width: 1023px){
-  .order-location {
+  .location-tab {
     width: 100%;
     border-right: none;
   }
 }
 
-@media screen and (min-width: 420px) and (max-width: 767px){
-  .order-location {
-    &__cities-list {
-      &_active {
-        left: 7.2rem;
-        top: -0.35rem;
-      }
-    }
-  }
-}
-
 @media screen and (max-width: 419px){
-  .order-location {
+  .location-tab {
     padding: 1rem 2rem;
 
     &__input-block {
@@ -105,12 +61,6 @@
       &__title {
         text-align: start;
         padding-left: .5rem;
-      }
-    }
-    &__cities-list {
-      &_active {
-        left: 0;
-        top: -0.35rem;
       }
     }
   }

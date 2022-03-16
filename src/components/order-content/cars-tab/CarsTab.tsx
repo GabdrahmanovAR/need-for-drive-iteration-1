@@ -4,17 +4,17 @@ import RadioButton from '../../radio-button/RadioButton';
 import { Cars, ICars } from '../../../constants/fake-data/cars';
 import CarCard from '../car-card/CarCard';
 import './CarsTab.scss';
-import { carModelCardSelector } from '../../../selectors/carModelCardSelector';
+import { carCardSelector } from '../../../selectors/carCardSelector';
 
 const CarsTab = () => {
-  const state = useSelector(carModelCardSelector);
+  const state = useSelector(carCardSelector);
 
   return (
-    <div className="car-models">
-      <header className="car-models__header">
+    <div className="cars-tab">
+      <header className="cars-tab__header">
         <RadioButton btnNames={['Все модели', 'Эконом', 'Премиум']} />
       </header>
-      <main className="car-models__car-list">
+      <main className="cars-tab__car-list">
         {Cars.map((carInfo: ICars, index: number) => (
           <CarCard
             carInfo={carInfo}

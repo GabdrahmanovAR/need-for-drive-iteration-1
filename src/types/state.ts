@@ -2,17 +2,14 @@ import { ICars } from '../constants/fake-data/cars';
 
 export interface IState {
   sidebarMenu: ISidebarMenuState;
-  header: IHeaderState;
   orderLocation: IOrderLocationState;
-  carModelCard: ICardModelCardState;
+  carCard: ICarCardState;
+  advancedTab: IAdvancedTabState;
+  inputField: IInputFieldState;
 }
 
 export interface ISidebarMenuState {
   isOpen: boolean;
-}
-
-export interface IHeaderState {
-  customClass: string;
 }
 
 export interface IOrderLocationState {
@@ -23,7 +20,16 @@ export interface IOrderLocationState {
   selectionCompleted: boolean;
 }
 
-export interface ICardModelCardState {
+export interface ICarCardState {
   activeCard: string;
   selectedCarInfo: ICars;
+}
+
+export interface IAdvancedTabState {
+  startDay: string;
+  endDay: string;
+}
+
+export interface IInputFieldState {
+  focusedField: string;
 }

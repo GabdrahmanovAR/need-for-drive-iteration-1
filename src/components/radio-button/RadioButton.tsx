@@ -1,12 +1,15 @@
 import React, { BaseSyntheticEvent, FC, useState } from 'react';
 import './RadioButton.scss';
+import { EMPTY_STRING } from '../../constants/common';
 
 interface IRadioButtonProps {
   btnNames: string[],
+  type?: string,
+  direction?: string,
 }
 
-const RadioButton: FC<IRadioButtonProps> = ({ btnNames }) => {
-  const [checked, setChecked] = useState('radio-id-0');
+const RadioButton: FC<IRadioButtonProps> = ({ btnNames, type, direction }) => {
+  const [checked, setChecked] = useState(type === 'radio' ? 'radio-id-0' : EMPTY_STRING);
 
   const handleOnChangeEvent = (event: BaseSyntheticEvent) => {
     setChecked(event.target.id);
@@ -14,14 +17,21 @@ const RadioButton: FC<IRadioButtonProps> = ({ btnNames }) => {
 
   return (
     <form className="form_radio">
-      <fieldset className="form_radio__fieldset">
+      <fieldset className={`form_radio__fieldset ${direction !== EMPTY_STRING && 'form_radio__fieldset_column'}`}>
         {btnNames.map((name: string, index: number) => (
           <div key={`radio-${index}`} className="form_radio__fieldset__r-button">
             <input
-              id={`radio-id-${index}`}
-              type="radio"
-              name="radio-button"
-              defaultChecked={index === 0}
+              id={`${type === 'radio'
+                ? `radio-id-${index}`
+                : `checkbox-id-${index}`
+              }`}
+              className={`form_radio__fieldset__input ${type === 'checkbox' && 'form_radio__fieldset__input_checkbox'}`}
+              type={type}
+              name={`${type === 'radio'
+                ? 'radio-button'
+                : `checkbox-btn-${index}`
+              }`}
+              defaultChecked={type === 'radio' && index === 0}
               onChange={handleOnChangeEvent}
             />
             <span className={`
