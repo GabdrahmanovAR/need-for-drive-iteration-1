@@ -63,3 +63,12 @@ export interface IOrderStepActionType extends IActionType {
   advancedTabCompleted?: boolean;
   activeTab?: string;
 }
+
+export interface IAdvancedTabActionType extends IActionType {
+  startDay?: string;
+  endDay?: string;
+}
+
+export interface IInputFieldActionType extends IActionType{
+  focusedField?: string;
+}

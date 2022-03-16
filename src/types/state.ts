@@ -69,3 +69,12 @@ export interface IOrderStepState {
   advancedTabCompleted: boolean;
   activeTab: string;
 }
+
+export interface IAdvancedTabState {
+  startDay: string;
+  endDay: string;
+}
+
+export interface IInputFieldState {
+  focusedField: string;
+}
