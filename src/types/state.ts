@@ -100,4 +100,8 @@ export interface ICarsDataState {
 
 export interface IRadioButtonState {
   selectedItem: string;
+  radioCar: string;
+  radioColor: string;
+  radioTariff: string;
+  checkboxAdvanced: string[];
 }

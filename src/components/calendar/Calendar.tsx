@@ -22,7 +22,7 @@ const Calendar = () => {
 
   return (
     <div className="calendar">
-      <DatePicker showTime onChange={onChange} />
+      <DatePicker showTime onChange={onChange} showSecond={false} />
     </div>
   );
 };

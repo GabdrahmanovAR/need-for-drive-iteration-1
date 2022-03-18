@@ -96,16 +96,8 @@ const CarsTab = () => {
       </header>
       <main className="cars-tab__car-list">
         {displayCards()}
-        {/* {carsDataState.data.map((carInfo: ICarInfoData, index: number) => ( */}
-        {/*  <CarCard */}
-        {/*    carInfo={carInfo} */}
-        {/*    activeCard={orderInfoState.car.selectedCar} */}
-        {/*    id={`model-card-${index}`} */}
-        {/*    key={`model-card-${index}`} */}
-        {/*  /> */}
-        {/* ))} */}
         <div className={`cars-tab__spinner ${carsDataState.isLoading && 'cars-tab__spinner_visible'}`}>
-          <Spinner customClass="cars-tab__spinner_black" />
+          <Spinner />
         </div>
       </main>
       {/* <ScrollToTopBtn isVisible={isScrollBtnVisible} /> */}

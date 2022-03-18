@@ -15,6 +15,7 @@ import { IPointCityCoordsState, IPointMarkerCoordsState } from '../../types/stat
 import { changeCityCoords, changeMarkerCoords } from '../../redux/actions/PointsDataAction';
 import { IPoint } from '../../types/api';
 import { YMAPS_API_KEY } from '../../constants/api/api';
+import { MapError } from './map-error/MapError';
 
 const YandexMaps = () => {
   const { location } = useSelector(orderInfoSelector);
@@ -22,6 +23,7 @@ const YandexMaps = () => {
   const dispatch = useDispatch();
   const [someCityCoords, setSomeCityCoords] = useState([] as IPointCityCoordsState[]);
   const [someMarkerCoords, setSomeMarkerCoords] = useState([] as IPointMarkerCoordsState[]);
+  const [resultReceived, setResultReceived] = useState(true);
 
   const handleMarkerClick = (markerId: string, markerCoords: number[]) => {
     let markerName = EMPTY_STRING;
@@ -50,13 +52,16 @@ const YandexMaps = () => {
   const handleOnLoadMap = (maps: YMapsApi) => {
     const array: any = GetCoordinates(maps, pointsDataState.data);
     array.then((result: any) => {
-      setSomeCityCoords(result[0]);
-      setSomeMarkerCoords(result[1]);
+      if (result[0].length === 0 || result[1].length === 0) setResultReceived(false);
+      else {
+        setSomeCityCoords(result[0]);
+        setSomeMarkerCoords(result[1]);
+      }
     });
   };
 
   useEffect(() => {
-    if (someCityCoords !== [] || someMarkerCoords !== []) {
+    if (someCityCoords.length !== 0 && someMarkerCoords.length !== 0) {
       dispatch(changeCityCoords(someCityCoords));
       dispatch(changeMarkerCoords(someMarkerCoords));
     }
@@ -65,7 +70,7 @@ const YandexMaps = () => {
   return (
     <section className="maps">
       <header className="maps__header">Выбрать на карте:</header>
-      <main>
+      <main className="maps__content">
         <YMaps
           query={{
             ns: 'use-load-option',
@@ -95,6 +100,7 @@ const YandexMaps = () => {
             </Clusterer>
           </Map>
         </YMaps>
+        {!resultReceived && <MapError />}
       </main>
     </section>
   );

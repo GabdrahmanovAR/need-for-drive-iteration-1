@@ -79,4 +79,8 @@ export interface ICarsDataActionType extends IActionType {
 
 export interface IRadioButtonActionType extends IActionType {
   selectedItem?: string;
+  radioCar?: string,
+  radioColor?: string,
+  radioTariff?: string,
+  checkboxAdvanced?: string[],
 }
