@@ -21,7 +21,6 @@ const hideLoader = (draft: ICarsDataState) => {
 };
 
 const loadCarsData = (draft: ICarsDataState, carData?: ICarsData) => {
-  // draft.data = carData?.data || [];
   draft.data.push(...carData?.data || []);
   draft.count = carData?.count || 0;
   return draft;

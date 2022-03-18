@@ -1,6 +1,6 @@
 import { ICarsFakeData } from '../constants/fake-data/cars';
 import { ICarsData, IPoint } from './api';
-import { IPointCityCoordsState, IPointMarkerCoordsState } from './state';
+import { IPointCityCoordsState, IPointMarkerCoordsState, IRateInfoState } from './state';
 
 export interface IActionType {
   type: string;
@@ -83,4 +83,9 @@ export interface IRadioButtonActionType extends IActionType {
   radioColor?: string,
   radioTariff?: string,
   checkboxAdvanced?: string[],
+}
+
+export interface IRateActionType extends IActionType {
+  count?: number;
+  data?: IRateInfoState[],
 }
