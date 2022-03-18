@@ -1,6 +1,6 @@
 import axios from 'axios';
 import {
-  APP_ID_FIELD, APP_ID_VALUE, BASE_URL, CARS_URL, POINT_URL,
+  APP_ID_FIELD, APP_ID_VALUE, BASE_URL, CARS_URL, POINT_URL, RATE_URL,
 } from '../constants/api/api';
 
 const apiDB = axios.create({
@@ -13,3 +13,5 @@ const apiDB = axios.create({
 export const getPickupPoints = () => apiDB.get(POINT_URL);
 
 export const getCars = (page: string, limit: string) => apiDB.get(`${CARS_URL}?page=${page}&limit=${limit}`);
+
+export const getRate = () => apiDB.get(RATE_URL);

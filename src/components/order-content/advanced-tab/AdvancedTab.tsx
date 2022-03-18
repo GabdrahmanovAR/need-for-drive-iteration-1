@@ -11,15 +11,20 @@ import { orderInfoSelector } from '../../../selectors/orderInfoSelector';
 import { orderStepSelector } from '../../../selectors/orderStepSelector';
 import { endDayRentAction, startDayRentAction } from '../../../redux/actions/OrderInfoAction';
 import { CheckEndDayValue } from '../../../utils/CheckEndDayValue';
+import { getRateAction } from '../../../redux/actions/RateAction';
+import { RateList } from '../../../utils/RateList';
+import { rateSelector } from '../../../selectors/rateSelector';
 
 const AdvancedTab = () => {
   const { car } = useSelector(orderInfoSelector);
   const orderStepState = useSelector(orderStepSelector);
+  const rateState = useSelector(rateSelector);
   const dispatch = useDispatch();
   const path = useNavigate();
 
   useEffect(() => {
     ScrollToTop();
+    dispatch(getRateAction());
   }, []);
 
   const handleStartDateDeleteClick = () => {
@@ -65,7 +70,7 @@ const AdvancedTab = () => {
         <p>Тариф</p>
         <RadioButton
           formName="tariff"
-          btnNames={['Поминутно, 7 ₽/мин', 'На сутки, 1999 ₽/сутки']}
+          btnNames={RateList(rateState.data)}
           direction="column"
         />
       </section>
