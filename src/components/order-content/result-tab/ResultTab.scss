@@ -10,8 +10,9 @@
     width: 50%;
   }
   &__car-img {
+    text-align: end;
     img {
-      width: 100%;
+      height: 160px;
     }
   }
   &__car-info {

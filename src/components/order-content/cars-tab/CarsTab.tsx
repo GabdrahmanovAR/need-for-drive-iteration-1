@@ -94,7 +94,7 @@ const CarsTab = () => {
       <main className="cars-tab__car-list">
         {displayCards()}
         <div className={`cars-tab__spinner ${carsDataState.isLoading && 'cars-tab__spinner_visible'}`}>
-          <Spinner customClass="cars-tab__spinner_black" />
+          <Spinner />
         </div>
       </main>
       {!orderStepState.locationTabCompleted && path('/order/location')}
