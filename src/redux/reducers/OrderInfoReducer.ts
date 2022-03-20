@@ -37,7 +37,7 @@ export const orderInfoInitialState: IOrderInfoState = {
       to: EMPTY_STRING,
     },
     rightHandDrive: false,
-    tariff: 'Поминутно',
+    tariff: 'Суточный',
   },
 };
 
