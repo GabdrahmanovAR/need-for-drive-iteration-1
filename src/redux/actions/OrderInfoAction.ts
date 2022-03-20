@@ -2,7 +2,7 @@ import { Dispatch } from 'redux';
 import { IOrderInfoActionType } from '../../types/actions';
 import {
   BABY_CHAIR_NEEDED,
-  FULL_TANK_NEEDED, RIGHT_HAND_NEEDED,
+  FULL_TANK_NEEDED, RESET_CAR_INFO, RIGHT_HAND_NEEDED,
   SET_CAR_COLOR,
   SET_CAR_INFO,
   SET_CITY_DATA,
@@ -98,4 +98,8 @@ export const setRightHandDriveAction = (isNeeded: boolean): IOrderInfoActionType
   car: {
     rightHandDrive: isNeeded,
   },
+});
+
+export const resetCarInfoAction = (): IOrderInfoActionType => ({
+  type: RESET_CAR_INFO,
 });

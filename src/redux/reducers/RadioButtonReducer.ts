@@ -6,10 +6,10 @@ import {
   SELECT_ITEM,
   RADIO_BTN_CAR_ID,
   RADIO_BTN_COLOR_ID,
-  RADIO_BTN_TARIFF_ID, RADIO_BTN_ADVANCED_ID,
+  RADIO_BTN_TARIFF_ID, RADIO_BTN_ADVANCED_ID, RESET_RADIO_BTN,
 } from '../../constants/actions/radioButton';
 
-const initialState: IRadioButtonState = {
+const radioBtnInitialState: IRadioButtonState = {
   selectedItem: 'all',
   radioCar: 'radio-cars-0',
   checkboxAdvanced: EMPTY_ARRAY,
@@ -51,7 +51,12 @@ const radioBtnAdvId = (draft: IRadioButtonState, id?: string[]) => {
   return draft;
 };
 
-export default (state = initialState, action: IRadioButtonActionType) => produce(
+const resetRadioBtnState = (draft: IRadioButtonState) => {
+  draft = radioBtnInitialState;
+  return draft;
+};
+
+export default (state = radioBtnInitialState, action: IRadioButtonActionType) => produce(
   state,
   (draft: IRadioButtonState) => {
     switch (action.type) {
@@ -60,6 +65,7 @@ export default (state = initialState, action: IRadioButtonActionType) => produce
       case RADIO_BTN_COLOR_ID: return radioBtnColorId(draft, action.radioColor);
       case RADIO_BTN_TARIFF_ID: return radioBtnTariffId(draft, action.radioTariff);
       case RADIO_BTN_ADVANCED_ID: return radioBtnAdvId(draft, action.checkboxAdvanced);
+      case RESET_RADIO_BTN: return resetRadioBtnState(draft);
       default: return state;
     }
   },
