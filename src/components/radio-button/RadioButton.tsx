@@ -9,7 +9,7 @@ import {
   setTariffAction,
 } from '../../redux/actions/OrderInfoAction';
 import {
-  changeSelectedItem,
+  changeSelectedItem, radioBtnAdvIdAction,
   radioBtnCarIdAction,
   radioBtnColorIdAction,
   radioBtnTariffIdAction,
@@ -45,6 +45,9 @@ const RadioButton: FC<IRadioButtonProps> = (props) => {
     if (event.target.id.includes('tariff')) {
       dispatch(setTariffAction(event.target.value));
       dispatch((radioBtnTariffIdAction(event.target.id)));
+    }
+    if (event.target.id.includes('advanced')) {
+      dispatch(radioBtnAdvIdAction(event.target.id));
     }
 
     switch (event.target.value) {
