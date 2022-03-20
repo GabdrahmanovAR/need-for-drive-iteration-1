@@ -9,14 +9,19 @@ import {
 import './LocationTab.scss';
 import YandexMaps from '../../yandex-maps/YandexMaps';
 import { IState } from '../../../types/state';
-import { changeLocationDataAction } from '../../../redux/actions/OrderInfoAction';
+import { changeLocationDataAction, resetCarInfoAction } from '../../../redux/actions/OrderInfoAction';
 import InputField from '../../input-field/InputField';
 import DropDownMenu from '../../dropdown-menu/DropDownMenu';
-import { changeLocTabStateAction } from '../../../redux/actions/OrderStepAction';
+import {
+  changeAdvTabStateAction,
+  changeLocTabStateAction,
+  changeModelTabStateAction,
+} from '../../../redux/actions/OrderStepAction';
 import { pointsDataSelector } from '../../../selectors/pointsDataSelector';
 import { IPoint } from '../../../types/api';
 import { GetPointCoordinates } from '../../../utils/GetPointCoordinates';
 import { orderInfoSelector } from '../../../selectors/orderInfoSelector';
+import { resetRadioBtnAction } from '../../../redux/actions/RadioButtonAction';
 
 interface ILocationTabProps {
   cityName: string,
@@ -101,6 +106,10 @@ const LocationTab: FC<ILocationTabProps> = ({ cityName, markerName, changeLocati
     setCitiesMenuActive(false);
     setMarkerMenuActive(false);
     dispatch(changeLocTabStateAction(false));
+    dispatch(changeModelTabStateAction(false));
+    dispatch(changeAdvTabStateAction(false));
+    dispatch(resetCarInfoAction());
+    dispatch(resetRadioBtnAction());
   };
 
   const handleMarkerBtnClick = () => {
@@ -108,6 +117,10 @@ const LocationTab: FC<ILocationTabProps> = ({ cityName, markerName, changeLocati
     changeLocationData(EMPTY_STRING, EMPTY_ARRAY, MARKER_KEY);
     setCitiesMenuActive(false);
     dispatch(changeLocTabStateAction(false));
+    dispatch(changeModelTabStateAction(false));
+    dispatch(changeAdvTabStateAction(false));
+    dispatch(resetCarInfoAction());
+    dispatch(resetRadioBtnAction());
   };
 
   const handleCityInputClick = () => {

@@ -14,6 +14,7 @@ import { CheckEndDayValue } from '../../../utils/CheckEndDayValue';
 import { getRateAction } from '../../../redux/actions/RateAction';
 import { RateList } from '../../../utils/RateList';
 import { rateSelector } from '../../../selectors/rateSelector';
+import { changeAdvTabStateAction } from '../../../redux/actions/OrderStepAction';
 
 const AdvancedTab = () => {
   const { car } = useSelector(orderInfoSelector);
@@ -30,10 +31,12 @@ const AdvancedTab = () => {
   const handleStartDateDeleteClick = () => {
     dispatch(startDayRentAction(EMPTY_STRING));
     dispatch(endDayRentAction(EMPTY_STRING));
+    dispatch(changeAdvTabStateAction(false));
   };
 
   const handleEndDateDeleteClick = () => {
     dispatch(endDayRentAction(EMPTY_STRING));
+    dispatch(changeAdvTabStateAction(false));
   };
 
   return (

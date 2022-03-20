@@ -4,7 +4,7 @@ import { EMPTY_ARRAY, EMPTY_STRING } from '../../constants/common';
 import { IOrderCarInfoActionType, IOrderInfoActionType } from '../../types/actions';
 import {
   BABY_CHAIR_NEEDED,
-  FULL_TANK_NEEDED, RIGHT_HAND_NEEDED,
+  FULL_TANK_NEEDED, RESET_CAR_INFO, RIGHT_HAND_NEEDED,
   SET_CAR_COLOR,
   SET_CAR_INFO,
   SET_CITY_DATA,
@@ -14,7 +14,7 @@ import {
   SET_TARIFF,
 } from '../../constants/actions/orderInfo';
 
-const initialState: IOrderInfoState = {
+export const orderInfoInitialState: IOrderInfoState = {
   location: {
     cityName: EMPTY_STRING,
     markerName: EMPTY_STRING,
@@ -106,7 +106,12 @@ const setFullTank = (draft: IOrderInfoState, fullTank?: boolean) => {
   return draft;
 };
 
-export default (state = initialState, action: IOrderInfoActionType) => produce(
+const resetCarInfo = (draft: IOrderInfoState) => {
+  draft.car = orderInfoInitialState.car;
+  return draft;
+};
+
+export default (state = orderInfoInitialState, action: IOrderInfoActionType) => produce(
   state,
   (draft: IOrderInfoState) => {
     switch (action.type) {
@@ -120,6 +125,7 @@ export default (state = initialState, action: IOrderInfoActionType) => produce(
       case FULL_TANK_NEEDED: return setFullTank(draft, action.car?.fullTank);
       case BABY_CHAIR_NEEDED: return setBabyChair(draft, action.car?.babyChair);
       case RIGHT_HAND_NEEDED: return setRightHandDrive(draft, action.car?.rightHandDrive);
+      case RESET_CAR_INFO: return resetCarInfo(draft);
       default: return state;
     }
   },

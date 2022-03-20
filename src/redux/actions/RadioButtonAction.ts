@@ -3,7 +3,7 @@ import {
   SELECT_ITEM,
   RADIO_BTN_CAR_ID,
   RADIO_BTN_COLOR_ID,
-  RADIO_BTN_TARIFF_ID, RADIO_BTN_ADVANCED_ID,
+  RADIO_BTN_TARIFF_ID, RADIO_BTN_ADVANCED_ID, RESET_RADIO_BTN,
 } from '../../constants/actions/radioButton';
 
 export const changeSelectedItem = (item: string): IRadioButtonActionType => ({
@@ -29,4 +29,8 @@ export const radioBtnTariffIdAction = (fieldId: string): IRadioButtonActionType 
 export const radioBtnAdvIdAction = (fieldId: string): IRadioButtonActionType => ({
   type: RADIO_BTN_ADVANCED_ID,
   checkboxAdvanced: [fieldId],
+});
+
+export const resetRadioBtnAction = (): IRadioButtonActionType => ({
+  type: RESET_RADIO_BTN,
 });

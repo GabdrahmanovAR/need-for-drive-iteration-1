@@ -1,9 +1,12 @@
 import React, { BaseSyntheticEvent, FC } from 'react';
 import './CarCard.scss';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import carPicture from '../../../assets/images/car-picture.png';
-import { changeCarInfoAction } from '../../../redux/actions/OrderInfoAction';
+import { changeCarInfoAction, resetCarInfoAction } from '../../../redux/actions/OrderInfoAction';
 import { ICarInfoData } from '../../../types/api';
+import { orderInfoSelector } from '../../../selectors/orderInfoSelector';
+import { EMPTY_STRING } from '../../../constants/common';
+import { resetRadioBtnAction } from '../../../redux/actions/RadioButtonAction';
 
 interface ICarCardProps {
   id: string,
@@ -12,18 +15,32 @@ interface ICarCardProps {
 }
 
 const CarCard: FC<ICarCardProps> = ({ id, carInfo, activeCard }) => {
+  const { car } = useSelector((orderInfoSelector));
   const dispatch = useDispatch();
   const regex = new RegExp(/^(data:image\/)(jpeg|png);base64/);
 
   const handleCardClick = (event: BaseSyntheticEvent) => {
-    dispatch(changeCarInfoAction(
-      carInfo.name,
-      carInfo.priceMin.toString(),
-      carInfo.priceMax.toString(),
-      carInfo.thumbnail.path,
-      carInfo.colors,
-      event.currentTarget.id,
-    ));
+    if (car.name === EMPTY_STRING) {
+      dispatch(changeCarInfoAction(
+        carInfo.name,
+        carInfo.priceMin.toString(),
+        carInfo.priceMax.toString(),
+        carInfo.thumbnail.path,
+        carInfo.colors,
+        event.currentTarget.id,
+      ));
+    } else {
+      dispatch(resetCarInfoAction());
+      dispatch(resetRadioBtnAction());
+      dispatch(changeCarInfoAction(
+        carInfo.name,
+        carInfo.priceMin.toString(),
+        carInfo.priceMax.toString(),
+        carInfo.thumbnail.path,
+        carInfo.colors,
+        event.currentTarget.id,
+      ));
+    }
   };
 
   return (
