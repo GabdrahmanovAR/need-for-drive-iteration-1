@@ -14,6 +14,10 @@ const CarsTab = () => {
     ScrollToTop();
   }, []);
 
+  useEffect(() => {
+    ScrollToTop();
+  }, []);
+
   return (
     <div className="cars-tab">
       <header className="cars-tab__header">

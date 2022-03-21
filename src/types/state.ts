@@ -78,3 +78,7 @@ export interface IAdvancedTabState {
 export interface IInputFieldState {
   focusedField: string;
 }
+
+export interface IOrderConfirmState {
+  isActive: boolean;
+}
