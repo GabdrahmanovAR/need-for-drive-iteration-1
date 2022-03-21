@@ -92,3 +92,7 @@ export interface IRateActionType extends IActionType {
   count?: number;
   data?: IRateInfoState[],
 }
+
+export interface IUploadingOrderActionType extends IActionType {
+  uploading?: boolean;
+}
