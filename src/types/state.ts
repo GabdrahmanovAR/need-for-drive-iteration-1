@@ -45,13 +45,16 @@ export interface IOrderInfoState {
 
 export interface IOrderLocationState {
   cityName: string;
+  cityId: string;
   markerName: string;
+  markerId: string;
   cityCoords: Array<number>;
   markerCoords: Array<number>;
   selectionCompleted: boolean;
 }
 
 export interface IOrderCarInfoState {
+  id: string;
   name: string;
   number: string;
   tank: number;

@@ -17,12 +17,15 @@ import {
 export const orderInfoInitialState: IOrderInfoState = {
   location: {
     cityName: EMPTY_STRING,
+    cityId: EMPTY_STRING,
     markerName: EMPTY_STRING,
+    markerId: EMPTY_STRING,
     cityCoords: [55.755819, 37.617644],
     markerCoords: EMPTY_ARRAY,
     selectionCompleted: false,
   },
   car: {
+    id: EMPTY_STRING,
     name: EMPTY_STRING,
     number: EMPTY_STRING,
     tank: 0,
@@ -44,20 +47,23 @@ export const orderInfoInitialState: IOrderInfoState = {
   },
 };
 
-const changeCityData = (draft: IOrderInfoState, cityName?: string, cityCoords?: number[]) => {
+const changeCityData = (draft: IOrderInfoState, cityName?: string, cityCoords?: number[], cityId?: string) => {
   draft.location.cityName = cityName || EMPTY_STRING;
   draft.location.cityCoords = cityCoords || EMPTY_ARRAY;
+  draft.location.cityId = cityId || EMPTY_STRING;
   return draft;
 };
 
-const changeMarkerData = (draft: IOrderInfoState, markerName?: string, markerCoords?: number[]) => {
+const changeMarkerData = (draft: IOrderInfoState, markerName?: string, markerCoords?: number[], markerId?: string) => {
   draft.location.markerName = markerName || EMPTY_STRING;
   draft.location.markerCoords = markerCoords || EMPTY_ARRAY;
+  draft.location.markerId = markerId || EMPTY_STRING;
   return draft;
 };
 
 const carInfo = (draft: IOrderInfoState, props?: IOrderCarInfoActionType) => {
   const {
+    id,
     name,
     number,
     tank,
@@ -67,6 +73,7 @@ const carInfo = (draft: IOrderInfoState, props?: IOrderCarInfoActionType) => {
     colors,
     selectedCar,
   } = { ...props };
+  draft.car.id = id || EMPTY_STRING;
   draft.car.name = name || EMPTY_STRING;
   draft.car.number = number || EMPTY_STRING;
   draft.car.tank = tank || 0;
@@ -127,8 +134,10 @@ export default (state = orderInfoInitialState, action: IOrderInfoActionType) => 
   state,
   (draft: IOrderInfoState) => {
     switch (action.type) {
-      case SET_CITY_DATA: return changeCityData(draft, action.location?.cityName, action.location?.cityCoords);
-      case SET_MARKER_DATA: return changeMarkerData(draft, action.location?.markerName, action.location?.markerCoords);
+      case SET_CITY_DATA:
+        return changeCityData(draft, action.location?.cityName, action.location?.cityCoords, action.location?.cityId);
+      case SET_MARKER_DATA:
+        return changeMarkerData(draft, action.location?.markerName, action.location?.markerCoords, action.location?.markerId);
       case SET_CAR_INFO: return carInfo(draft, action.car);
       case SET_CAR_COLOR: return setCarColor(draft, action.car?.currentColor);
       case SET_RENTAL_DURATION_SD: return startDayRent(draft, action.car?.rentalDuration?.from);

@@ -25,28 +25,30 @@ const YandexMaps = () => {
   const [someMarkerCoords, setSomeMarkerCoords] = useState([] as IPointMarkerCoordsState[]);
   const [resultReceived, setResultReceived] = useState(true);
 
-  const handleMarkerClick = (markerId: string, markerCoords: number[]) => {
+  const handleMarkerClick = (clickedMarkerId: string, markerCoords: number[]) => {
     let markerName = EMPTY_STRING;
-    let markerCity = EMPTY_STRING;
-    let markerCityId = EMPTY_STRING;
+    let markerId = EMPTY_STRING;
+    let cityOfMarker = EMPTY_STRING;
+    let cityIdOfMarker = EMPTY_STRING;
     let markerCityCoords: number[] = [];
 
     pointsDataState.data.forEach((point: IPoint) => {
-      if (point.id === markerId) {
+      if (point.id === clickedMarkerId) {
         markerName = point.address;
-        markerCity = point.cityId.name;
-        markerCityId = point.cityId.id;
+        markerId = point.id;
+        cityOfMarker = point.cityId.name;
+        cityIdOfMarker = point.cityId.id;
       }
     });
 
     pointsDataState.cityCoords.forEach((city: IPointCityCoordsState) => {
-      if (city.id === markerCityId) {
+      if (city.id === cityIdOfMarker) {
         markerCityCoords = city.coordinates;
       }
     });
 
-    dispatch(changeLocationDataAction(markerCity, markerCityCoords, CITY_KEY));
-    dispatch(changeLocationDataAction(markerName, markerCoords, MARKER_KEY));
+    dispatch(changeLocationDataAction(cityOfMarker, markerCityCoords, cityIdOfMarker, CITY_KEY));
+    dispatch(changeLocationDataAction(markerName, markerCoords, markerId, MARKER_KEY));
   };
 
   const handleOnLoadMap = (maps: YMapsApi) => {
