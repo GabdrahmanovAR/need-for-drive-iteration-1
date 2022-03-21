@@ -43,6 +43,8 @@ export interface IOrderInfoActionType extends IActionType {
 
 export interface IOrderCarInfoActionType {
   name?: string;
+  number?: string;
+  tank?: number;
   minPrice?: string,
   maxPrice?: string,
   image?: string,
@@ -57,6 +59,7 @@ export interface IOrderCarInfoActionType {
   babyChair?: boolean;
   rightHandDrive?: boolean;
   selectedCar?: string,
+  totalCost?: number,
 }
 
 export interface IOrderStepActionType extends IActionType {

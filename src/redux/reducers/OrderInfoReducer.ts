@@ -11,7 +11,7 @@ import {
   SET_MARKER_DATA,
   SET_RENTAL_DURATION_ED,
   SET_RENTAL_DURATION_SD,
-  SET_TARIFF,
+  SET_TARIFF, SET_TOTAL_COST,
 } from '../../constants/actions/orderInfo';
 
 export const orderInfoInitialState: IOrderInfoState = {
@@ -24,6 +24,8 @@ export const orderInfoInitialState: IOrderInfoState = {
   },
   car: {
     name: EMPTY_STRING,
+    number: EMPTY_STRING,
+    tank: 0,
     image: EMPTY_STRING,
     selectedCar: EMPTY_STRING,
     maxPrice: EMPTY_STRING,
@@ -38,6 +40,7 @@ export const orderInfoInitialState: IOrderInfoState = {
     },
     rightHandDrive: false,
     tariff: 'Суточный',
+    totalCost: 0,
   },
 };
 
@@ -56,6 +59,8 @@ const changeMarkerData = (draft: IOrderInfoState, markerName?: string, markerCoo
 const carInfo = (draft: IOrderInfoState, props?: IOrderCarInfoActionType) => {
   const {
     name,
+    number,
+    tank,
     minPrice,
     maxPrice,
     image,
@@ -63,6 +68,8 @@ const carInfo = (draft: IOrderInfoState, props?: IOrderCarInfoActionType) => {
     selectedCar,
   } = { ...props };
   draft.car.name = name || EMPTY_STRING;
+  draft.car.number = number || EMPTY_STRING;
+  draft.car.tank = tank || 0;
   draft.car.minPrice = Number(minPrice) < Number(maxPrice) ? minPrice || EMPTY_STRING : maxPrice || EMPTY_STRING;
   draft.car.maxPrice = Number(minPrice) > Number(maxPrice) ? minPrice || EMPTY_STRING : maxPrice || EMPTY_STRING;
   draft.car.image = image || EMPTY_STRING;
@@ -87,7 +94,7 @@ const endDayRent = (draft: IOrderInfoState, endDay?: string) => {
 };
 
 const setTariff = (draft: IOrderInfoState, tariff?: string) => {
-  draft.car.tariff = tariff || EMPTY_STRING;
+  draft.car.tariff = tariff?.split(',')[0] || EMPTY_STRING;
   return draft;
 };
 
@@ -103,6 +110,11 @@ const setRightHandDrive = (draft: IOrderInfoState, rightHandDrive?: boolean) => 
 
 const setFullTank = (draft: IOrderInfoState, fullTank?: boolean) => {
   draft.car.fullTank = fullTank || false;
+  return draft;
+};
+
+const setTotalCost = (draft: IOrderInfoState, totalCost?: number) => {
+  draft.car.totalCost = totalCost || 0;
   return draft;
 };
 
@@ -125,6 +137,7 @@ export default (state = orderInfoInitialState, action: IOrderInfoActionType) => 
       case FULL_TANK_NEEDED: return setFullTank(draft, action.car?.fullTank);
       case BABY_CHAIR_NEEDED: return setBabyChair(draft, action.car?.babyChair);
       case RIGHT_HAND_NEEDED: return setRightHandDrive(draft, action.car?.rightHandDrive);
+      case SET_TOTAL_COST: return setTotalCost(draft, action.car?.totalCost);
       case RESET_CAR_INFO: return resetCarInfo(draft);
       default: return state;
     }

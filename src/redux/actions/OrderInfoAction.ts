@@ -9,7 +9,7 @@ import {
   SET_MARKER_DATA,
   SET_RENTAL_DURATION_ED,
   SET_RENTAL_DURATION_SD,
-  SET_TARIFF,
+  SET_TARIFF, SET_TOTAL_COST,
 } from '../../constants/actions/orderInfo';
 
 const changeCityData = (cityName: string, cityCoords: number[]): IOrderInfoActionType => ({
@@ -29,11 +29,13 @@ const changeMarkerData = (markerName: string, markerCoords: number[]): IOrderInf
 });
 
 export const changeCarInfoAction = (
-  name: string, minPrice: string, maxPrice: string, image: string, colors: string[], selectedCar: string,
+  name: string, number: string, tank: number, minPrice: string, maxPrice: string, image: string, colors: string[], selectedCar: string,
 ): IOrderInfoActionType => ({
   type: SET_CAR_INFO,
   car: {
     name,
+    number,
+    tank,
     minPrice,
     maxPrice,
     image,
@@ -97,6 +99,13 @@ export const setRightHandDriveAction = (isNeeded: boolean): IOrderInfoActionType
   type: RIGHT_HAND_NEEDED,
   car: {
     rightHandDrive: isNeeded,
+  },
+});
+
+export const setTotalCostAction = (totalCost: number) => ({
+  type: SET_TOTAL_COST,
+  car: {
+    totalCost,
   },
 });
 
