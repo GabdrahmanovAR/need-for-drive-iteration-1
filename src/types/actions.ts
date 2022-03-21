@@ -12,7 +12,9 @@ export interface ISidebarMenuActionType extends IActionType {
 
 export interface IOrderLocationActionType {
   cityName?: string;
+  cityId?: string;
   markerName?: string;
+  markerId?: string;
   cityCoords?: Array<number>;
   markerCoords?: Array<number>;
   selectionCompleted?: boolean;
@@ -42,6 +44,7 @@ export interface IOrderInfoActionType extends IActionType {
 }
 
 export interface IOrderCarInfoActionType {
+  id?: string;
   name?: string;
   number?: string;
   tank?: number;

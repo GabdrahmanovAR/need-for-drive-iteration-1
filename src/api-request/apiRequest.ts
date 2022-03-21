@@ -20,15 +20,9 @@ export const getRate = () => apiDB.get(RATE_URL);
 
 export const registerOrder = (orderInfo: IOrderInfoState) => apiDB.post(ORDER_URL, {
   orderStatusId: { id: '5e26a191099b810b946c5d89' },
-  cityId: {
-    id: '6005b8f9ad015e0bb6997778',
-    name: orderInfo.location.cityName,
-  },
-  pointId: {
-    id: '615ae47018f5c2264119b939',
-    name: orderInfo.location.markerName,
-  },
-  carId: { car: orderInfo.car.name },
+  cityId: { id: orderInfo.location.cityId },
+  pointId: { id: orderInfo.location.markerId },
+  carId: { id: orderInfo.car.id },
   color: orderInfo.car.currentColor,
   dateFrom: moment(orderInfo.car.rentalDuration.from).valueOf(),
   dateTo: moment(orderInfo.car.rentalDuration.to).valueOf(),
