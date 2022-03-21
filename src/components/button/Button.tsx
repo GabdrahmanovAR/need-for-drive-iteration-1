@@ -41,7 +41,7 @@ const Button: FC<IButtonProps> = (props) => {
       onClick={handleButtonClick}
     >
       {isLoading
-        ? <Spinner />
+        ? <Spinner customClass="button__spinner" />
         : <span className={`${!isDisabled ? 'button__text' : 'button__text_disabled'}`}>{text}</span>}
     </button>
   );

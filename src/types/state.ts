@@ -13,6 +13,7 @@ export interface IState {
   carsData: ICarsDataState;
   radioButton: IRadioButtonState;
   rate: IRateState;
+  uploadingOrder: IUploadingOrderState;
 }
 
 export interface ISidebarMenuState {
@@ -126,4 +127,8 @@ interface IRateTypeInfoState {
   unit: string;
   name: string;
   id: string;
+}
+
+export interface IUploadingOrderState {
+  uploading: boolean;
 }

@@ -2,6 +2,7 @@ import React, { useEffect } from 'react';
 import './ResultTab.scss';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
+import moment from 'moment';
 import { ScrollToTop } from '../../../utils/ScrollToTop';
 import OrderConfirm from '../order-confirm/OrderConfirm';
 import { orderInfoSelector } from '../../../selectors/orderInfoSelector';
@@ -32,7 +33,7 @@ const ResultTab = () => {
         </div>
         <div>
           <span>Доступна с </span>
-          <span>{car.rentalDuration.from}</span>
+          <span>{moment(car.rentalDuration.from).format('DD MMMM YYYY')}</span>
         </div>
       </section>
       <section className="result-tab__car-img">
