@@ -23,6 +23,8 @@ const CarCard: FC<ICarCardProps> = ({ id, carInfo, activeCard }) => {
     if (car.name === EMPTY_STRING) {
       dispatch(changeCarInfoAction(
         carInfo.name,
+        carInfo.number,
+        carInfo.tank,
         carInfo.priceMin.toString(),
         carInfo.priceMax.toString(),
         carInfo.thumbnail.path,
@@ -34,6 +36,8 @@ const CarCard: FC<ICarCardProps> = ({ id, carInfo, activeCard }) => {
       dispatch(resetRadioBtnAction());
       dispatch(changeCarInfoAction(
         carInfo.name,
+        carInfo.number,
+        carInfo.tank,
         carInfo.priceMin.toString(),
         carInfo.priceMax.toString(),
         carInfo.thumbnail.path,

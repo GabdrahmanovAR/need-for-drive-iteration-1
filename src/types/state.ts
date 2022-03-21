@@ -52,6 +52,8 @@ export interface IOrderLocationState {
 
 export interface IOrderCarInfoState {
   name: string;
+  number: string;
+  tank: number;
   minPrice: string,
   maxPrice: string,
   image: string,
@@ -66,6 +68,7 @@ export interface IOrderCarInfoState {
   babyChair: boolean;
   rightHandDrive: boolean;
   selectedCar: string,
+  totalCost: number,
 }
 
 export interface IOrderStepState {

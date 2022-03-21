@@ -73,11 +73,17 @@ const OrderInfo = () => {
       {/* Информация диапозон цен */}
       <section className="order-info__price">
         <span><strong>Цена: </strong></span>
-        <span>
-          {(car.minPrice && car.maxPrice) === EMPTY_STRING
-            ? 'автомобиль не выбран'
-            : `от ${car.minPrice} до ${car.maxPrice} ₽`}
-        </span>
+        {car.totalCost === 0 || locationPath.pathname !== '/order/result'
+          ? (
+            <span>
+              {(car.minPrice && car.maxPrice) === EMPTY_STRING
+                ? 'автомобиль не выбран'
+                : `от ${car.minPrice} до ${car.maxPrice} ₽`}
+            </span>
+          )
+          : (
+            <span>{`${car.totalCost}₽`}</span>
+          )}
       </section>
       <Button
         text={ButtonText(locationPath.pathname)}
