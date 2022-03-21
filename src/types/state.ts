@@ -6,6 +6,7 @@ export interface IState {
   carCard: ICarCardState;
   advancedTab: IAdvancedTabState;
   inputField: IInputFieldState;
+  orderConfirm: IOrderConfirmState;
 }
 
 export interface ISidebarMenuState {
@@ -32,4 +33,8 @@ export interface IAdvancedTabState {
 
 export interface IInputFieldState {
   focusedField: string;
+}
+
+export interface IOrderConfirmState {
+  isActive: boolean;
 }

@@ -4,9 +4,12 @@ import { connect, useSelector } from 'react-redux';
 import { useLocation } from 'react-router-dom';
 import Button from '../../button/Button';
 import { IState } from '../../../types/state';
-import { ADVANCED_URL_PATH, EMPTY_STRING, MODELS_URL_PATH } from '../../../constants/common';
+import {
+  ADVANCED_URL_PATH, EMPTY_STRING, MODELS_URL_PATH, RESULT_URL_PATH,
+} from '../../../constants/common';
 import { OrderInfoBtnText } from '../../../utils/OrderInfoBtnText';
 import { carCardSelector } from '../../../selectors/carCardSelector';
+import { NextTabUrl } from '../../../utils/NextTabUrl';
 
 const MIN_PRICE = '8000';
 const MAX_PRICE = '12000';
@@ -36,10 +39,8 @@ const OrderInfo: FC<IOrderInfoProps> = ({ cityName, markerName }) => {
         <span className="order-info__details__title">Пункт выдачи</span>
         <span className="order-info__details__dots" />
         <div className="order-info__details__address">
-          <div>
-            <span>{cityName}</span>
-            {markerName !== EMPTY_STRING && <span>,</span>}
-          </div>
+          <span>{cityName}</span>
+          {markerName !== EMPTY_STRING && <span>,</span>}
           <span className={`
           ${markerName === EMPTY_STRING && 'order-info__details__address_disable'}`}
           >
@@ -61,7 +62,7 @@ const OrderInfo: FC<IOrderInfoProps> = ({ cityName, markerName }) => {
         </div>
       </section>
       {/* Информация Вкладка - Дополнительно */}
-      <section className={`${location.pathname === ADVANCED_URL_PATH
+      <section className={`${(location.pathname === ADVANCED_URL_PATH || location.pathname === RESULT_URL_PATH)
         ? 'order-info__details'
         : 'order-info__details_disable'}`}
       >
@@ -76,13 +77,16 @@ const OrderInfo: FC<IOrderInfoProps> = ({ cityName, markerName }) => {
       </section>
       {/* Информация диапозон цен */}
       <section className="order-info__price">
-        <span><strong>Цена:</strong></span>
-        <span>{` от ${MIN_PRICE} до ${MAX_PRICE} ₽`}</span>
+        <span><strong>Цена: </strong></span>
+        <span>
+          {location.pathname === RESULT_URL_PATH
+            ? '16 000₽'
+            : `от ${MIN_PRICE} до ${MAX_PRICE} ₽`}
+        </span>
       </section>
       <Button
         text={OrderInfoBtnText(location.pathname)}
-        isDisabled={((cityName === EMPTY_STRING || markerName === EMPTY_STRING))}
-        link={MODELS_URL_PATH}
+        link={NextTabUrl(location.pathname)}
       />
     </div>
   );

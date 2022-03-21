@@ -7,7 +7,8 @@
   width: fit-content;
 
   &__title {
-    display: inline-block;
+    display: flex;
+    align-items: flex-end;
     padding-right: .5rem;
     text-align: end;
     font-size: .875rem;
@@ -26,6 +27,7 @@
     border: none;
     background-color: transparent;
     border-bottom: 1.5px solid gray;
+    line-height: 1.475rem;
 
     &__icon {
       cursor: pointer;

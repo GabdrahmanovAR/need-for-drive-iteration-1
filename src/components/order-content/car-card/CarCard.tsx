@@ -18,7 +18,9 @@ const CarCard: FC<ICarCardProps> = ({ id, carInfo, activeCard }) => {
   };
 
   useEffect(() => {
-    if (activeCard === id) dispatch(changeSelectedCarInfoAction(carInfo));
+    if (activeCard === id) {
+      dispatch(changeSelectedCarInfoAction(carInfo));
+    }
   }, [activeCard]);
 
   return (

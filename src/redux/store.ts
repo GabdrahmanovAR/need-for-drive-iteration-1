@@ -6,6 +6,7 @@ import orderLocationReducer from './reducers/OrderLocationReducer';
 import cardModelCardReducer from './reducers/CardCardReducer';
 import advancedTabReducer from './reducers/AdvancedTabReducer';
 import inputFieldReducer from './reducers/InputFieldReducer';
+import orderConfirmReducer from './reducers/OrderConfirmReducer';
 
 export const store = createStore(
   combineReducers({
@@ -14,6 +15,7 @@ export const store = createStore(
     carCard: cardModelCardReducer,
     advancedTab: advancedTabReducer,
     inputField: inputFieldReducer,
+    orderConfirm: orderConfirmReducer,
   }),
   composeWithDevTools(applyMiddleware(thunk)),
 );

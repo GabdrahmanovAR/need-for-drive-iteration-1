@@ -15,6 +15,7 @@ interface ISidebarProps {
 const Sidebar: FC<ISidebarProps> = ({ isOpen, sidebarMenu }) => {
   const handleSidebarBtnClick = () => {
     sidebarMenu(!isOpen);
+    document.body.style.overflow = 'hidden';
   };
 
   return (

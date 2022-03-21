@@ -30,6 +30,10 @@
       position: absolute;
       z-index: 1;
       background-color: $main-white-color;
+      top: .2rem;
+      box-shadow: 0 3px 6px -4px rgba(0, 0, 0, .12), 0 6px 16px 0 rgba(0, 0, 0, .08), 0 9px 28px 8px rgba(0, 0, 0, .05);
+      animation-duration: 300ms;
+      animation-name: dropDownMenu;
     }
   }
   .list-item {
@@ -63,5 +67,16 @@
         padding-left: .5rem;
       }
     }
+  }
+}
+
+@keyframes dropDownMenu {
+  from {
+    max-height: 0;
+    overflow: hidden;
+  }
+  to {
+    max-height: 6.625rem;
+    overflow: auto;
   }
 }

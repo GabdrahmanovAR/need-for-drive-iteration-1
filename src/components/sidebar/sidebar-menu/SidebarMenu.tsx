@@ -22,6 +22,7 @@ const SidebarMenu: FC<ISidebarMenuProps> = ({ isOpen, sidebarMenu }) => {
 
   const handleSidebarBtnClick = () => {
     sidebarMenu(!isOpen);
+    document.body.style.overflow = 'unset';
   };
 
   return (
