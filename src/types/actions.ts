@@ -1,6 +1,8 @@
 import { ICarsFakeData } from '../constants/fake-data/cars';
 import { ICarsData, IPoint } from './api';
-import { IPointCityCoordsState, IPointMarkerCoordsState, IRateInfoState } from './state';
+import {
+  IOrderStatusInfoState, IPointCityCoordsState, IPointMarkerCoordsState, IRateInfoState,
+} from './state';
 
 export interface IActionType {
   type: string;
@@ -58,6 +60,7 @@ export interface IOrderCarInfoActionType {
     to?: string,
   }
   tariff?: string;
+  tariffId?: string;
   fullTank?: boolean;
   babyChair?: boolean;
   rightHandDrive?: boolean;
@@ -96,6 +99,7 @@ export interface IRateActionType extends IActionType {
   data?: IRateInfoState[],
 }
 
-export interface IUploadingOrderActionType extends IActionType {
+export interface IOrderStatusActionType extends IActionType {
   uploading?: boolean;
+  statusInfo?: IOrderStatusInfoState;
 }

@@ -10,7 +10,7 @@ import { CarNumber } from '../../../utils/CarNumber';
 import { CalculateTotalCost } from '../../../utils/CalculateTotalCost';
 import { setTotalCostAction } from '../../../redux/actions/OrderInfoAction';
 import { ORDER_STATUS_URL_PATH } from '../../../constants/common';
-
+// TODO Сделать возврат вначало при перезагрузке
 const ResultTab = () => {
   const locationPath = useLocation();
   const dispatch = useDispatch();

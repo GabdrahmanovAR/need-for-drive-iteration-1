@@ -5,17 +5,17 @@ import Button from '../../button/Button';
 import { orderConfirmSelector } from '../../../selectors/orderConfirmSelector';
 import { changeOrderConfirmAction } from '../../../redux/actions/OrderConfirmAction';
 import { orderInfoSelector } from '../../../selectors/orderInfoSelector';
-import { uploadingOrderAction } from '../../../redux/actions/UploadingOrderAction';
-import { uploadingOrderSelector } from '../../../selectors/uploadingOrderSelector';
+import { orderStatusAction } from '../../../redux/actions/OrderStatusAction';
+import { orderStatusSelector } from '../../../selectors/orderStatusSelector';
 
 const OrderConfirm = () => {
   const orderConfirmState = useSelector(orderConfirmSelector);
   const orderInfo = useSelector(orderInfoSelector);
-  const uploadingOrder = useSelector(uploadingOrderSelector);
+  const uploadingOrder = useSelector(orderStatusSelector);
   const dispatch = useDispatch();
 
   const handleConfirmBtnClick = () => {
-    dispatch(uploadingOrderAction(orderInfo));
+    dispatch(orderStatusAction(orderInfo));
   };
 
   const handleCancelBtnClick = () => {
