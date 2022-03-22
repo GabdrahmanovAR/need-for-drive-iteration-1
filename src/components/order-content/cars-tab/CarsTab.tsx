@@ -1,14 +1,18 @@
 import React, { useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import RadioButton from '../../radio-button/RadioButton';
-import { Cars, ICars } from '../../../constants/fake-data/cars';
+import { Cars, ICarsFakeData } from '../../../constants/fake-data/cars';
 import CarCard from '../car-card/CarCard';
 import './CarsTab.scss';
-import { carCardSelector } from '../../../selectors/carCardSelector';
 import { ScrollToTop } from '../../../utils/ScrollToTop';
+import { orderInfoSelector } from '../../../selectors/orderInfoSelector';
 
 const CarsTab = () => {
-  const state = useSelector(carCardSelector);
+  const orderInfoState = useSelector(orderInfoSelector);
+
+  useEffect(() => {
+    ScrollToTop();
+  }, []);
 
   useEffect(() => {
     ScrollToTop();
@@ -17,13 +21,16 @@ const CarsTab = () => {
   return (
     <div className="cars-tab">
       <header className="cars-tab__header">
-        <RadioButton btnNames={['Все модели', 'Эконом', 'Премиум']} />
+        <RadioButton
+          formName="cars"
+          btnNames={['Все модели', 'Эконом', 'Премиум']}
+        />
       </header>
       <main className="cars-tab__car-list">
-        {Cars.map((carInfo: ICars, index: number) => (
+        {Cars.map((carInfo: ICarsFakeData, index: number) => (
           <CarCard
             carInfo={carInfo}
-            activeCard={state.activeCard}
+            activeCard={orderInfoState.car.selectedCar}
             id={`model-card-${index}`}
             key={`model-card-${index}`}
           />

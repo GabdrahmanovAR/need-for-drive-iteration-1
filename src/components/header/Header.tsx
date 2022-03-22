@@ -16,6 +16,7 @@ const Header: FC<IHeaderProps> = ({ customClass }) => {
   const dispatch = useDispatch();
 
   const handleMenuBtnClick = () => {
+    console.log(customClass);
     dispatch(sidebarMenuAction(!sidebarMenuState.isOpen));
     document.body.style.overflow = 'hidden';
   };

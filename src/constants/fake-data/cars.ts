@@ -1,4 +1,4 @@
-export interface ICars {
+export interface ICarsFakeData {
   brand: string,
   name: string,
   minPrice: string,

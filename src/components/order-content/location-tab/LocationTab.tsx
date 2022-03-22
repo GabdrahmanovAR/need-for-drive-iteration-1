@@ -8,7 +8,7 @@ import './LocationTab.scss';
 import YandexMaps from '../../yandex-maps/YandexMaps';
 import { ICity, listOfCities } from '../../../constants/fake-data/cities';
 import { IState } from '../../../types/state';
-import { changeLocationDataAction } from '../../../redux/actions/OrderLocationAction';
+import { changeLocationDataAction } from '../../../redux/actions/OrderInfoAction';
 import InputField from '../../input-field/InputField';
 
 interface ILocationTabProps {
@@ -123,8 +123,8 @@ const LocationTab: FC<ILocationTabProps> = ({ cityName, markerName, changeLocati
 
 export default connect(
   (state: IState) => ({
-    cityName: state.orderLocation.cityName,
-    markerName: state.orderLocation.markerName,
+    cityName: state.orderInfo.location.cityName,
+    markerName: state.orderInfo.location.markerName,
   }),
   (dispatch) => ({
     changeLocationData: bindActionCreators(changeLocationDataAction, dispatch),
