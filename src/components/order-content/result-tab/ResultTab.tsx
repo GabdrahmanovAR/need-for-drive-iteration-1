@@ -10,12 +10,14 @@ import { CarNumber } from '../../../utils/CarNumber';
 import { CalculateTotalCost } from '../../../utils/CalculateTotalCost';
 import { setTotalCostAction } from '../../../redux/actions/OrderInfoAction';
 import { ORDER_STATUS_URL_PATH } from '../../../constants/common';
+import { orderStatusSelector } from '../../../selectors/orderStatusSelector';
 
 const ResultTab = () => {
   const locationPath = useLocation();
   const dispatch = useDispatch();
 
   const { car } = useSelector(orderInfoSelector);
+  const orderStatusState = useSelector(orderStatusSelector);
   const {
     name,
     number,
@@ -25,13 +27,13 @@ const ResultTab = () => {
   } = locationPath.pathname !== ORDER_STATUS_URL_PATH
     ? car
     : {
-      name: 'Hyndai, i30 N',
-      number: 'K 761 HA 73',
+      name: orderStatusState.statusInfo.car.name,
+      number: CarNumber(orderStatusState.statusInfo.car.number),
       tank: '100',
       rentalDuration: {
-        from: '12.06.2019 12:00',
+        from: moment(orderStatusState.statusInfo.dateFrom).format('DD MMMM YYYY'),
       },
-      image: '',
+      image: orderStatusState.statusInfo.car.image,
     };
 
   useEffect(() => {
@@ -64,7 +66,6 @@ const ResultTab = () => {
         <img src={image} alt="Car Model" />
       </section>
       <OrderConfirm />
-      {!orderStepState.locationTabCompleted && path('/order/location')}
     </div>
   );
 };
