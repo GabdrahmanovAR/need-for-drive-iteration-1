@@ -1,6 +1,4 @@
-
 import React from 'react';
-import {
   Clusterer, Map, Placemark, YMaps,
 } from 'react-yandex-maps';
 import './YandexMaps.scss';
@@ -8,7 +6,7 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { IState } from '../../types/state';
 import { ICity, ICityMarker, listOfCities } from '../../constants/fake-data/cities';
-import { changeLocationDataAction } from '../../redux/actions/OrderLocationAction';
+import { changeLocationDataAction } from '../../redux/actions/OrderInfoAction';
 
 interface IProps {
   cityCoords: number[],
@@ -52,7 +50,7 @@ const YandexMaps = ({ cityCoords, changeLocationData }: IProps) => {
 
 export default connect(
   (state: IState) => ({
-    cityCoords: state.orderLocation.cityCoords,
+    cityCoords: state.orderInfo.location.cityCoords,
   }),
   (dispatch) => ({
     changeLocationData: bindActionCreators(changeLocationDataAction, dispatch),

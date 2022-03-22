@@ -58,8 +58,8 @@ const InputField: FC<IInputFieldProps> = (props) => {
           >
             <img
               className={`
-            input-field__close-btn__icon 
-            ${fieldValue !== EMPTY_STRING && 'input-field__close-btn__icon_active'}`}
+                input-field__close-btn__icon 
+                ${fieldValue !== EMPTY_STRING && 'input-field__close-btn__icon_active'}`}
               src={deleteIcon}
               alt="Delete"
             />

@@ -1,27 +1,22 @@
-import React, { FC } from 'react';
+import React from 'react';
 import './OrderInfo.scss';
-import { connect, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { useLocation } from 'react-router-dom';
 import Button from '../../button/Button';
-import { IState } from '../../../types/state';
 import {
-  ADVANCED_URL_PATH, EMPTY_STRING, MODELS_URL_PATH, RESULT_URL_PATH,
+  ADVANCED_URL_PATH, EMPTY_STRING, ORDER_LOCATION_URL_PATH, RESULT_URL_PATH,
 } from '../../../constants/common';
-import { OrderInfoBtnText } from '../../../utils/OrderInfoBtnText';
-import { carCardSelector } from '../../../selectors/carCardSelector';
+import { ButtonText } from '../../../utils/ButtonText';
 import { NextTabUrl } from '../../../utils/NextTabUrl';
+import { ButtonState } from '../../../utils/ButtonState';
+import { orderInfoSelector } from '../../../selectors/orderInfoSelector';
 
 const MIN_PRICE = '8000';
 const MAX_PRICE = '12000';
 
-interface IOrderInfoProps {
-  cityName: string,
-  markerName: string,
-}
-
-const OrderInfo: FC<IOrderInfoProps> = ({ cityName, markerName }) => {
-  const location = useLocation();
-  const state = useSelector(carCardSelector);
+const OrderInfo = () => {
+  const { location, car } = useSelector(orderInfoSelector);
+  const locationPath = useLocation();
 
   const advancedInfoElement = (title: string, value: string) => (
     <div className="multiple-info__element">
@@ -39,62 +34,60 @@ const OrderInfo: FC<IOrderInfoProps> = ({ cityName, markerName }) => {
         <span className="order-info__details__title">Пункт выдачи</span>
         <span className="order-info__details__dots" />
         <div className="order-info__details__address">
-          <span>{cityName}</span>
-          {markerName !== EMPTY_STRING && <span>,</span>}
+          <div>
+            <span>{location.cityName}</span>
+            {location.markerName !== EMPTY_STRING && <span>,</span>}
+          </div>
           <span className={`
-          ${markerName === EMPTY_STRING && 'order-info__details__address_disable'}`}
+          ${location.markerName === EMPTY_STRING && 'order-info__details__address_disable'}`}
           >
-            {markerName}
+            {location.markerName}
           </span>
         </div>
       </section>
       {/* Информация Вкладка - Модель */}
-      <section className={`${(location.pathname === MODELS_URL_PATH || location.pathname === ADVANCED_URL_PATH)
+      <section className={`${(locationPath.pathname !== ORDER_LOCATION_URL_PATH)
         ? 'order-info__details'
         : 'order-info__details_disable'}`}
       >
         <span>Модель</span>
         <span className="order-info__details__dots" />
         <div className="order-info__details__info">
-          {state.selectedCarInfo.name === EMPTY_STRING
+          {car.name === EMPTY_STRING
             ? 'Выберите авто'
-            : `${state.selectedCarInfo.brand}, ${state.selectedCarInfo.name}`}
+            : `${car.brand}, ${car.name}`}
         </div>
       </section>
       {/* Информация Вкладка - Дополнительно */}
-      <section className={`${(location.pathname === ADVANCED_URL_PATH || location.pathname === RESULT_URL_PATH)
+      <section className={`${(locationPath.pathname === ADVANCED_URL_PATH || locationPath.pathname === RESULT_URL_PATH)
         ? 'order-info__details'
         : 'order-info__details_disable'}`}
       >
         <div className="order-info__details__multiple-info multiple-info">
-          {advancedInfoElement('Цвет', 'Любой')}
+          {advancedInfoElement('Цвет', car.color)}
           {advancedInfoElement('Длительность аренды', '1д 2ч')}
-          {advancedInfoElement('Тариф', 'На сутки')}
-          {advancedInfoElement('Полный бак', 'Да')}
-          {advancedInfoElement('Детское кресло', 'Да')}
-          {advancedInfoElement('Правый руль', 'Да')}
+          {advancedInfoElement('Тариф', car.tariff.split(',')[0])}
+          {advancedInfoElement('Полный бак', 'Не выбрано')}
+          {advancedInfoElement('Детское кресло', 'Не выбрано')}
+          {advancedInfoElement('Правый руль', 'Не выбрано')}
         </div>
       </section>
       {/* Информация диапозон цен */}
       <section className="order-info__price">
         <span><strong>Цена: </strong></span>
         <span>
-          {location.pathname === RESULT_URL_PATH
+          {locationPath.pathname === RESULT_URL_PATH
             ? '16 000₽'
             : `от ${MIN_PRICE} до ${MAX_PRICE} ₽`}
         </span>
       </section>
       <Button
-        text={OrderInfoBtnText(location.pathname)}
-        link={NextTabUrl(location.pathname)}
+        text={ButtonText(locationPath.pathname)}
+        isDisabled={ButtonState(locationPath.pathname, { location, car })}
+        link={NextTabUrl(locationPath.pathname)}
       />
     </div>
   );
 };
 
-export default connect(
-  (state: IState) => ({
-    cityName: state.orderLocation.cityName,
-    markerName: state.orderLocation.markerName,
-  }),
-)(OrderInfo);
+export default OrderInfo;

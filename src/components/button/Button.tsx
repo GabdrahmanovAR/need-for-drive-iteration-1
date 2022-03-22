@@ -14,9 +14,14 @@ interface IButtonProps {
   link?: string;
 }
 
-const Button: FC<IButtonProps> = ({
-  text, customClass, isDisabled, isLoading, link,
-}) => {
+const Button: FC<IButtonProps> = (props) => {
+  const {
+    text,
+    customClass = EMPTY_STRING,
+    isDisabled,
+    isLoading,
+    link,
+  } = props;
   const path = useNavigate();
   const dispatch = useDispatch();
 

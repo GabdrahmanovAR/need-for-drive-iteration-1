@@ -1,9 +1,13 @@
 import React, { useEffect } from 'react';
 import './ResultTab.scss';
-import { Cars } from '../../../constants/fake-data/cars';
+import { useSelector } from 'react-redux';
 import { ScrollToTop } from '../../../utils/ScrollToTop';
+import OrderConfirm from '../order-confirm/OrderConfirm';
+import { orderInfoSelector } from '../../../selectors/orderInfoSelector';
 
 const ResultTab = () => {
+  const { car } = useSelector(orderInfoSelector);
+
   useEffect(() => {
     ScrollToTop();
   }, []);
@@ -11,7 +15,7 @@ const ResultTab = () => {
   return (
     <div className="result-tab">
       <section className="result-tab__car-info">
-        <h2>Hyndai, I30 N</h2>
+        <h2>{`${car.brand}, ${car.name}`}</h2>
         <div className="result-tab__car-info__number">К 761 НА 73</div>
         <div>
           <span>Топливо </span>
@@ -23,8 +27,9 @@ const ResultTab = () => {
         </div>
       </section>
       <section className="result-tab__car-img">
-        <img src={Cars[0].image} alt="Car Model" />
+        <img src={car.image} alt="Car Model" />
       </section>
+      <OrderConfirm />
     </div>
   );
 };
