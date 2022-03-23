@@ -35,7 +35,7 @@ const OrderInfo = () => {
         <span className="order-info__details__dots" />
         <div className="order-info__details__address">
           <div>
-            <span>{location.cityName}</span>
+            <span>{location.cityName !== EMPTY_STRING ? location.cityName : 'Не выбран'}</span>
             {location.markerName !== EMPTY_STRING && <span>,</span>}
           </div>
           <span className={`

@@ -1,4 +1,6 @@
 import { ICarsFakeData } from '../constants/fake-data/cars';
+import { IPoint } from './api';
+import { IPointCityCoordsState, IPointMarkerCoordsState } from './state';
 
 export interface IActionType {
   type: string;
@@ -64,15 +66,9 @@ export interface IOrderStepActionType extends IActionType {
   activeTab?: string;
 }
 
-export interface IAdvancedTabActionType extends IActionType {
-  startDay?: string;
-  endDay?: string;
-}
-
-export interface IInputFieldActionType extends IActionType{
-  focusedField?: string;
-}
-
-export interface IOrderConfirmActionType extends IActionType {
-  isActive?: boolean;
+export interface IPointsDataActionType extends IActionType {
+  data?: Array<IPoint>;
+  cityCoords?: Array<IPointCityCoordsState>;
+  markerCoords?: Array<IPointMarkerCoordsState>;
+  isLoading?: boolean;
 }

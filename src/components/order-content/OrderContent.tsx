@@ -16,7 +16,6 @@ const OrderContent = () => (
       <Route path="/result" element={<ResultTab />} />
     </Routes>
     <OrderInfo />
-    <OrderConfirm />
   </section>
 );
 

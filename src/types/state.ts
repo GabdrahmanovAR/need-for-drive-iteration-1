@@ -1,4 +1,5 @@
 import { ICarsFakeData } from '../constants/fake-data/cars';
+import { IPoint } from './api';
 
 export interface IState {
   sidebarMenu: ISidebarMenuState;
@@ -8,6 +9,7 @@ export interface IState {
   orderConfirm: IOrderConfirmState;
   orderInfo: IOrderInfoState;
   orderStep: IOrderStepState;
+  pointsData: IPointsDataState;
 }
 
 export interface ISidebarMenuState {
@@ -70,15 +72,19 @@ export interface IOrderStepState {
   activeTab: string;
 }
 
-export interface IAdvancedTabState {
-  startDay: string;
-  endDay: string;
+export interface IPointsDataState {
+  data: Array<IPoint>;
+  cityCoords: Array<IPointCityCoordsState>;
+  markerCoords: Array<IPointMarkerCoordsState>;
+  isLoading: boolean;
 }
 
-export interface IInputFieldState {
-  focusedField: string;
+export interface IPointCityCoordsState {
+  id: string;
+  coordinates: number[];
 }
 
-export interface IOrderConfirmState {
-  isActive: boolean;
+export interface IPointMarkerCoordsState {
+  id: string;
+  coordinates: number[];
 }
