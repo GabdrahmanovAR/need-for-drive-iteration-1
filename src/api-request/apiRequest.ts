@@ -34,3 +34,5 @@ export const registerOrder = (orderInfo: IOrderInfoState) => apiDB.post(ORDER_UR
 });
 
 export const getOrderById = (orderId: string) => apiDB.get(`${ORDER_URL}/${orderId}`);
+
+export const deleteOrderById = (orderId: string) => apiDB.delete(`${ORDER_URL}/${orderId}`);

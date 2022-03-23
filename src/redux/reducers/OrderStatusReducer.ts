@@ -2,10 +2,11 @@ import produce from 'immer';
 import { IOrderStatusInfoState, IOrderStatusState } from '../../types/state';
 import { IOrderStatusActionType } from '../../types/actions';
 import {
+  DELETE_ORDER_STATUS_DATA,
   GET_ORDER_STATUS_DATA,
   UPLOADING_ORDER_END,
   UPLOADING_ORDER_START,
-} from '../../constants/actions/uploadingOrder';
+} from '../../constants/actions/orderStatus';
 import { EMPTY_STRING } from '../../constants/common';
 
 const initialState: IOrderStatusState = {
@@ -47,6 +48,11 @@ const getOrderStatusData = (draft: IOrderStatusState, data?: IOrderStatusInfoSta
   return draft;
 };
 
+const deleteOrderStatusData = (draft: IOrderStatusState) => {
+  draft.statusInfo = initialState.statusInfo;
+  return draft;
+};
+
 export default (state = initialState, action: IOrderStatusActionType) => produce(
   state,
   (draft: IOrderStatusState) => {
@@ -54,6 +60,7 @@ export default (state = initialState, action: IOrderStatusActionType) => produce
       case UPLOADING_ORDER_START: return uploadingStart(draft);
       case UPLOADING_ORDER_END: return uploadingEnd(draft);
       case GET_ORDER_STATUS_DATA: return getOrderStatusData(draft, action.statusInfo);
+      case DELETE_ORDER_STATUS_DATA: return deleteOrderStatusData(draft);
       default: return state;
     }
   },

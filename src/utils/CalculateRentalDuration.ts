@@ -4,9 +4,6 @@ export const CalculateRentalDuration = (dateFrom: string, dateTo: string) => {
   const startDate = moment(dateFrom);
   const endDate = moment(dateTo);
 
-  console.log(startDate);
-  console.log(endDate);
-
   const duration = moment.duration(startDate.diff(endDate));
   if (Math.abs(duration.asDays()) < 1) {
     const hours = Math.floor(Math.abs(duration.asHours()));

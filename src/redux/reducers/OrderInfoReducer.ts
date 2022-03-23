@@ -3,7 +3,7 @@ import { IOrderInfoState } from '../../types/state';
 import { EMPTY_ARRAY, EMPTY_STRING } from '../../constants/common';
 import { IOrderCarInfoActionType, IOrderInfoActionType } from '../../types/actions';
 import {
-  BABY_CHAIR_NEEDED,
+  BABY_CHAIR_NEEDED, CLEAR_ORDER_INFO,
   FULL_TANK_NEEDED, RESET_CAR_INFO, RIGHT_HAND_NEEDED,
   SET_CAR_COLOR,
   SET_CAR_INFO,
@@ -132,6 +132,11 @@ const resetCarInfo = (draft: IOrderInfoState) => {
   return draft;
 };
 
+const clearOrderInfo = (draft: IOrderInfoState) => {
+  draft = orderInfoInitialState;
+  return draft;
+};
+
 export default (state = orderInfoInitialState, action: IOrderInfoActionType) => produce(
   state,
   (draft: IOrderInfoState) => {
@@ -150,6 +155,7 @@ export default (state = orderInfoInitialState, action: IOrderInfoActionType) => 
       case RIGHT_HAND_NEEDED: return setRightHandDrive(draft, action.car?.rightHandDrive);
       case SET_TOTAL_COST: return setTotalCost(draft, action.car?.totalCost);
       case RESET_CAR_INFO: return resetCarInfo(draft);
+      case CLEAR_ORDER_INFO: return clearOrderInfo(draft);
       default: return state;
     }
   },

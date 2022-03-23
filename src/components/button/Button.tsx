@@ -1,10 +1,12 @@
 import React, { FC } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import './Button.scss';
-import { useDispatch } from 'react-redux';
-import { CONFIRM_TAB, EMPTY_STRING } from '../../constants/common';
+import { useDispatch, useSelector } from 'react-redux';
+import { CONFIRM_TAB, EMPTY_STRING, ORDER_LOCATION_URL_PATH } from '../../constants/common';
 import Spinner from '../Spinner/Spinner';
 import { changeOrderConfirmAction } from '../../redux/actions/OrderConfirmAction';
+import { orderStatusSelector } from '../../selectors/orderStatusSelector';
+import { deleteOrderByIdAction } from '../../redux/actions/OrderStatusAction';
 
 interface IButtonProps {
   text: string;
@@ -24,12 +26,19 @@ const Button: FC<IButtonProps> = (props) => {
   } = props;
   const path = useNavigate();
   const dispatch = useDispatch();
+  const locationPath = useLocation();
+  const orderStatusState = useSelector(orderStatusSelector);
 
   const handleButtonClick = () => {
     if (link !== EMPTY_STRING && link === CONFIRM_TAB) {
       dispatch(changeOrderConfirmAction(true));
       document.body.style.overflow = 'hidden';
     } else if (link !== EMPTY_STRING) path(link || EMPTY_STRING);
+    if (locationPath.pathname.includes('/orderStatus')) {
+      dispatch(deleteOrderByIdAction(orderStatusState.statusInfo.id));
+      localStorage.removeItem('orderId');
+      path(ORDER_LOCATION_URL_PATH);
+    }
   };
 
   return (

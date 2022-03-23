@@ -1,7 +1,7 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import './OrderConfirm.scss';
 import { useDispatch, useSelector } from 'react-redux';
-import { Navigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import Button from '../../button/Button';
 import { orderConfirmSelector } from '../../../selectors/orderConfirmSelector';
 import { changeOrderConfirmAction } from '../../../redux/actions/OrderConfirmAction';
@@ -14,7 +14,14 @@ const OrderConfirm = () => {
   const orderConfirmState = useSelector(orderConfirmSelector);
   const orderInfo = useSelector(orderInfoSelector);
   const orderStatusState = useSelector(orderStatusSelector);
+  const navigate = useNavigate();
   const dispatch = useDispatch();
+
+  useEffect(() => {
+    if (orderStatusState.statusInfo.id !== EMPTY_STRING) {
+      navigate(`${ORDER_STATUS_URL_PATH}/${orderStatusState.statusInfo.id}`);
+    }
+  }, [orderStatusState.statusInfo.id]);
 
   const handleConfirmBtnClick = () => {
     dispatch(orderStatusAction(orderInfo));
@@ -44,8 +51,6 @@ const OrderConfirm = () => {
           </div>
         </div>
       </div>
-      {orderStatusState.statusInfo.id !== EMPTY_STRING
-        && <Navigate to={`${ORDER_STATUS_URL_PATH}/${orderStatusState.statusInfo.id}`} />}
     </div>
   );
 };
