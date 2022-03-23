@@ -15,7 +15,6 @@ const OrderContent = () => (
       <Route path="/models" element={<CarsTab />} />
       <Route path="/advanced" element={<AdvancedTab />} />
       <Route path="/result" element={<ResultTab />} />
-      {/* <Route path="/status/:orderId" element={<OrderStatus />} /> */}
       <Route path="/" element={<Navigate to={ORDER_LOCATION_URL_PATH} />} />
     </Routes>
     <OrderInfo />
