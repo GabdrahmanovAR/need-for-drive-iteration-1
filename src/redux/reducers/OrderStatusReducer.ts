@@ -6,19 +6,37 @@ import {
   UPLOADING_ORDER_END,
   UPLOADING_ORDER_START,
 } from '../../constants/actions/uploadingOrder';
+import { EMPTY_STRING } from '../../constants/common';
 
 const initialState: IOrderStatusState = {
-  uploading: false,
-  statusInfo: {} as IOrderStatusInfoState,
+  loading: false,
+  statusInfo: {
+    car: {
+      name: EMPTY_STRING,
+      number: EMPTY_STRING,
+      image: EMPTY_STRING,
+    },
+    cityName: EMPTY_STRING,
+    color: EMPTY_STRING,
+    dateFrom: 0,
+    dateTo: 0,
+    id: EMPTY_STRING,
+    isFullTank: false,
+    isNeedChildChair: false,
+    isRightWheel: false,
+    pointName: EMPTY_STRING,
+    price: 0,
+    rate: EMPTY_STRING,
+  },
 };
 
 const uploadingStart = (draft: IOrderStatusState) => {
-  draft.uploading = true;
+  draft.loading = true;
   return draft;
 };
 
 const uploadingEnd = (draft: IOrderStatusState) => {
-  draft.uploading = false;
+  draft.loading = false;
   return draft;
 };
 

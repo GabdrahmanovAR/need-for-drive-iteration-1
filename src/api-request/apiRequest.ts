@@ -32,3 +32,5 @@ export const registerOrder = (orderInfo: IOrderInfoState) => apiDB.post(ORDER_UR
   isNeedChildChair: orderInfo.car.babyChair,
   isRightWheel: orderInfo.car.rightHandDrive,
 });
+
+export const getOrderById = (orderId: string) => apiDB.get(`${ORDER_URL}/${orderId}`);

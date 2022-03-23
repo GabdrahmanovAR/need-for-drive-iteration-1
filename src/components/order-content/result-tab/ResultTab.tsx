@@ -24,7 +24,7 @@ const ResultTab = () => {
     tank,
     rentalDuration,
     image,
-  } = locationPath.pathname !== ORDER_STATUS_URL_PATH
+  } = !locationPath.pathname.includes(ORDER_STATUS_URL_PATH)
     ? car
     : {
       name: orderStatusState.statusInfo.car.name,

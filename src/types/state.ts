@@ -134,7 +134,7 @@ interface IRateTypeInfoState {
 }
 
 export interface IOrderStatusState {
-  uploading: boolean;
+  loading: boolean;
   statusInfo: IOrderStatusInfoState;
 }
 

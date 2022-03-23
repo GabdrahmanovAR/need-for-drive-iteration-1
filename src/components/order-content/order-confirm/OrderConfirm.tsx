@@ -29,7 +29,7 @@ const OrderConfirm = () => {
         <h1 className="order-confirm__block__title">Подтвердить заказ</h1>
         <div className="order-confirm__block__buttons">
           <div onClick={handleConfirmBtnClick} role="presentation">
-            <Button text="Подтвердить" isLoading={uploadingOrder.uploading} />
+            <Button text="Подтвердить" isLoading={uploadingOrder.loading} />
           </div>
           <div onClick={handleCancelBtnClick} role="presentation">
             <Button
