@@ -25,7 +25,6 @@ const CarsTab = () => {
 
   const [page, setPage] = useState(1);
   const [fetching, setFetching] = useState(true);
-  // const [isScrollBtnVisible, setIsScrollBtnVisible] = useState(false);
 
   useEffect(() => {
     if (carsDataState.data.length === 0 && fetching) {
@@ -42,8 +41,6 @@ const CarsTab = () => {
     if (event.target.scrollHeight - event.target.scrollTop <= event.target.clientHeight) {
       setFetching(true);
     }
-    // if (event.target.scrollTop > 200) setIsScrollBtnVisible(true);
-    // else setIsScrollBtnVisible(false);
   };
 
   const displayCards = () => {
@@ -92,19 +89,10 @@ const CarsTab = () => {
       </header>
       <main className="cars-tab__car-list">
         {displayCards()}
-        {/* {carsDataState.data.map((carInfo: ICarInfoData, index: number) => ( */}
-        {/*  <CarCard */}
-        {/*    carInfo={carInfo} */}
-        {/*    activeCard={orderInfoState.car.selectedCar} */}
-        {/*    id={`model-card-${index}`} */}
-        {/*    key={`model-card-${index}`} */}
-        {/*  /> */}
-        {/* ))} */}
         <div className={`cars-tab__spinner ${carsDataState.isLoading && 'cars-tab__spinner_visible'}`}>
           <Spinner customClass="cars-tab__spinner_black" />
         </div>
       </main>
-      {/* <ScrollToTopBtn isVisible={isScrollBtnVisible} /> */}
       {!orderStepState.locationTabCompleted && path('/order/location')}
     </div>
   );
