@@ -1,7 +1,6 @@
 import React, { useEffect } from 'react';
 import './OrderStatus.scss';
 import { useDispatch, useSelector } from 'react-redux';
-// import { useParams } from 'react-router-dom';
 import ResultTab from '../order-content/result-tab/ResultTab';
 import OrderInfo from '../order-content/order-info/OrderInfo';
 import { orderStatusSelector } from '../../selectors/orderStatusSelector';
@@ -13,10 +12,9 @@ import Header from '../header/Header';
 const OrderStatus = () => {
   const orderStatusState = useSelector(orderStatusSelector);
   const dispatch = useDispatch();
-  // const { orderId } = useParams();
 
   useEffect(() => {
-    if (localStorage.getItem('orderId')) {
+    if (localStorage.getItem('orderId') && orderStatusState.statusInfo.id === EMPTY_STRING) {
       dispatch(getOrderStatusByIdAction(localStorage.getItem('orderId') || EMPTY_STRING));
     }
   }, []);
@@ -31,6 +29,7 @@ const OrderStatus = () => {
               {`Заказ номер ${orderStatusState.statusInfo.id}`}
             </section>
             <section className="order-status__info">
+              <h2 className="order-status__info__title">Ваш заказ подтверждён</h2>
               <ResultTab />
               <OrderInfo />
             </section>

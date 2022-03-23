@@ -1,17 +1,19 @@
 import React from 'react';
 import './OrderConfirm.scss';
 import { useDispatch, useSelector } from 'react-redux';
+import { Navigate } from 'react-router-dom';
 import Button from '../../button/Button';
 import { orderConfirmSelector } from '../../../selectors/orderConfirmSelector';
 import { changeOrderConfirmAction } from '../../../redux/actions/OrderConfirmAction';
 import { orderInfoSelector } from '../../../selectors/orderInfoSelector';
 import { orderStatusAction } from '../../../redux/actions/OrderStatusAction';
 import { orderStatusSelector } from '../../../selectors/orderStatusSelector';
+import { EMPTY_STRING, ORDER_STATUS_URL_PATH } from '../../../constants/common';
 
 const OrderConfirm = () => {
   const orderConfirmState = useSelector(orderConfirmSelector);
   const orderInfo = useSelector(orderInfoSelector);
-  const uploadingOrder = useSelector(orderStatusSelector);
+  const orderStatusState = useSelector(orderStatusSelector);
   const dispatch = useDispatch();
 
   const handleConfirmBtnClick = () => {
@@ -29,7 +31,10 @@ const OrderConfirm = () => {
         <h1 className="order-confirm__block__title">Подтвердить заказ</h1>
         <div className="order-confirm__block__buttons">
           <div onClick={handleConfirmBtnClick} role="presentation">
-            <Button text="Подтвердить" isLoading={uploadingOrder.loading} />
+            <Button
+              text="Подтвердить"
+              isLoading={orderStatusState.loading}
+            />
           </div>
           <div onClick={handleCancelBtnClick} role="presentation">
             <Button
@@ -39,6 +44,8 @@ const OrderConfirm = () => {
           </div>
         </div>
       </div>
+      {orderStatusState.statusInfo.id !== EMPTY_STRING
+        && <Navigate to={`${ORDER_STATUS_URL_PATH}/${orderStatusState.statusInfo.id}`} />}
     </div>
   );
 };

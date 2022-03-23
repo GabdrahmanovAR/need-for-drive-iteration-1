@@ -9,6 +9,7 @@ import {
 import { IOrderInfoState } from '../../types/state';
 import { getOrderById, registerOrder } from '../../api-request/apiRequest';
 import { IOrderStatus, IOrderStatusResponse } from '../../types/api';
+import { changeOrderConfirmAction } from './OrderConfirmAction';
 
 const uploadingOrderStart = (): IOrderStatusActionType => ({
   type: UPLOADING_ORDER_START,
@@ -50,6 +51,7 @@ export const orderStatusAction = (orderInfo: IOrderInfoState) => async (dispatch
     console.log(error);
   } finally {
     dispatch(uploadingOrderEnd());
+    dispatch(changeOrderConfirmAction(false));
   }
 };
 
