@@ -43,7 +43,7 @@ const OrderConfirm = () => {
               isLoading={orderStatusState.loading}
             />
           </div>
-          <div onClick={handleCancelBtnClick} role="presentation">
+          <div className="cancel-button" onClick={handleCancelBtnClick} role="presentation">
             <Button
               text="Вернуться"
               customClass="order-confirm__cancel-button"

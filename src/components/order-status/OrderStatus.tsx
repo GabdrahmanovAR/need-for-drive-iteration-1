@@ -22,17 +22,15 @@ const OrderStatus = () => {
   return (
     <main className="order-status">
       <Header customClass="order-page__header" />
+      <section className="order-status__number">
+        {`Заказ номер ${orderStatusState.statusInfo.id}`}
+      </section>
       {orderStatusState.loading ? <Spinner />
         : (
-          <div>
-            <section className="order-status__number">
-              {`Заказ номер ${orderStatusState.statusInfo.id}`}
-            </section>
-            <section className="order-status__info">
-              <ResultTab />
-              <OrderInfo />
-            </section>
-          </div>
+          <section className="order-status__info">
+            <ResultTab />
+            <OrderInfo />
+          </section>
         )}
     </main>
   );

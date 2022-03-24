@@ -71,7 +71,7 @@ export const getOrderStatusByIdAction = (orderId: string) => async (dispatch: Di
   }
 };
 
-const deleteOrderStatusData = (): IOrderStatusActionType => ({
+export const deleteOrderStatusData = (): IOrderStatusActionType => ({
   type: DELETE_ORDER_STATUS_DATA,
 });
 

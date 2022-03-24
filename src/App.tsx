@@ -9,6 +9,7 @@ import SidebarMenu from './components/sidebar/sidebar-menu/SidebarMenu';
 import OrderPage from './pages/order-page/OrderPage';
 import OrderStatus from './components/order-status/OrderStatus';
 import OrderStatusMissing from './components/order-status/order-status-missing/OrderStatusMissing';
+import ErrorMessage from './components/error-message/ErrorMessage';
 
 const App = () => (
   <HashRouter>
@@ -29,6 +30,7 @@ const App = () => (
               }
           />
         </Route>
+        <Route path="/error" element={<ErrorMessage />} />
       </Routes>
     </div>
   </HashRouter>

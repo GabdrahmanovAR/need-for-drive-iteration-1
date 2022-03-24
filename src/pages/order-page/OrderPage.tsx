@@ -1,7 +1,8 @@
 import React, { useEffect } from 'react';
 import './OrderPage.scss';
 import { useDispatch, useSelector } from 'react-redux';
-import { useLocation } from 'react-router-dom';
+import { Navigate, useLocation } from 'react-router-dom';
+import { ErrorBoundary } from 'react-error-boundary';
 import OrderContent from '../../components/order-content/OrderContent';
 import Header from '../../components/header/Header';
 import OrderStep from '../../components/order-step/OrderStep';
@@ -32,9 +33,11 @@ const OrderPage = () => {
 
   return (
     <main className="order-page">
-      <Header customClass="order-page__header" />
-      <OrderStep />
-      <OrderContent />
+      <ErrorBoundary FallbackComponent={() => <Navigate to="/error" />}>
+        <Header customClass="order-page__header" />
+        <OrderStep />
+        <OrderContent />
+      </ErrorBoundary>
     </main>
   );
 };
