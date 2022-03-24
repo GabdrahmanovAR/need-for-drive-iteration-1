@@ -1,10 +1,13 @@
 import moment from 'moment';
 
 export const CalculateRentalDuration = (dateFrom: string, dateTo: string) => {
-  const startDate = moment(dateFrom);
-  const endDate = moment(dateTo);
+  const dateFormatRegex = new RegExp(/^\d+$/, 'gm');
+
+  const startDate = dateFormatRegex.exec(dateFrom) ? moment(Number(dateFrom)) : moment(dateFrom);
+  const endDate = dateFormatRegex.exec(dateTo) ? moment(Number(dateTo)) : moment(dateTo);
 
   const duration = moment.duration(startDate.diff(endDate));
+
   if (Math.abs(duration.asDays()) < 1) {
     const hours = Math.floor(Math.abs(duration.asHours()));
     const minutes = Math.floor(((Math.abs(duration.asMinutes()) / 60) % 1) * 60);

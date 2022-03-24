@@ -9,7 +9,7 @@ import {
 } from '../../constants/actions/orderStep';
 import { EMPTY_STRING } from '../../constants/common';
 
-const initialState: IOrderStepState = {
+export const orderStepInitialState: IOrderStepState = {
   locationTabCompleted: false,
   modelTabCompleted: false,
   advancedTabCompleted: false,
@@ -32,11 +32,11 @@ const changeAdvTabState = (draft: IOrderStepState, isCompleted?: boolean) => {
 };
 
 const resetTabsState = (draft: IOrderStepState) => {
-  draft = initialState;
+  draft = orderStepInitialState;
   return draft;
 };
 
-export default (state = initialState, action: IOrderStepActionType) => produce(
+export default (state = orderStepInitialState, action: IOrderStepActionType) => produce(
   state,
   (draft: IOrderStepState) => {
     switch (action.type) {

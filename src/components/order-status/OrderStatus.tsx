@@ -29,7 +29,6 @@ const OrderStatus = () => {
               {`Заказ номер ${orderStatusState.statusInfo.id}`}
             </section>
             <section className="order-status__info">
-              <h2 className="order-status__info__title">Ваш заказ подтверждён</h2>
               <ResultTab />
               <OrderInfo />
             </section>
