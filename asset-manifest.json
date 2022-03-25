@@ -1,7 +1,7 @@
 {
   "files": {
-    "main.css": "/need-for-drive-iteration-1/static/css/main.7a9549d6.css",
-    "main.js": "/need-for-drive-iteration-1/static/js/main.f3dbeccc.js",
+    "main.css": "/need-for-drive-iteration-1/static/css/main.a0893356.css",
+    "main.js": "/need-for-drive-iteration-1/static/js/main.4602c4cd.js",
     "static/media/car-picture.png": "/need-for-drive-iteration-1/static/media/car-picture.a9d926c8d4161c8b877f.png",
     "static/media/error.png": "/need-for-drive-iteration-1/static/media/error.c2c8bd4f135f792dae74.png",
     "static/media/no-data.png": "/need-for-drive-iteration-1/static/media/no-data.b306be4db6d6cebcaf8d.png",
@@ -22,11 +22,11 @@
     "static/media/left-arrow.svg": "/need-for-drive-iteration-1/static/media/left-arrow.1752ae9160db5265a941d6120fcaeadb.svg",
     "static/media/right-arrow.svg": "/need-for-drive-iteration-1/static/media/right-arrow.7591c327fb5160f95b31d713c84e5cc5.svg",
     "static/media/location-arrow.svg": "/need-for-drive-iteration-1/static/media/location-arrow.3f54b55d7d55c4a8870ecaeb995be364.svg",
-    "main.7a9549d6.css.map": "/need-for-drive-iteration-1/static/css/main.7a9549d6.css.map",
-    "main.f3dbeccc.js.map": "/need-for-drive-iteration-1/static/js/main.f3dbeccc.js.map"
+    "main.a0893356.css.map": "/need-for-drive-iteration-1/static/css/main.a0893356.css.map",
+    "main.4602c4cd.js.map": "/need-for-drive-iteration-1/static/js/main.4602c4cd.js.map"
   },
   "entrypoints": [
-    "static/css/main.7a9549d6.css",
-    "static/js/main.f3dbeccc.js"
+    "static/css/main.a0893356.css",
+    "static/js/main.4602c4cd.js"
   ]
 }
