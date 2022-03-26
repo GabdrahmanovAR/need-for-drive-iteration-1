@@ -10,6 +10,7 @@ import { ButtonText } from '../../../utils/ButtonText';
 import { NextTabUrl } from '../../../utils/NextTabUrl';
 import { ButtonState } from '../../../utils/ButtonState';
 import { orderInfoSelector } from '../../../selectors/orderInfoSelector';
+import { CalculateRentalDuration } from '../../../utils/CalculateRentalDuration';
 
 const OrderInfo = () => {
   const { location, car } = useSelector(orderInfoSelector);
@@ -61,12 +62,12 @@ const OrderInfo = () => {
         : 'order-info__details_disable'}`}
       >
         <div className="order-info__details__multiple-info multiple-info">
-          {advancedInfoElement('Цвет', car.color)}
-          {advancedInfoElement('Длительность аренды', '1д 2ч')}
+          {advancedInfoElement('Цвет', car.currentColor)}
+          {advancedInfoElement('Длительность аренды', CalculateRentalDuration(car.rentalDuration.from, car.rentalDuration.to))}
           {advancedInfoElement('Тариф', car.tariff.split(',')[0])}
-          {advancedInfoElement('Полный бак', 'Не выбрано')}
-          {advancedInfoElement('Детское кресло', 'Не выбрано')}
-          {advancedInfoElement('Правый руль', 'Не выбрано')}
+          {advancedInfoElement('Полный бак', car.fullTank ? 'Да' : 'Не выбрано')}
+          {advancedInfoElement('Детское кресло', car.babyChair ? 'Да' : 'Не выбрано')}
+          {advancedInfoElement('Правый руль', car.rightHandDrive ? 'Да' : 'Не выбрано')}
         </div>
       </section>
       {/* Информация диапозон цен */}

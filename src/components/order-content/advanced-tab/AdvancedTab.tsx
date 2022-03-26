@@ -6,27 +6,37 @@ import RadioButton from '../../radio-button/RadioButton';
 import InputField from '../../input-field/InputField';
 import { EMPTY_STRING } from '../../../constants/common';
 import Calendar from '../../calendar/Calendar';
-import { setEndDayAction, setStartDayAction } from '../../../redux/actions/AdvancedTabAction';
 import { ScrollToTop } from '../../../utils/ScrollToTop';
 import { orderInfoSelector } from '../../../selectors/orderInfoSelector';
 import { orderStepSelector } from '../../../selectors/orderStepSelector';
+import { endDayRentAction, startDayRentAction } from '../../../redux/actions/OrderInfoAction';
+import { CheckEndDayValue } from '../../../utils/CheckEndDayValue';
+import { getRateAction } from '../../../redux/actions/RateAction';
+import { RateList } from '../../../utils/RateList';
+import { rateSelector } from '../../../selectors/rateSelector';
+import { changeAdvTabStateAction } from '../../../redux/actions/OrderStepAction';
 
 const AdvancedTab = () => {
   const { car } = useSelector(orderInfoSelector);
-  const dispatch = useDispatch();
   const orderStepState = useSelector(orderStepSelector);
+  const rateState = useSelector(rateSelector);
+  const dispatch = useDispatch();
   const path = useNavigate();
 
   useEffect(() => {
     ScrollToTop();
+    dispatch(getRateAction());
   }, []);
 
   const handleStartDateDeleteClick = () => {
-    dispatch(setStartDayAction(EMPTY_STRING));
+    dispatch(startDayRentAction(EMPTY_STRING));
+    dispatch(endDayRentAction(EMPTY_STRING));
+    dispatch(changeAdvTabStateAction(false));
   };
 
   const handleEndDateDeleteClick = () => {
-    dispatch(setEndDayAction(EMPTY_STRING));
+    dispatch(endDayRentAction(EMPTY_STRING));
+    dispatch(changeAdvTabStateAction(false));
   };
 
   return (
@@ -35,7 +45,7 @@ const AdvancedTab = () => {
         <p>Цвет</p>
         <RadioButton
           formName="color"
-          btnNames={['Любой', 'Красный', 'Голубой']}
+          btnNames={['Любой', ...car.colors]}
         />
       </header>
       <section>
@@ -51,7 +61,7 @@ const AdvancedTab = () => {
           />
           <InputField
             id="end-day"
-            fieldValue={car.rentalDuration.to}
+            fieldValue={CheckEndDayValue(car.rentalDuration.from, car.rentalDuration.to)}
             placeholder="Выберите дату и время"
             title="По"
             onClickBtnFunc={handleEndDateDeleteClick}
@@ -63,7 +73,7 @@ const AdvancedTab = () => {
         <p>Тариф</p>
         <RadioButton
           formName="tariff"
-          btnNames={['Поминутно, 7 ₽/мин', 'На сутки, 1999 ₽/сутки']}
+          btnNames={RateList(rateState.data)}
           direction="column"
         />
       </section>

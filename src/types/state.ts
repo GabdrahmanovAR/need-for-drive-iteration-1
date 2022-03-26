@@ -1,5 +1,4 @@
 import { ICarsFakeData } from '../constants/fake-data/cars';
-// eslint-disable-next-line import/no-cycle
 import { ICarInfoData, IPoint } from './api';
 
 export interface IState {
@@ -13,6 +12,7 @@ export interface IState {
   pointsData: IPointsDataState;
   carsData: ICarsDataState;
   radioButton: IRadioButtonState;
+  rate: IRateState;
 }
 
 export interface ISidebarMenuState {
@@ -51,12 +51,12 @@ export interface IOrderLocationState {
 }
 
 export interface IOrderCarInfoState {
-  brand: string;
   name: string;
   minPrice: string,
   maxPrice: string,
   image: string,
-  color: string;
+  currentColor: string;
+  colors: string[];
   rentalDuration: {
     from: string,
     to: string,
@@ -100,4 +100,27 @@ export interface ICarsDataState {
 
 export interface IRadioButtonState {
   selectedItem: string;
+  radioCar: string;
+  radioColor: string;
+  radioTariff: string;
+  checkboxAdvanced: string[];
+}
+
+export interface IRateState {
+  count: number;
+  data: IRateInfoState[],
+}
+
+export interface IRateInfoState {
+  updatedAt: number;
+  createdAt: number;
+  price: number;
+  rateTypeId: IRateTypeInfoState;
+  id: string;
+}
+
+interface IRateTypeInfoState {
+  unit: string;
+  name: string;
+  id: string;
 }

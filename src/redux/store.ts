@@ -10,6 +10,7 @@ import orderStepReducer from './reducers/OrderStepReducer';
 import pointsDataReducer from './reducers/PointsDataReducer';
 import carsDataReducer from './reducers/CarsDataReducer';
 import radioButtonReducer from './reducers/RadioButtonReducer';
+import rateReducer from './reducers/RateReducer';
 
 export const store = createStore(
   combineReducers({
@@ -22,6 +23,7 @@ export const store = createStore(
     pointsData: pointsDataReducer,
     carsData: carsDataReducer,
     radioButton: radioButtonReducer,
+    rate: rateReducer,
   }),
   composeWithDevTools(applyMiddleware(thunk)),
 );

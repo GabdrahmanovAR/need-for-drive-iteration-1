@@ -1,9 +1,22 @@
-import React, { BaseSyntheticEvent, FC, useState } from 'react';
+import React, { BaseSyntheticEvent, FC } from 'react';
 import './RadioButton.scss';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { EMPTY_STRING } from '../../constants/common';
-import { setCarColorAction, setTariffAction } from '../../redux/actions/OrderInfoAction';
-import { changeSelectedItem } from '../../redux/actions/RadioButtonAction';
+import {
+  setBabyChairAction,
+  setCarColorAction,
+  setFullTankAction, setRightHandDriveAction,
+  setTariffAction,
+} from '../../redux/actions/OrderInfoAction';
+import {
+  changeSelectedItem, radioBtnAdvIdAction,
+  radioBtnCarIdAction,
+  radioBtnColorIdAction,
+  radioBtnTariffIdAction,
+} from '../../redux/actions/RadioButtonAction';
+import { orderInfoSelector } from '../../selectors/orderInfoSelector';
+import { IsChecked } from '../../utils/IsChecked';
+import { radioButtonSelector } from '../../selectors/radioButtonSelector';
 
 interface IRadioButtonProps {
   formName: string,
@@ -19,19 +32,36 @@ const RadioButton: FC<IRadioButtonProps> = (props) => {
     type = 'radio',
     direction = EMPTY_STRING,
   } = props;
-  const [checked, setChecked] = useState(type === 'radio' ? 'radio-id-0' : EMPTY_STRING);
+  const { car } = useSelector(orderInfoSelector);
+  const radioBtnState = useSelector(radioButtonSelector);
   const dispatch = useDispatch();
 
   const handleOnChangeEvent = (event: BaseSyntheticEvent) => {
-    setChecked(event.target.id);
-    if (event.target.id.includes('color')) dispatch(setCarColorAction(event.target.value));
-    else if (event.target.id.includes('tariff')) dispatch(setTariffAction(event.target.value));
+    if (event.target.id.includes('cars')) dispatch(radioBtnCarIdAction(event.target.id));
+    if (event.target.id.includes('color')) {
+      dispatch(setCarColorAction(event.target.value));
+      dispatch(radioBtnColorIdAction(event.target.id));
+    }
+    if (event.target.id.includes('tariff')) {
+      dispatch(setTariffAction(event.target.value));
+      dispatch((radioBtnTariffIdAction(event.target.id)));
+    }
+    if (event.target.id.includes('advanced')) {
+      dispatch(radioBtnAdvIdAction(event.target.id));
+    }
+
     switch (event.target.value) {
       case 'Все модели': dispatch(changeSelectedItem('all'));
         break;
       case 'Эконом': dispatch(changeSelectedItem('economy'));
         break;
       case 'Премиум': dispatch(changeSelectedItem('premium'));
+        break;
+      case 'Полный бак, 500₽': dispatch(setFullTankAction(!car.fullTank));
+        break;
+      case 'Детское кресло, 200₽': dispatch(setBabyChairAction(!car.babyChair));
+        break;
+      case 'Правый руль, 1600₽': dispatch(setRightHandDriveAction(!car.rightHandDrive));
         break;
       default:
     }
@@ -53,13 +83,13 @@ const RadioButton: FC<IRadioButtonProps> = (props) => {
                 ? 'radio-button'
                 : `checkbox-btn-${index}`
               }`}
-              defaultChecked={type === 'radio' && index === 0}
               onChange={handleOnChangeEvent}
               value={name}
+              checked={IsChecked(type, index, formName, radioBtnState)}
             />
             <span className={`
               form_radio__fieldset__name 
-              ${checked === `radio-id-${index}` && 'form_radio__fieldset__name_active'}`}
+              ${IsChecked(type, index, formName, radioBtnState) && 'form_radio__fieldset__name_active'}`}
             >
               {name}
             </span>

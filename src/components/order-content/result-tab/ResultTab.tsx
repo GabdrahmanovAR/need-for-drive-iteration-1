@@ -15,7 +15,7 @@ const ResultTab = () => {
   return (
     <div className="result-tab">
       <section className="result-tab__car-info">
-        <h2>{`${car.brand}, ${car.name}`}</h2>
+        <h2>{car.name}</h2>
         <div className="result-tab__car-info__number">К 761 НА 73</div>
         <div>
           <span>Топливо </span>
