@@ -64,6 +64,7 @@ const ResultTab = () => {
         <img src={image} alt="Car Model" />
       </section>
       <OrderConfirm />
+      {!orderStepState.locationTabCompleted && path('/order/location')}
     </div>
   );
 };
