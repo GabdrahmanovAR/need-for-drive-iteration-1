@@ -12,7 +12,9 @@ export interface ISidebarMenuActionType extends IActionType {
 
 export interface IOrderLocationActionType {
   cityName?: string;
+  cityId?: string;
   markerName?: string;
+  markerId?: string;
   cityCoords?: Array<number>;
   markerCoords?: Array<number>;
   selectionCompleted?: boolean;
@@ -42,7 +44,10 @@ export interface IOrderInfoActionType extends IActionType {
 }
 
 export interface IOrderCarInfoActionType {
+  id?: string;
   name?: string;
+  number?: string;
+  tank?: number;
   minPrice?: string,
   maxPrice?: string,
   image?: string,
@@ -57,6 +62,7 @@ export interface IOrderCarInfoActionType {
   babyChair?: boolean;
   rightHandDrive?: boolean;
   selectedCar?: string,
+  totalCost?: number,
 }
 
 export interface IOrderStepActionType extends IActionType {
@@ -88,4 +94,8 @@ export interface IRadioButtonActionType extends IActionType {
 export interface IRateActionType extends IActionType {
   count?: number;
   data?: IRateInfoState[],
+}
+
+export interface IUploadingOrderActionType extends IActionType {
+  uploading?: boolean;
 }

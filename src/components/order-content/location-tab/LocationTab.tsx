@@ -26,7 +26,7 @@ import { resetRadioBtnAction } from '../../../redux/actions/RadioButtonAction';
 interface ILocationTabProps {
   cityName: string,
   markerName: string,
-  changeLocationData: (name: string, coords: number[], key: string) => void,
+  changeLocationData: (name: string, coords: number[], id: string, key: string) => void,
 }
 
 const LocationTab: FC<ILocationTabProps> = ({ cityName, markerName, changeLocationData }) => {
@@ -57,7 +57,7 @@ const LocationTab: FC<ILocationTabProps> = ({ cityName, markerName, changeLocati
     pointsDataState.data.forEach((someCity: IPoint) => {
       if (someCity.cityId !== null && someCity.cityId.name === city) {
         const cityCoordinates = GetPointCoordinates(pointsDataState, someCity.cityId.id, CITY_KEY);
-        changeLocationData(someCity.cityId.name, cityCoordinates, CITY_KEY);
+        changeLocationData(someCity.cityId.name, cityCoordinates, someCity.cityId.id, CITY_KEY);
       }
     });
   }, [city]);
@@ -68,8 +68,8 @@ const LocationTab: FC<ILocationTabProps> = ({ cityName, markerName, changeLocati
       if (point.cityId !== null && point.address === marker) {
         const cityCoordinates = GetPointCoordinates(pointsDataState, point.cityId.id, CITY_KEY);
         const markerCoordinates = GetPointCoordinates(pointsDataState, point.id, MARKER_KEY);
-        changeLocationData(point.cityId.name, cityCoordinates, CITY_KEY);
-        changeLocationData(point.address, markerCoordinates, MARKER_KEY);
+        changeLocationData(point.cityId.name, cityCoordinates, point.cityId.id, CITY_KEY);
+        changeLocationData(point.address, markerCoordinates, point.id, MARKER_KEY);
       }
     });
   }, [marker]);
@@ -101,8 +101,8 @@ const LocationTab: FC<ILocationTabProps> = ({ cityName, markerName, changeLocati
   const handleCityBtnClick = () => {
     setCity(EMPTY_STRING);
     setMarker(EMPTY_STRING);
-    changeLocationData(EMPTY_STRING, EMPTY_ARRAY, MARKER_KEY);
-    changeLocationData(EMPTY_STRING, MOSCOW_CITY_COORDS, CITY_KEY);
+    changeLocationData(EMPTY_STRING, EMPTY_ARRAY, EMPTY_STRING, MARKER_KEY);
+    changeLocationData(EMPTY_STRING, MOSCOW_CITY_COORDS, EMPTY_STRING, CITY_KEY);
     setCitiesMenuActive(false);
     setMarkerMenuActive(false);
     dispatch(changeLocTabStateAction(false));
@@ -114,7 +114,7 @@ const LocationTab: FC<ILocationTabProps> = ({ cityName, markerName, changeLocati
 
   const handleMarkerBtnClick = () => {
     setMarker(EMPTY_STRING);
-    changeLocationData(EMPTY_STRING, EMPTY_ARRAY, MARKER_KEY);
+    changeLocationData(EMPTY_STRING, EMPTY_ARRAY, EMPTY_STRING, MARKER_KEY);
     setCitiesMenuActive(false);
     dispatch(changeLocTabStateAction(false));
     dispatch(changeModelTabStateAction(false));

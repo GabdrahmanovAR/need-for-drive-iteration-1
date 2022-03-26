@@ -6,7 +6,7 @@ import { changeCarInfoAction, resetCarInfoAction } from '../../../redux/actions/
 import { ICarInfoData } from '../../../types/api';
 import { orderInfoSelector } from '../../../selectors/orderInfoSelector';
 import { EMPTY_STRING } from '../../../constants/common';
-import { resetRadioBtnAction } from '../../../redux/actions/RadioButtonAction';
+import { changeAdvTabStateAction } from '../../../redux/actions/OrderStepAction';
 
 interface ICarCardProps {
   id: string,
@@ -22,7 +22,10 @@ const CarCard: FC<ICarCardProps> = ({ id, carInfo, activeCard }) => {
   const handleCardClick = (event: BaseSyntheticEvent) => {
     if (car.name === EMPTY_STRING) {
       dispatch(changeCarInfoAction(
+        carInfo.id,
         carInfo.name,
+        carInfo.number,
+        carInfo.tank,
         carInfo.priceMin.toString(),
         carInfo.priceMax.toString(),
         carInfo.thumbnail.path,
@@ -31,9 +34,12 @@ const CarCard: FC<ICarCardProps> = ({ id, carInfo, activeCard }) => {
       ));
     } else {
       dispatch(resetCarInfoAction());
-      dispatch(resetRadioBtnAction());
+      dispatch(changeAdvTabStateAction(false));
       dispatch(changeCarInfoAction(
+        carInfo.id,
         carInfo.name,
+        carInfo.number,
+        carInfo.tank,
         carInfo.priceMin.toString(),
         carInfo.priceMax.toString(),
         carInfo.thumbnail.path,

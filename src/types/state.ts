@@ -13,6 +13,7 @@ export interface IState {
   carsData: ICarsDataState;
   radioButton: IRadioButtonState;
   rate: IRateState;
+  uploadingOrder: IUploadingOrderState;
 }
 
 export interface ISidebarMenuState {
@@ -44,14 +45,19 @@ export interface IOrderInfoState {
 
 export interface IOrderLocationState {
   cityName: string;
+  cityId: string;
   markerName: string;
+  markerId: string;
   cityCoords: Array<number>;
   markerCoords: Array<number>;
   selectionCompleted: boolean;
 }
 
 export interface IOrderCarInfoState {
+  id: string;
   name: string;
+  number: string;
+  tank: number;
   minPrice: string,
   maxPrice: string,
   image: string,
@@ -66,6 +72,7 @@ export interface IOrderCarInfoState {
   babyChair: boolean;
   rightHandDrive: boolean;
   selectedCar: string,
+  totalCost: number,
 }
 
 export interface IOrderStepState {
@@ -123,4 +130,8 @@ interface IRateTypeInfoState {
   unit: string;
   name: string;
   id: string;
+}
+
+export interface IUploadingOrderState {
+  uploading: boolean;
 }

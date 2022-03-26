@@ -9,31 +9,44 @@ import {
   SET_MARKER_DATA,
   SET_RENTAL_DURATION_ED,
   SET_RENTAL_DURATION_SD,
-  SET_TARIFF,
+  SET_TARIFF, SET_TOTAL_COST,
 } from '../../constants/actions/orderInfo';
 
-const changeCityData = (cityName: string, cityCoords: number[]): IOrderInfoActionType => ({
+const changeCityData = (cityName: string, cityCoords: number[], cityId: string): IOrderInfoActionType => ({
   type: SET_CITY_DATA,
   location: {
     cityName,
     cityCoords,
+    cityId,
   },
 });
 
-const changeMarkerData = (markerName: string, markerCoords: number[]): IOrderInfoActionType => ({
+const changeMarkerData = (markerName: string, markerCoords: number[], markerId: string): IOrderInfoActionType => ({
   type: SET_MARKER_DATA,
   location: {
     markerName,
     markerCoords,
+    markerId,
   },
 });
 
 export const changeCarInfoAction = (
-  name: string, minPrice: string, maxPrice: string, image: string, colors: string[], selectedCar: string,
+  id: string,
+  name: string,
+  number: string,
+  tank: number,
+  minPrice: string,
+  maxPrice: string,
+  image: string,
+  colors: string[],
+  selectedCar: string,
 ): IOrderInfoActionType => ({
   type: SET_CAR_INFO,
   car: {
+    id,
     name,
+    number,
+    tank,
     minPrice,
     maxPrice,
     image,
@@ -74,9 +87,9 @@ export const setTariffAction = (tariff: string): IOrderInfoActionType => ({
   },
 });
 
-export const changeLocationDataAction = (name: string, coords: number[], key: string) => (dispatch: Dispatch) => {
-  if (key === 'city') dispatch(changeCityData(name, coords));
-  else dispatch(changeMarkerData(name, coords));
+export const changeLocationDataAction = (name: string, coords: number[], id: string, key: string) => (dispatch: Dispatch) => {
+  if (key === 'city') dispatch(changeCityData(name, coords, id));
+  else dispatch(changeMarkerData(name, coords, id));
 };
 
 export const setFullTankAction = (isNeeded: boolean): IOrderInfoActionType => ({
@@ -97,6 +110,13 @@ export const setRightHandDriveAction = (isNeeded: boolean): IOrderInfoActionType
   type: RIGHT_HAND_NEEDED,
   car: {
     rightHandDrive: isNeeded,
+  },
+});
+
+export const setTotalCostAction = (totalCost: number) => ({
+  type: SET_TOTAL_COST,
+  car: {
+    totalCost,
   },
 });
 

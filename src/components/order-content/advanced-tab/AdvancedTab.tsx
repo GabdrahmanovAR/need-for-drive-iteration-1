@@ -86,7 +86,7 @@ const AdvancedTab = () => {
           direction="column"
         />
       </section>
-      {(!orderStepState.locationTabCompleted || !orderStepState.modelTabCompleted) && path('/order/location')}
+      {!orderStepState.locationTabCompleted && path('/order/location')}
     </div>
   );
 };
