@@ -11,9 +11,6 @@ import { NextTabUrl } from '../../../utils/NextTabUrl';
 import { ButtonState } from '../../../utils/ButtonState';
 import { orderInfoSelector } from '../../../selectors/orderInfoSelector';
 
-const MIN_PRICE = '8000';
-const MAX_PRICE = '12000';
-
 const OrderInfo = () => {
   const { location, car } = useSelector(orderInfoSelector);
   const locationPath = useLocation();
@@ -55,7 +52,7 @@ const OrderInfo = () => {
         <div className="order-info__details__info">
           {car.name === EMPTY_STRING
             ? 'Выберите авто'
-            : `${car.brand}, ${car.name}`}
+            : car.name}
         </div>
       </section>
       {/* Информация Вкладка - Дополнительно */}
@@ -76,9 +73,9 @@ const OrderInfo = () => {
       <section className="order-info__price">
         <span><strong>Цена: </strong></span>
         <span>
-          {locationPath.pathname === RESULT_URL_PATH
-            ? '16 000₽'
-            : `от ${MIN_PRICE} до ${MAX_PRICE} ₽`}
+          {(car.minPrice && car.maxPrice) === EMPTY_STRING
+            ? 'автомобиль не выбран'
+            : `от ${car.minPrice} до ${car.maxPrice} ₽`}
         </span>
       </section>
       <Button

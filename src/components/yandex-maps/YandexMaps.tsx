@@ -6,12 +6,15 @@ import './YandexMaps.scss';
 import { useDispatch, useSelector } from 'react-redux';
 import { changeLocationDataAction } from '../../redux/actions/OrderInfoAction';
 import { orderInfoSelector } from '../../selectors/orderInfoSelector';
-import { EMPTY_ARRAY, EMPTY_STRING } from '../../constants/common';
-import { pointsDataSelector } from '../../selectors/pointsData';
+import {
+  CITY_KEY, EMPTY_ARRAY, EMPTY_STRING, MARKER_KEY,
+} from '../../constants/common';
+import { pointsDataSelector } from '../../selectors/pointsDataSelector';
 import { GetCoordinates } from '../../utils/GetCoordinates';
 import { IPointCityCoordsState, IPointMarkerCoordsState } from '../../types/state';
 import { changeCityCoords, changeMarkerCoords } from '../../redux/actions/PointsDataAction';
 import { IPoint } from '../../types/api';
+import { YMAPS_API_KEY } from '../../constants/api/api';
 
 const YandexMaps = () => {
   const { location } = useSelector(orderInfoSelector);
@@ -40,8 +43,8 @@ const YandexMaps = () => {
       }
     });
 
-    dispatch(changeLocationDataAction(markerCity, markerCityCoords, 'city'));
-    dispatch(changeLocationDataAction(markerName, markerCoords, 'marker'));
+    dispatch(changeLocationDataAction(markerCity, markerCityCoords, CITY_KEY));
+    dispatch(changeLocationDataAction(markerName, markerCoords, MARKER_KEY));
   };
 
   const handleOnLoadMap = (maps: YMapsApi) => {
@@ -66,7 +69,7 @@ const YandexMaps = () => {
         <YMaps
           query={{
             ns: 'use-load-option',
-            apikey: '70daecdb-7319-4705-83ef-c1f61e7799a7',
+            apikey: YMAPS_API_KEY,
             load: 'geocode',
           }}
         >

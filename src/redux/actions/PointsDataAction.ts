@@ -6,14 +6,6 @@ import {
 import { getPickupPoints } from '../../api-request/apiRequest';
 import { IPointCityCoordsState, IPointMarkerCoordsState } from '../../types/state';
 
-// const showPointsLoader = (): IPointsDataActionType => ({
-//   type: SHOW_POINTS_LOADER,
-// });
-//
-// const hidePointsLoader = (): IPointsDataActionType => ({
-//   type: HIDE_POINTS_LOADER,
-// });
-
 const loadPointsData = (data: any): IPointsDataActionType => ({
   type: LOAD_POINTS_SUCCESS,
   data,

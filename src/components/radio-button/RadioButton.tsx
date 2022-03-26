@@ -3,6 +3,7 @@ import './RadioButton.scss';
 import { useDispatch } from 'react-redux';
 import { EMPTY_STRING } from '../../constants/common';
 import { setCarColorAction, setTariffAction } from '../../redux/actions/OrderInfoAction';
+import { changeSelectedItem } from '../../redux/actions/RadioButtonAction';
 
 interface IRadioButtonProps {
   formName: string,
@@ -25,6 +26,15 @@ const RadioButton: FC<IRadioButtonProps> = (props) => {
     setChecked(event.target.id);
     if (event.target.id.includes('color')) dispatch(setCarColorAction(event.target.value));
     else if (event.target.id.includes('tariff')) dispatch(setTariffAction(event.target.value));
+    switch (event.target.value) {
+      case 'Все модели': dispatch(changeSelectedItem('all'));
+        break;
+      case 'Эконом': dispatch(changeSelectedItem('economy'));
+        break;
+      case 'Премиум': dispatch(changeSelectedItem('premium'));
+        break;
+      default:
+    }
   };
 
   return (

@@ -5,6 +5,7 @@
   width: 50%;
   border: 1px solid $main-lightgrey-color;
   padding: 1rem;
+  overflow: hidden;
 
   &__header {
     height: 40%;
@@ -20,8 +21,13 @@
   &__car-image {
     display: flex;
     justify-content: flex-end;
-    align-items: flex-end;
+    align-items: center;
     height: 60%;
+    overflow: hidden;
+
+    img {
+      max-width: 50%;
+    }
   }
   &_active {
     border: 1px solid $main-grey-color;

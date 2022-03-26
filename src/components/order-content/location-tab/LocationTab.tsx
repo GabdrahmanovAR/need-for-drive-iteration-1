@@ -3,7 +3,9 @@ import React, {
 } from 'react';
 import { connect, useDispatch, useSelector } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { EMPTY_ARRAY, EMPTY_STRING } from '../../../constants/common';
+import {
+  CITY_KEY, EMPTY_ARRAY, EMPTY_STRING, MARKER_KEY, MOSCOW_CITY_COORDS,
+} from '../../../constants/common';
 import './LocationTab.scss';
 import YandexMaps from '../../yandex-maps/YandexMaps';
 import { IState } from '../../../types/state';
@@ -11,9 +13,10 @@ import { changeLocationDataAction } from '../../../redux/actions/OrderInfoAction
 import InputField from '../../input-field/InputField';
 import DropDownMenu from '../../dropdown-menu/DropDownMenu';
 import { changeLocTabStateAction } from '../../../redux/actions/OrderStepAction';
-import { pointsDataSelector } from '../../../selectors/pointsData';
+import { pointsDataSelector } from '../../../selectors/pointsDataSelector';
 import { IPoint } from '../../../types/api';
 import { GetPointCoordinates } from '../../../utils/GetPointCoordinates';
+import { orderInfoSelector } from '../../../selectors/orderInfoSelector';
 
 interface ILocationTabProps {
   cityName: string,
@@ -22,18 +25,24 @@ interface ILocationTabProps {
 }
 
 const LocationTab: FC<ILocationTabProps> = ({ cityName, markerName, changeLocationData }) => {
-  const [city, setCity] = useState(EMPTY_STRING);
-  const [marker, setMarker] = useState(EMPTY_STRING);
+  const pointsDataState = useSelector((pointsDataSelector));
+  const orderInfoState = useSelector(orderInfoSelector);
+  const dispatch = useDispatch();
+
+  const initialCityState = orderInfoState.location.cityName !== EMPTY_STRING ? orderInfoState.location.cityName : EMPTY_STRING;
+  const initialMarkerState = orderInfoState.location.markerName !== EMPTY_STRING ? orderInfoState.location.markerName : EMPTY_STRING;
+  const [city, setCity] = useState(initialCityState);
+  const [marker, setMarker] = useState(initialMarkerState);
+
   const [citiesMenuActive, setCitiesMenuActive] = useState(false);
   const [markerMenuActive, setMarkerMenuActive] = useState(false);
   const cyrillicRegexp = new RegExp(/^[А-я]*$/);
 
-  const pointsDataState = useSelector((pointsDataSelector));
-  const dispatch = useDispatch();
-
   useEffect(() => {
-    if (cityName !== EMPTY_STRING || markerName !== EMPTY_STRING) {
+    if (cityName !== EMPTY_STRING) {
       setCity(cityName);
+    }
+    if (markerName !== EMPTY_STRING) {
       setMarker(markerName);
     }
   }, [cityName, markerName]);
@@ -42,8 +51,8 @@ const LocationTab: FC<ILocationTabProps> = ({ cityName, markerName, changeLocati
     if (city === EMPTY_STRING) return;
     pointsDataState.data.forEach((someCity: IPoint) => {
       if (someCity.cityId !== null && someCity.cityId.name === city) {
-        const cityCoordinates = GetPointCoordinates(pointsDataState, someCity.cityId.id, 'city');
-        changeLocationData(someCity.cityId.name, cityCoordinates, 'city');
+        const cityCoordinates = GetPointCoordinates(pointsDataState, someCity.cityId.id, CITY_KEY);
+        changeLocationData(someCity.cityId.name, cityCoordinates, CITY_KEY);
       }
     });
   }, [city]);
@@ -52,21 +61,17 @@ const LocationTab: FC<ILocationTabProps> = ({ cityName, markerName, changeLocati
     if (marker === EMPTY_STRING) return;
     pointsDataState.data.forEach((point: IPoint) => {
       if (point.cityId !== null && point.address === marker) {
-        const cityCoordinates = GetPointCoordinates(pointsDataState, point.cityId.id, 'city');
-        const markerCoordinates = GetPointCoordinates(pointsDataState, point.id, 'marker');
-        changeLocationData(point.cityId.name, cityCoordinates, 'city');
-        changeLocationData(point.address, markerCoordinates, 'marker');
+        const cityCoordinates = GetPointCoordinates(pointsDataState, point.cityId.id, CITY_KEY);
+        const markerCoordinates = GetPointCoordinates(pointsDataState, point.id, MARKER_KEY);
+        changeLocationData(point.cityId.name, cityCoordinates, CITY_KEY);
+        changeLocationData(point.address, markerCoordinates, MARKER_KEY);
       }
     });
   }, [marker]);
 
   useEffect(() => {
     if (citiesMenuActive && markerMenuActive) setMarkerMenuActive(false);
-  }, [citiesMenuActive]);
-
-  useEffect(() => {
-    if (citiesMenuActive && markerMenuActive) setCitiesMenuActive(false);
-  }, [markerMenuActive]);
+  }, [citiesMenuActive, markerMenuActive]);
 
   const handleCityInput = (event: BaseSyntheticEvent) => {
     if (event.target.value !== EMPTY_STRING && cyrillicRegexp.exec(event.target.value)) {
@@ -91,8 +96,8 @@ const LocationTab: FC<ILocationTabProps> = ({ cityName, markerName, changeLocati
   const handleCityBtnClick = () => {
     setCity(EMPTY_STRING);
     setMarker(EMPTY_STRING);
-    changeLocationData(EMPTY_STRING, EMPTY_ARRAY, 'marker');
-    changeLocationData(EMPTY_STRING, [55.753215, 37.622504], 'city');
+    changeLocationData(EMPTY_STRING, EMPTY_ARRAY, MARKER_KEY);
+    changeLocationData(EMPTY_STRING, MOSCOW_CITY_COORDS, CITY_KEY);
     setCitiesMenuActive(false);
     setMarkerMenuActive(false);
     dispatch(changeLocTabStateAction(false));
@@ -100,7 +105,7 @@ const LocationTab: FC<ILocationTabProps> = ({ cityName, markerName, changeLocati
 
   const handleMarkerBtnClick = () => {
     setMarker(EMPTY_STRING);
-    changeLocationData(EMPTY_STRING, EMPTY_ARRAY, 'marker');
+    changeLocationData(EMPTY_STRING, EMPTY_ARRAY, MARKER_KEY);
     setCitiesMenuActive(false);
     dispatch(changeLocTabStateAction(false));
   };

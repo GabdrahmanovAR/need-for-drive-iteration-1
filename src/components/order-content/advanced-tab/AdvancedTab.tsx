@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
 import './AdvancedTab.scss';
 import { useDispatch, useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 import RadioButton from '../../radio-button/RadioButton';
 import InputField from '../../input-field/InputField';
 import { EMPTY_STRING } from '../../../constants/common';
@@ -8,10 +9,13 @@ import Calendar from '../../calendar/Calendar';
 import { setEndDayAction, setStartDayAction } from '../../../redux/actions/AdvancedTabAction';
 import { ScrollToTop } from '../../../utils/ScrollToTop';
 import { orderInfoSelector } from '../../../selectors/orderInfoSelector';
+import { orderStepSelector } from '../../../selectors/orderStepSelector';
 
 const AdvancedTab = () => {
   const { car } = useSelector(orderInfoSelector);
   const dispatch = useDispatch();
+  const orderStepState = useSelector(orderStepSelector);
+  const path = useNavigate();
 
   useEffect(() => {
     ScrollToTop();
@@ -72,6 +76,7 @@ const AdvancedTab = () => {
           direction="column"
         />
       </section>
+      {(!orderStepState.locationTabCompleted || !orderStepState.modelTabCompleted) && path('/order/location')}
     </div>
   );
 };
