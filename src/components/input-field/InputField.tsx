@@ -1,9 +1,10 @@
 import React, { BaseSyntheticEvent, FC } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { EMPTY_STRING, EmptyFuncType } from '../../constants/common';
 import deleteIcon from '../../assets/icons/delete-city.svg';
 import './InputField.scss';
 import { setFocusedFieldAction } from '../../redux/actions/InputFieldAction';
+import { inputFieldSelector } from '../../selectors/inputFieldSelector';
 
 interface IInputFieldProps {
   title: string,
@@ -28,8 +29,10 @@ const InputField: FC<IInputFieldProps> = (props) => {
     childComponent,
   } = props;
   const dispatch = useDispatch();
+  const inputFieldState = useSelector(inputFieldSelector);
 
   const handleInputFieldClick = (event: BaseSyntheticEvent) => {
+    if (inputFieldState.focusedField === event.currentTarget.id) return;
     dispatch(setFocusedFieldAction(event.currentTarget.id));
   };
 
@@ -41,7 +44,7 @@ const InputField: FC<IInputFieldProps> = (props) => {
       role="presentation"
     >
       <span className="input-field__title">{title}</span>
-      <div>
+      <div className="input-field__container">
         <div>
           <input
             className="input-field__input"

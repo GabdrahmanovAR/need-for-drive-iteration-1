@@ -1,58 +1,111 @@
-import React from 'react';
-  Clusterer, Map, Placemark, YMaps,
+import React, { useEffect, useState } from 'react';
+import {
+  Clusterer, Map, Placemark, YMaps, YMapsApi,
 } from 'react-yandex-maps';
 import './YandexMaps.scss';
-import { connect } from 'react-redux';
-import { bindActionCreators } from 'redux';
-import { IState } from '../../types/state';
-import { ICity, ICityMarker, listOfCities } from '../../constants/fake-data/cities';
+import { useDispatch, useSelector } from 'react-redux';
 import { changeLocationDataAction } from '../../redux/actions/OrderInfoAction';
+import { orderInfoSelector } from '../../selectors/orderInfoSelector';
+import {
+  CITY_KEY, EMPTY_ARRAY, EMPTY_STRING, MARKER_KEY,
+} from '../../constants/common';
+import { pointsDataSelector } from '../../selectors/pointsDataSelector';
+import { GetCoordinates } from '../../utils/GetCoordinates';
+import { IPointCityCoordsState, IPointMarkerCoordsState } from '../../types/state';
+import { changeCityCoords, changeMarkerCoords } from '../../redux/actions/PointsDataAction';
+import { IPoint } from '../../types/api';
+import { YMAPS_API_KEY } from '../../constants/api/api';
+import { MapError } from './map-error/MapError';
 
-interface IProps {
-  cityCoords: number[],
-  changeLocationData: (name: string, coords: number[], key: string) => void,
-}
+const YandexMaps = () => {
+  const { location } = useSelector(orderInfoSelector);
+  const pointsDataState = useSelector(pointsDataSelector);
+  const dispatch = useDispatch();
+  const [someCityCoords, setSomeCityCoords] = useState([] as IPointCityCoordsState[]);
+  const [someMarkerCoords, setSomeMarkerCoords] = useState([] as IPointMarkerCoordsState[]);
+  const [resultReceived, setResultReceived] = useState(true);
 
-const YandexMaps = ({ cityCoords, changeLocationData }: IProps) => {
-  const handleMarkerClick = (markerName: string, markerCoords: number[], markerCity: string, markerCityCoords: number[]) => {
-    changeLocationData(markerCity, markerCityCoords, 'city');
-    changeLocationData(markerName, markerCoords, 'marker');
+  const handleMarkerClick = (clickedMarkerId: string, markerCoords: number[]) => {
+    let markerName = EMPTY_STRING;
+    let markerId = EMPTY_STRING;
+    let cityOfMarker = EMPTY_STRING;
+    let cityIdOfMarker = EMPTY_STRING;
+    let markerCityCoords: number[] = [];
+
+    pointsDataState.data.forEach((point: IPoint) => {
+      if (point.id === clickedMarkerId) {
+        markerName = point.address;
+        markerId = point.id;
+        cityOfMarker = point.cityId.name;
+        cityIdOfMarker = point.cityId.id;
+      }
+    });
+
+    pointsDataState.cityCoords.forEach((city: IPointCityCoordsState) => {
+      if (city.id === cityIdOfMarker) {
+        markerCityCoords = city.coordinates;
+      }
+    });
+
+    dispatch(changeLocationDataAction(cityOfMarker, markerCityCoords, cityIdOfMarker, CITY_KEY));
+    dispatch(changeLocationDataAction(markerName, markerCoords, markerId, MARKER_KEY));
   };
+
+  const handleOnLoadMap = (maps: YMapsApi) => {
+    const array: any = GetCoordinates(maps, pointsDataState.data);
+    array.then((result: any) => {
+      if (result[0].length === 0 || result[1].length === 0) setResultReceived(false);
+      else {
+        setSomeCityCoords(result[0]);
+        setSomeMarkerCoords(result[1]);
+      }
+    });
+  };
+
+  useEffect(() => {
+    if (someCityCoords.length !== 0 && someMarkerCoords.length !== 0) {
+      dispatch(changeCityCoords(someCityCoords));
+      dispatch(changeMarkerCoords(someMarkerCoords));
+    }
+  }, [someCityCoords, someMarkerCoords]);
 
   return (
     <section className="maps">
       <header className="maps__header">Выбрать на карте:</header>
-      <main>
-        <YMaps>
+      <main className="maps__content">
+        <YMaps
+          query={{
+            ns: 'use-load-option',
+            apikey: YMAPS_API_KEY,
+            load: 'geocode',
+          }}
+        >
           <Map
-            state={{ center: cityCoords, zoom: 9 }}
+            onLoad={handleOnLoadMap}
+            state={{
+              center: location.markerCoords === EMPTY_ARRAY ? location.cityCoords : location.markerCoords,
+              zoom: location.markerCoords === EMPTY_ARRAY ? 9 : 14,
+            }}
             height="45vh"
             width="100%"
+            modules={['geocode']}
           >
             <Clusterer options={{ preset: 'islands#darkGreenClusterIcons' }}>
-              {listOfCities.map((city: ICity) => (
-                city.markers.map((marker: ICityMarker, index: number) => (
-                  <Placemark
-                    geometry={marker.coordinates}
-                    options={{ preset: 'islands#darkGreenCircleDotIcon' }}
-                    onClick={() => handleMarkerClick(marker.street, marker.coordinates, city.name, city.coordinates)}
-                    key={`marker-${index}`}
-                  />
-                ))
+              {pointsDataState.markerCoords.map((marker: IPointCityCoordsState, index: number) => (
+                <Placemark
+                  geometry={marker.coordinates}
+                  options={{ preset: 'islands#darkGreenCircleDotIcon' }}
+                  onClick={() => handleMarkerClick(marker.id, marker.coordinates)}
+                  key={`marker-${index}`}
+                />
               ))}
             </Clusterer>
           </Map>
         </YMaps>
+        {!resultReceived && <MapError />}
       </main>
     </section>
   );
 };
 
-export default connect(
-  (state: IState) => ({
-    cityCoords: state.orderInfo.location.cityCoords,
-  }),
-  (dispatch) => ({
-    changeLocationData: bindActionCreators(changeLocationDataAction, dispatch),
-  }),
-)(YandexMaps);
+export default YandexMaps;

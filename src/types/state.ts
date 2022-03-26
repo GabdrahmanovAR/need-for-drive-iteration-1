@@ -1,4 +1,5 @@
 import { ICarsFakeData } from '../constants/fake-data/cars';
+import { ICarInfoData, IPoint } from './api';
 
 export interface IState {
   sidebarMenu: ISidebarMenuState;
@@ -8,6 +9,11 @@ export interface IState {
   orderConfirm: IOrderConfirmState;
   orderInfo: IOrderInfoState;
   orderStep: IOrderStepState;
+  pointsData: IPointsDataState;
+  carsData: ICarsDataState;
+  radioButton: IRadioButtonState;
+  rate: IRateState;
+  uploadingOrder: IUploadingOrderState;
 }
 
 export interface ISidebarMenuState {
@@ -39,19 +45,24 @@ export interface IOrderInfoState {
 
 export interface IOrderLocationState {
   cityName: string;
+  cityId: string;
   markerName: string;
+  markerId: string;
   cityCoords: Array<number>;
   markerCoords: Array<number>;
   selectionCompleted: boolean;
 }
 
 export interface IOrderCarInfoState {
-  brand: string;
+  id: string;
   name: string;
+  number: string;
+  tank: number;
   minPrice: string,
   maxPrice: string,
   image: string,
-  color: string;
+  currentColor: string;
+  colors: string[];
   rentalDuration: {
     from: string,
     to: string,
@@ -61,6 +72,7 @@ export interface IOrderCarInfoState {
   babyChair: boolean;
   rightHandDrive: boolean;
   selectedCar: string,
+  totalCost: number,
 }
 
 export interface IOrderStepState {
@@ -70,15 +82,56 @@ export interface IOrderStepState {
   activeTab: string;
 }
 
-export interface IAdvancedTabState {
-  startDay: string;
-  endDay: string;
+export interface IPointsDataState {
+  data: Array<IPoint>;
+  cityCoords: Array<IPointCityCoordsState>;
+  markerCoords: Array<IPointMarkerCoordsState>;
+  isLoading: boolean;
 }
 
-export interface IInputFieldState {
-  focusedField: string;
+export interface IPointCityCoordsState {
+  id: string;
+  coordinates: number[];
 }
 
-export interface IOrderConfirmState {
-  isActive: boolean;
+export interface IPointMarkerCoordsState {
+  id: string;
+  coordinates: number[];
+}
+
+export interface ICarsDataState {
+  count: number;
+  data: Array<ICarInfoData>;
+  isLoading: boolean;
+}
+
+export interface IRadioButtonState {
+  selectedItem: string;
+  radioCar: string;
+  radioColor: string;
+  radioTariff: string;
+  checkboxAdvanced: string[];
+}
+
+export interface IRateState {
+  count: number;
+  data: IRateInfoState[],
+}
+
+export interface IRateInfoState {
+  updatedAt: number;
+  createdAt: number;
+  price: number;
+  rateTypeId: IRateTypeInfoState;
+  id: string;
+}
+
+interface IRateTypeInfoState {
+  unit: string;
+  name: string;
+  id: string;
+}
+
+export interface IUploadingOrderState {
+  uploading: boolean;
 }
