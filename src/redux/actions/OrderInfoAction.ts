@@ -80,10 +80,11 @@ export const endDayRentAction = (endDay: string): IOrderInfoActionType => ({
   },
 });
 
-export const setTariffAction = (tariff: string): IOrderInfoActionType => ({
+export const setTariffAction = (tariff: string, tariffId: string): IOrderInfoActionType => ({
   type: SET_TARIFF,
   car: {
     tariff,
+    tariffId,
   },
 });
 

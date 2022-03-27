@@ -42,7 +42,8 @@ export const orderInfoInitialState: IOrderInfoState = {
       to: EMPTY_STRING,
     },
     rightHandDrive: false,
-    tariff: 'Суточный',
+    tariff: 'Недельный (Акция!)',
+    tariffId: '60c614202aed9a0b9b84f543',
     totalCost: 0,
   },
 };
@@ -100,8 +101,9 @@ const endDayRent = (draft: IOrderInfoState, endDay?: string) => {
   return draft;
 };
 
-const setTariff = (draft: IOrderInfoState, tariff?: string) => {
+const setTariff = (draft: IOrderInfoState, tariff?: string, tariffId?: string) => {
   draft.car.tariff = tariff?.split(',')[0] || EMPTY_STRING;
+  draft.car.tariffId = tariffId || EMPTY_STRING;
   return draft;
 };
 
@@ -142,7 +144,7 @@ export default (state = orderInfoInitialState, action: IOrderInfoActionType) => 
       case SET_CAR_COLOR: return setCarColor(draft, action.car?.currentColor);
       case SET_RENTAL_DURATION_SD: return startDayRent(draft, action.car?.rentalDuration?.from);
       case SET_RENTAL_DURATION_ED: return endDayRent(draft, action.car?.rentalDuration?.to);
-      case SET_TARIFF: return setTariff(draft, action.car?.tariff);
+      case SET_TARIFF: return setTariff(draft, action.car?.tariff, action.car?.tariffId);
       case FULL_TANK_NEEDED: return setFullTank(draft, action.car?.fullTank);
       case BABY_CHAIR_NEEDED: return setBabyChair(draft, action.car?.babyChair);
       case RIGHT_HAND_NEEDED: return setRightHandDrive(draft, action.car?.rightHandDrive);

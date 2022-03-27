@@ -17,6 +17,8 @@ import {
 import { orderInfoSelector } from '../../selectors/orderInfoSelector';
 import { IsChecked } from '../../utils/IsChecked';
 import { radioButtonSelector } from '../../selectors/radioButtonSelector';
+import { rateSelector } from '../../selectors/rateSelector';
+import { RateId } from '../../utils/RateId';
 
 interface IRadioButtonProps {
   formName: string,
@@ -33,6 +35,7 @@ const RadioButton: FC<IRadioButtonProps> = (props) => {
     direction = EMPTY_STRING,
   } = props;
   const { car } = useSelector(orderInfoSelector);
+  const rateState = useSelector(rateSelector);
   const radioBtnState = useSelector(radioButtonSelector);
   const dispatch = useDispatch();
 
@@ -43,7 +46,7 @@ const RadioButton: FC<IRadioButtonProps> = (props) => {
       dispatch(radioBtnColorIdAction(event.target.id));
     }
     if (event.target.id.includes('tariff')) {
-      dispatch(setTariffAction(event.target.value));
+      dispatch(setTariffAction(event.target.value, RateId(rateState.data, event.target.value)));
       dispatch((radioBtnTariffIdAction(event.target.id)));
     }
     if (event.target.id.includes('advanced')) {

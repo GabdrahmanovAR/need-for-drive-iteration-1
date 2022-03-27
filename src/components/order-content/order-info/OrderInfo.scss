@@ -58,6 +58,10 @@
   }
 }
 
+.order-status-btn:before {
+  background: linear-gradient(to right, #493013, #7B0C3B);
+}
+
 @media screen and (min-width: 1024px) and (max-width: 1439px){
   .order-info {
     &__details {
