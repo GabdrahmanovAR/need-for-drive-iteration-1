@@ -2,9 +2,7 @@ import React, { FC } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { useLocation } from 'react-router-dom';
-import facebookIcon from '../../../assets/icons/facebook.svg';
 import telegramIcon from '../../../assets/icons/telegram.svg';
-import instagramIcon from '../../../assets/icons/instagram.svg';
 import './SidebarMenu.scss';
 import { IState } from '../../../types/state';
 import { sidebarMenuAction } from '../../../redux/actions/SidebarMenuAction';
@@ -46,8 +44,6 @@ const SidebarMenu: FC<ISidebarMenuProps> = ({ isOpen, sidebarMenu }) => {
           </ul>
           <div className="sidebar-menu__social-network">
             <img src={telegramIcon} alt="Telegram" />
-            <img src={facebookIcon} alt="Facebook" />
-            <img src={instagramIcon} alt="Instagram" />
           </div>
         </nav>
       </section>

@@ -12,6 +12,7 @@ import { ICarInfoData } from '../../../types/api';
 import Spinner from '../../Spinner/Spinner';
 import { radioButtonSelector } from '../../../selectors/radioButtonSelector';
 import { LIMIT_PER_PAGE } from '../../../constants/common';
+import { ScrollToTop } from '../../../utils/ScrollToTop';
 
 const CarsTab = () => {
   const orderInfoState = useSelector(orderInfoSelector);
@@ -25,9 +26,10 @@ const CarsTab = () => {
   const regexEconomy = new RegExp(/эконом/);
 
   const [page, setPage] = useState(1);
-  const [fetching, setFetching] = useState(true);
+  const [fetching, setFetching] = useState(false);
 
   useEffect(() => {
+    ScrollToTop();
     if (carsDataState.data.length === 0) {
       dispatch(getCarsAction('0', LIMIT_PER_PAGE));
     }
@@ -84,14 +86,14 @@ const CarsTab = () => {
   };
 
   return (
-    <div className="cars-tab" onScroll={handleCarsScroll}>
+    <div className="cars-tab">
       <header className="cars-tab__header">
         <RadioButton
           formName="cars"
           btnNames={['Все модели', 'Эконом', 'Премиум']}
         />
       </header>
-      <main className="cars-tab__car-list">
+      <main className="cars-tab__car-list" onScroll={handleCarsScroll}>
         {displayCards()}
         <div className={`cars-tab__spinner ${carsDataState.isLoading && 'cars-tab__spinner_visible'}`}>
           <Spinner />

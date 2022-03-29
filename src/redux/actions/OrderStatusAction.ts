@@ -2,19 +2,24 @@ import { Dispatch } from 'redux';
 import { AxiosResponse } from 'axios';
 import { IOrderStatusActionType } from '../../types/actions';
 import {
+  DELETE_ORDER_STATUS_DATA,
   GET_ORDER_STATUS_DATA,
   UPLOADING_ORDER_END,
   UPLOADING_ORDER_START,
-} from '../../constants/actions/uploadingOrder';
+} from '../../constants/actions/orderStatus';
 import { IOrderInfoState } from '../../types/state';
-import { registerOrder } from '../../api-request/apiRequest';
+import { deleteOrderById, getOrderById, registerOrder } from '../../api-request/apiRequest';
 import { IOrderStatus, IOrderStatusResponse } from '../../types/api';
+import { changeOrderConfirmAction } from './OrderConfirmAction';
+import { clearOrderInfoAction } from './OrderInfoAction';
+import { resetRadioBtnAction } from './RadioButtonAction';
+import { resetTabsStateAction } from './OrderStepAction';
 
-const uploadingOrderStart = (): IOrderStatusActionType => ({
+const loadingOrderStart = (): IOrderStatusActionType => ({
   type: UPLOADING_ORDER_START,
 });
 
-const uploadingOrderEnd = (): IOrderStatusActionType => ({
+const loadingOrderEnd = (): IOrderStatusActionType => ({
   type: UPLOADING_ORDER_END,
 });
 
@@ -41,7 +46,7 @@ const getOrderStatusData = (data: IOrderStatusResponse): IOrderStatusActionType 
 });
 
 export const orderStatusAction = (orderInfo: IOrderInfoState) => async (dispatch: Dispatch) => {
-  dispatch(uploadingOrderStart());
+  dispatch(loadingOrderStart());
   try {
     const response: AxiosResponse<IOrderStatus> = await registerOrder(orderInfo);
     localStorage.setItem('orderId', response.data.data.id);
@@ -49,6 +54,39 @@ export const orderStatusAction = (orderInfo: IOrderInfoState) => async (dispatch
   } catch (error) {
     console.log(error);
   } finally {
-    dispatch(uploadingOrderEnd());
+    dispatch(loadingOrderEnd());
+    dispatch(changeOrderConfirmAction(false));
+  }
+};
+
+export const getOrderStatusByIdAction = (orderId: string) => async (dispatch: Dispatch) => {
+  dispatch(loadingOrderStart());
+  try {
+    const response: AxiosResponse<IOrderStatus> = await getOrderById(orderId);
+    dispatch(getOrderStatusData(response.data.data));
+  } catch (error) {
+    console.log(error);
+  } finally {
+    dispatch(loadingOrderEnd());
+  }
+};
+
+export const deleteOrderStatusData = (): IOrderStatusActionType => ({
+  type: DELETE_ORDER_STATUS_DATA,
+});
+
+export const deleteOrderByIdAction = (orderId: string) => async (dispatch: Dispatch) => {
+  dispatch(loadingOrderStart());
+  try {
+    dispatch(deleteOrderStatusData());
+    dispatch(clearOrderInfoAction());
+    dispatch(resetRadioBtnAction());
+    dispatch(resetTabsStateAction());
+    const response = await deleteOrderById(orderId);
+    console.log(response.data);
+  } catch (error) {
+    console.log(error);
+  } finally {
+    dispatch(loadingOrderEnd());
   }
 };

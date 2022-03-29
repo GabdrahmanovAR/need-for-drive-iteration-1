@@ -100,6 +100,6 @@ export interface IRateActionType extends IActionType {
 }
 
 export interface IOrderStatusActionType extends IActionType {
-  uploading?: boolean;
+  loading?: boolean;
   statusInfo?: IOrderStatusInfoState;
 }

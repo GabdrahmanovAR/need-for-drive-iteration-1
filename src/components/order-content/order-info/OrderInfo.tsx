@@ -11,18 +11,20 @@ import { NextTabUrl } from '../../../utils/NextTabUrl';
 import { ButtonState } from '../../../utils/ButtonState';
 import { orderInfoSelector } from '../../../selectors/orderInfoSelector';
 import { CalculateRentalDuration } from '../../../utils/CalculateRentalDuration';
+import { orderStatusSelector } from '../../../selectors/orderStatusSelector';
 
 const OrderInfo = () => {
   const { location, car } = useSelector(orderInfoSelector);
+  const orderStatusState = useSelector(orderStatusSelector);
   const locationPath = useLocation();
 
   const {
     cityName,
     markerName,
-  } = locationPath.pathname !== ORDER_STATUS_URL_PATH ? location
+  } = !locationPath.pathname.includes(ORDER_STATUS_URL_PATH) ? location
     : {
-      cityName: 'Ульяновск',
-      markerName: 'Нариманова 42',
+      cityName: orderStatusState.statusInfo.cityName,
+      markerName: orderStatusState.statusInfo.pointName,
     };
 
   const {
@@ -36,21 +38,21 @@ const OrderInfo = () => {
     totalCost,
     minPrice,
     maxPrice,
-  } = locationPath.pathname !== ORDER_STATUS_URL_PATH ? car
+  } = !locationPath.pathname.includes(ORDER_STATUS_URL_PATH) ? car
     : {
-      name: 'Hyndai i30 N',
-      currentColor: 'Голубой',
+      name: orderStatusState.statusInfo.car.name,
+      currentColor: orderStatusState.statusInfo.color,
       rentalDuration: {
-        from: '12.06.2019 12:00',
-        to: '13.06.2019 12:00',
+        from: orderStatusState.statusInfo.dateFrom,
+        to: orderStatusState.statusInfo.dateTo,
       },
-      tariff: 'На сутки',
-      babyChair: false,
-      fullTank: true,
-      rightHandDrive: false,
-      totalCost: 16000,
-      minPrice: '10000',
-      maxPrice: '16000',
+      tariff: orderStatusState.statusInfo.rate,
+      babyChair: orderStatusState.statusInfo.isNeedChildChair,
+      fullTank: orderStatusState.statusInfo.isFullTank,
+      rightHandDrive: orderStatusState.statusInfo.isRightWheel,
+      totalCost: orderStatusState.statusInfo.price,
+      minPrice: EMPTY_STRING,
+      maxPrice: EMPTY_STRING,
     };
 
   const advancedInfoElement = (title: string, value: string) => (
@@ -97,7 +99,7 @@ const OrderInfo = () => {
       <section className={`${
         locationPath.pathname === ADVANCED_URL_PATH
         || locationPath.pathname === RESULT_URL_PATH
-        || locationPath.pathname === ORDER_STATUS_URL_PATH
+        || locationPath.pathname.includes(ORDER_STATUS_URL_PATH)
           ? 'order-info__details'
           : 'order-info__details_disable'}`}
       >
@@ -105,7 +107,7 @@ const OrderInfo = () => {
           {advancedInfoElement('Цвет', currentColor)}
           {advancedInfoElement(
             'Длительность аренды',
-            CalculateRentalDuration(rentalDuration.from, rentalDuration.to),
+            CalculateRentalDuration(rentalDuration.from.toString(), rentalDuration.to.toString()),
           )}
           {advancedInfoElement('Тариф', tariff.split(',')[0])}
           {advancedInfoElement('Полный бак', fullTank ? 'Да' : 'Не выбрано')}
@@ -116,7 +118,7 @@ const OrderInfo = () => {
       {/* Информация диапозон цен */}
       <section className="order-info__price">
         <span><strong>Цена: </strong></span>
-        {totalCost === 0 && (locationPath.pathname !== RESULT_URL_PATH || ORDER_STATUS_URL_PATH)
+        {totalCost === 0 && (locationPath.pathname !== RESULT_URL_PATH || locationPath.pathname.includes(ORDER_STATUS_URL_PATH))
           ? (
             <span>
               {(minPrice && maxPrice) === EMPTY_STRING
@@ -129,10 +131,10 @@ const OrderInfo = () => {
           )}
       </section>
       <Button
-        text={ButtonText(locationPath.pathname)}
+        text={ButtonText(locationPath.pathname, orderStatusState.statusInfo.id)}
         isDisabled={ButtonState(locationPath.pathname, { location, car })}
         link={NextTabUrl(locationPath.pathname)}
-        customClass={locationPath.pathname === ORDER_STATUS_URL_PATH ? 'order-status-btn' : ''}
+        customClass={locationPath.pathname.includes(ORDER_STATUS_URL_PATH) ? 'order-status-btn' : ''}
       />
     </div>
   );

@@ -87,14 +87,14 @@ const RadioButton: FC<IRadioButtonProps> = (props) => {
                 : `checkbox-btn-${index}`
               }`}
               onChange={handleOnChangeEvent}
-              value={name}
+              value={name && name[0].toUpperCase() + name.slice(1)}
               checked={IsChecked(type, index, formName, radioBtnState)}
             />
             <span className={`
               form_radio__fieldset__name 
               ${IsChecked(type, index, formName, radioBtnState) && 'form_radio__fieldset__name_active'}`}
             >
-              {name}
+              {name && name[0].toUpperCase() + name.slice(1)}
             </span>
           </div>
         ))}
