@@ -26,9 +26,13 @@ export const registerOrder = (orderInfo: IOrderInfoState) => apiDB.post(ORDER_UR
   color: orderInfo.car.currentColor,
   dateFrom: moment(orderInfo.car.rentalDuration.from).valueOf(),
   dateTo: moment(orderInfo.car.rentalDuration.to).valueOf(),
-  rateId: { rate: orderInfo.car.tariff },
+  rateId: { id: orderInfo.car.tariffId },
   price: orderInfo.car.totalCost,
   isFullTank: orderInfo.car.fullTank,
   isNeedChildChair: orderInfo.car.babyChair,
   isRightWheel: orderInfo.car.rightHandDrive,
 });
+
+export const getOrderById = (orderId: string) => apiDB.get(`${ORDER_URL}/${orderId}`);
+
+export const deleteOrderById = (orderId: string) => apiDB.delete(`${ORDER_URL}/${orderId}`);

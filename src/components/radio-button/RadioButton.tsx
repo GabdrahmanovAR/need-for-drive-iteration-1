@@ -17,6 +17,8 @@ import {
 import { orderInfoSelector } from '../../selectors/orderInfoSelector';
 import { IsChecked } from '../../utils/IsChecked';
 import { radioButtonSelector } from '../../selectors/radioButtonSelector';
+import { rateSelector } from '../../selectors/rateSelector';
+import { RateId } from '../../utils/RateId';
 
 interface IRadioButtonProps {
   formName: string,
@@ -33,6 +35,7 @@ const RadioButton: FC<IRadioButtonProps> = (props) => {
     direction = EMPTY_STRING,
   } = props;
   const { car } = useSelector(orderInfoSelector);
+  const rateState = useSelector(rateSelector);
   const radioBtnState = useSelector(radioButtonSelector);
   const dispatch = useDispatch();
 
@@ -43,7 +46,7 @@ const RadioButton: FC<IRadioButtonProps> = (props) => {
       dispatch(radioBtnColorIdAction(event.target.id));
     }
     if (event.target.id.includes('tariff')) {
-      dispatch(setTariffAction(event.target.value));
+      dispatch(setTariffAction(event.target.value, RateId(rateState.data, event.target.value)));
       dispatch((radioBtnTariffIdAction(event.target.id)));
     }
     if (event.target.id.includes('advanced')) {
@@ -84,14 +87,14 @@ const RadioButton: FC<IRadioButtonProps> = (props) => {
                 : `checkbox-btn-${index}`
               }`}
               onChange={handleOnChangeEvent}
-              value={name}
+              value={name && name[0].toUpperCase() + name.slice(1)}
               checked={IsChecked(type, index, formName, radioBtnState)}
             />
             <span className={`
               form_radio__fieldset__name 
               ${IsChecked(type, index, formName, radioBtnState) && 'form_radio__fieldset__name_active'}`}
             >
-              {name}
+              {name && name[0].toUpperCase() + name.slice(1)}
             </span>
           </div>
         ))}

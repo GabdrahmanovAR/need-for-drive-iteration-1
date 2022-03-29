@@ -3,7 +3,7 @@ import { IOrderInfoState } from '../../types/state';
 import { EMPTY_ARRAY, EMPTY_STRING } from '../../constants/common';
 import { IOrderCarInfoActionType, IOrderInfoActionType } from '../../types/actions';
 import {
-  BABY_CHAIR_NEEDED,
+  BABY_CHAIR_NEEDED, CLEAR_ORDER_INFO,
   FULL_TANK_NEEDED, RESET_CAR_INFO, RIGHT_HAND_NEEDED,
   SET_CAR_COLOR,
   SET_CAR_INFO,
@@ -42,7 +42,8 @@ export const orderInfoInitialState: IOrderInfoState = {
       to: EMPTY_STRING,
     },
     rightHandDrive: false,
-    tariff: 'Суточный',
+    tariff: 'Недельный (Акция!)',
+    tariffId: '60c614202aed9a0b9b84f543',
     totalCost: 0,
   },
 };
@@ -100,8 +101,9 @@ const endDayRent = (draft: IOrderInfoState, endDay?: string) => {
   return draft;
 };
 
-const setTariff = (draft: IOrderInfoState, tariff?: string) => {
+const setTariff = (draft: IOrderInfoState, tariff?: string, tariffId?: string) => {
   draft.car.tariff = tariff?.split(',')[0] || EMPTY_STRING;
+  draft.car.tariffId = tariffId || EMPTY_STRING;
   return draft;
 };
 
@@ -130,6 +132,11 @@ const resetCarInfo = (draft: IOrderInfoState) => {
   return draft;
 };
 
+const clearOrderInfo = (draft: IOrderInfoState) => {
+  draft = orderInfoInitialState;
+  return draft;
+};
+
 export default (state = orderInfoInitialState, action: IOrderInfoActionType) => produce(
   state,
   (draft: IOrderInfoState) => {
@@ -142,12 +149,13 @@ export default (state = orderInfoInitialState, action: IOrderInfoActionType) => 
       case SET_CAR_COLOR: return setCarColor(draft, action.car?.currentColor);
       case SET_RENTAL_DURATION_SD: return startDayRent(draft, action.car?.rentalDuration?.from);
       case SET_RENTAL_DURATION_ED: return endDayRent(draft, action.car?.rentalDuration?.to);
-      case SET_TARIFF: return setTariff(draft, action.car?.tariff);
+      case SET_TARIFF: return setTariff(draft, action.car?.tariff, action.car?.tariffId);
       case FULL_TANK_NEEDED: return setFullTank(draft, action.car?.fullTank);
       case BABY_CHAIR_NEEDED: return setBabyChair(draft, action.car?.babyChair);
       case RIGHT_HAND_NEEDED: return setRightHandDrive(draft, action.car?.rightHandDrive);
       case SET_TOTAL_COST: return setTotalCost(draft, action.car?.totalCost);
       case RESET_CAR_INFO: return resetCarInfo(draft);
+      case CLEAR_ORDER_INFO: return clearOrderInfo(draft);
       default: return state;
     }
   },

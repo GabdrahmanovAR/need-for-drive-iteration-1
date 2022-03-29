@@ -11,8 +11,7 @@ import pointsDataReducer from './reducers/PointsDataReducer';
 import carsDataReducer from './reducers/CarsDataReducer';
 import radioButtonReducer from './reducers/RadioButtonReducer';
 import rateReducer from './reducers/RateReducer';
-// eslint-disable-next-line import/no-named-as-default-member
-import uploadingOrderReducer from './reducers/UploadingOrderReducer';
+import orderStatusReducer from './reducers/OrderStatusReducer';
 
 export const store = createStore(
   combineReducers({
@@ -26,7 +25,7 @@ export const store = createStore(
     carsData: carsDataReducer,
     radioButton: radioButtonReducer,
     rate: rateReducer,
-    uploadingOrder: uploadingOrderReducer,
+    orderStatus: orderStatusReducer,
   }),
   composeWithDevTools(applyMiddleware(thunk)),
 );

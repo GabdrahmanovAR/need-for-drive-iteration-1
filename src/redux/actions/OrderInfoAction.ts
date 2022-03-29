@@ -1,7 +1,7 @@
 import { Dispatch } from 'redux';
 import { IOrderInfoActionType } from '../../types/actions';
 import {
-  BABY_CHAIR_NEEDED,
+  BABY_CHAIR_NEEDED, CLEAR_ORDER_INFO,
   FULL_TANK_NEEDED, RESET_CAR_INFO, RIGHT_HAND_NEEDED,
   SET_CAR_COLOR,
   SET_CAR_INFO,
@@ -80,10 +80,11 @@ export const endDayRentAction = (endDay: string): IOrderInfoActionType => ({
   },
 });
 
-export const setTariffAction = (tariff: string): IOrderInfoActionType => ({
+export const setTariffAction = (tariff: string, tariffId: string): IOrderInfoActionType => ({
   type: SET_TARIFF,
   car: {
     tariff,
+    tariffId,
   },
 });
 
@@ -122,4 +123,8 @@ export const setTotalCostAction = (totalCost: number) => ({
 
 export const resetCarInfoAction = (): IOrderInfoActionType => ({
   type: RESET_CAR_INFO,
+});
+
+export const clearOrderInfoAction = (): IOrderInfoActionType => ({
+  type: CLEAR_ORDER_INFO,
 });
